@@ -1,0 +1,22 @@
+[Unit]
+Description=智算引擎 Data Management Daemon
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=zsyq
+Group=zsyq
+WorkingDirectory=/opt/zsyq
+ExecStart=/opt/zsyq/datamanagementd \
+  -socket-path /tmp/zsyq-datamanagement.sock \
+  -sqlite-path /var/lib/zsyq/datamanagement/datamanagementd.db \
+  -version 1.0.0
+Restart=always
+RestartSec=5s
+LimitNOFILE=100000
+NoNewPrivileges=true
+PrivateTmp=false
+
+[Install]
+WantedBy=multi-user.target

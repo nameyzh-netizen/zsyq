@@ -1,0 +1,33 @@
+[Unit]
+Description=智算引擎 - 智能算力与 AI 服务网关
+Documentation=https://github.com/nameyzh-netizen/zsyq
+After=network.target postgresql.service redis.service
+Wants=postgresql.service redis.service
+
+[Service]
+Type=simple
+User=zsyq
+Group=zsyq
+WorkingDirectory=/opt/zsyq
+ExecStart=/opt/zsyq/zsyq
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=zsyq
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/opt/zsyq
+
+# Environment - Server configuration
+# Modify these values to change listen address and port
+Environment=GIN_MODE=release
+Environment=SERVER_HOST=0.0.0.0
+Environment=SERVER_PORT=8080
+
+[Install]
+WantedBy=multi-user.target
