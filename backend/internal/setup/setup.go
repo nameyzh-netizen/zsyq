@@ -161,13 +161,32 @@ func NeedsSetup() bool {
 	return true
 }
 
+func setupPostgresDSN(cfg *DatabaseConfig, dbName string) string {
+	parts := []string{
+		fmt.Sprintf("host=%s", cfg.Host),
+		fmt.Sprintf("port=%d", cfg.Port),
+		fmt.Sprintf("user=%s", cfg.User),
+		fmt.Sprintf("dbname=%s", dbName),
+		fmt.Sprintf("sslmode=%s", cfg.SSLMode),
+	}
+	if cfg.Password != "" {
+		parts = append(parts, fmt.Sprintf("password=%s", cfg.Password))
+	}
+	return strings.Join(parts, " ")
+}
+
+func quotePostgresIdentifier(name string) string {
+	return `"` + strings.ReplaceAll(name, `"`, `""`) + `"`
+}
+
 // TestDatabaseConnection tests the database connection and creates database if not exists
 func TestDatabaseConnection(cfg *DatabaseConfig) error {
+	if !validateDBName(cfg.DBName) {
+		return fmt.Errorf("invalid database name: %s", cfg.DBName)
+	}
+
 	// First, connect to the default 'postgres' database to check/create target database
-	defaultDSN := fmt.Sprintf(
-		"host=%s port=%d user=%s password=%s dbname=%s sslmode=%s",
-		cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.DBName, cfg.SSLMode,
-	)
+	defaultDSN := setupPostgresDSN(cfg, "postgres")
 
 	db, err := sql.Open("postgres", defaultDSN)
 	if err != nil {
@@ -199,10 +218,7 @@ func TestDatabaseConnection(cfg *DatabaseConfig) error {
 
 	// Create database if not exists
 	if !exists {
-		// 注意：数据库名不能参数化，依赖前置输入校验保障安全。
-		// Note: Database names cannot be parameterized, but we've already validated cfg.DBName
-		// in the handler using validateDBName() which only allows [a-zA-Z][a-zA-Z0-9_]*
-		_, err := db.ExecContext(ctx, fmt.Sprintf("CREATE DATABASE %s", cfg.DBName))
+		_, err := db.ExecContext(ctx, fmt.Sprintf("CREATE DATABASE %s", quotePostgresIdentifier(cfg.DBName)))
 		if err != nil {
 			return fmt.Errorf("failed to create database '%s': %w", cfg.DBName, err)
 		}
@@ -215,10 +231,7 @@ func TestDatabaseConnection(cfg *DatabaseConfig) error {
 	}
 	db = nil
 
-	targetDSN := fmt.Sprintf(
-		"host=%s port=%d user=%s password=%s dbname=%s sslmode=%s",
-		cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.DBName, cfg.SSLMode,
-	)
+	targetDSN := setupPostgresDSN(cfg, cfg.DBName)
 
 	targetDB, err := sql.Open("postgres", targetDSN)
 	if err != nil {

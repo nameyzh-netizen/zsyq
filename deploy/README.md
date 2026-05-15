@@ -44,21 +44,21 @@ chmod +x docker-deploy.sh
 ```
 
 **What the script does:**
-- Downloads `docker-compose.local.yml` and `.env.example`
-- Automatically generates secure secrets (JWT_SECRET, TOTP_ENCRYPTION_KEY, POSTGRES_PASSWORD)
-- Creates `.env` file with generated secrets
-- Creates necessary data directories (data/, postgres_data/, redis_data/)
-- **Displays generated credentials** (POSTGRES_PASSWORD, JWT_SECRET, etc.)
+- Downloads `docker-compose.local.yml` and saves it as `docker-compose.yml`
+- Downloads `.env.example` and generates a `.env` file with secure secrets (JWT_SECRET, TOTP_ENCRYPTION_KEY, POSTGRES_PASSWORD, ADMIN_PASSWORD)
+- Creates data directories (`data/`, `postgres_data/`, `redis_data/`)
+- Sets `chmod 600 .env` and only prints the generated `ADMIN_PASSWORD` — the rest stays in `.env`
 
 **After running the script:**
 ```bash
 # Start services
-docker compose -f docker-compose.local.yml up -d
+docker compose up -d
 
 # View logs
-docker compose -f docker-compose.local.yml logs -f zsyq
+docker compose logs -f zsyq
 
-# Ensure ADMIN_PASSWORD is set in .env before first startup.
+# Restart only zsyq
+docker compose restart zsyq
 
 # Access Web UI
 # http://localhost:8080

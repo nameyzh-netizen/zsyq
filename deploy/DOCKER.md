@@ -10,7 +10,7 @@ docker run -d \
   -p 8080:8080 \
   -e DATABASE_URL="postgres://user:pass@host:5432/zsyq" \
   -e REDIS_URL="redis://host:6379" \
-  nameyzh-netizen/zsyq:latest
+  ghcr.io/nameyzh-netizen/zsyq:latest
 ```
 
 ## Docker Compose
@@ -20,7 +20,7 @@ version: '3.8'
 
 services:
   zsyq:
-    image: nameyzh-netizen/zsyq:latest
+    image: ${ZSYQ_IMAGE:-ghcr.io/nameyzh-netizen/zsyq:latest}
     ports:
       - "8080:8080"
     environment:

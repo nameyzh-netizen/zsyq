@@ -2290,14 +2290,9 @@ func (s *SettingService) UpdateAuthSourceDefaultSettings(ctx context.Context, se
 
 // InitializeDefaultSettings 初始化默认设置
 func (s *SettingService) InitializeDefaultSettings(ctx context.Context) error {
-	// 检查是否已有设置
-	_, err := s.settingRepo.GetValue(ctx, SettingKeyRegistrationEnabled)
-	if err == nil {
-		// 已有设置，不需要初始化
-		return nil
-	}
-	if !errors.Is(err, ErrSettingNotFound) {
-		return fmt.Errorf("check existing settings: %w", err)
+	existing, err := s.settingRepo.GetAll(ctx)
+	if err != nil {
+		return fmt.Errorf("load existing settings: %w", err)
 	}
 
 	oidcUsePKCEDefault := true
@@ -2310,6 +2305,13 @@ func (s *SettingService) InitializeDefaultSettings(ctx context.Context) error {
 			oidcValidateIDTokenDefault = s.cfg.OIDC.ValidateIDToken
 		}
 	}
+	defaultConcurrency := 5
+	defaultBalance := 0.0
+	if s != nil && s.cfg != nil {
+		defaultConcurrency = s.cfg.Default.UserConcurrency
+		defaultBalance = s.cfg.Default.UserBalance
+	}
+
 	loginAgreementDocumentsJSON, err := marshalLoginAgreementDocuments(defaultLoginAgreementDocuments())
 	if err != nil {
 		return err
@@ -2327,6 +2329,11 @@ func (s *SettingService) InitializeDefaultSettings(ctx context.Context) error {
 		SettingKeyLoginAgreementDocuments:                  loginAgreementDocumentsJSON,
 		SettingKeySiteName:                                 "智算引擎",
 		SettingKeySiteLogo:                                 "",
+		SettingKeySiteSubtitle:                             "智能算力与 AI 服务网关",
+		SettingKeyAPIBaseURL:                               "",
+		SettingKeyContactInfo:                              "",
+		SettingKeyDocURL:                                   "",
+		SettingKeyHomeContent:                              "",
 		SettingKeyPurchaseSubscriptionEnabled:              "false",
 		SettingKeyPurchaseSubscriptionURL:                  "",
 		SettingKeyTableDefaultPageSize:                     "20",
@@ -2381,8 +2388,8 @@ func (s *SettingService) InitializeDefaultSettings(ctx context.Context) error {
 		SettingKeyOIDCConnectUserInfoEmailPath:             "",
 		SettingKeyOIDCConnectUserInfoIDPath:                "",
 		SettingKeyOIDCConnectUserInfoUsernamePath:          "",
-		SettingKeyDefaultConcurrency:                       strconv.Itoa(s.cfg.Default.UserConcurrency),
-		SettingKeyDefaultBalance:                           strconv.FormatFloat(s.cfg.Default.UserBalance, 'f', 8, 64),
+		SettingKeyDefaultConcurrency:                       strconv.Itoa(defaultConcurrency),
+		SettingKeyDefaultBalance:                           strconv.FormatFloat(defaultBalance, 'f', 8, 64),
 		SettingKeyAffiliateRebateRate:                      strconv.FormatFloat(AffiliateRebateRateDefault, 'f', 8, 64),
 		SettingKeyAffiliateRebateFreezeHours:               strconv.Itoa(AffiliateRebateFreezeHoursDefault),
 		SettingKeyAffiliateRebateDurationDays:              strconv.Itoa(AffiliateRebateDurationDaysDefault),
@@ -2467,7 +2474,17 @@ func (s *SettingService) InitializeDefaultSettings(ctx context.Context) error {
 		openAIAdvancedSchedulerSettingKey:            "false",
 	}
 
-	return s.settingRepo.SetMultiple(ctx, defaults)
+	missing := make(map[string]string, len(defaults))
+	for key, value := range defaults {
+		if _, ok := existing[key]; !ok {
+			missing[key] = value
+		}
+	}
+	if len(missing) == 0 {
+		return nil
+	}
+
+	return s.settingRepo.SetMultiple(ctx, missing)
 }
 
 // parseSettings 解析设置到结构体

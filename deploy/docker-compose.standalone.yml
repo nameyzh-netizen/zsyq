@@ -6,13 +6,13 @@
 #
 # Usage:
 #   1. Copy .env.example to .env and configure database/redis connection
-#   2. docker-compose -f docker-compose.standalone.yml up -d
+#   2. docker compose -f docker-compose.standalone.yml up -d
 #   3. Access: http://localhost:8080
 # =============================================================================
 
 services:
   zsyq:
-    image: nameyzh-netizen/zsyq:latest
+    image: ${ZSYQ_IMAGE:-ghcr.io/nameyzh-netizen/zsyq:latest}
     container_name: zsyq
     restart: unless-stopped
     ulimits:

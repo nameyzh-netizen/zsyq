@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"time"
 
 	dbent "github.com/nameyzh-netizen/zsyq/ent"
@@ -392,12 +393,19 @@ func ProvideBackupService(
 }
 
 // ProvideSettingService wires SettingService with group reader and proxy repo.
-func ProvideSettingService(settingRepo SettingRepository, groupRepo GroupRepository, proxyRepo ProxyRepository, cfg *config.Config) *SettingService {
+func ProvideSettingService(settingRepo SettingRepository, groupRepo GroupRepository, proxyRepo ProxyRepository, cfg *config.Config) (*SettingService, error) {
 	svc := NewSettingService(settingRepo, cfg)
 	svc.SetDefaultSubscriptionGroupReader(groupRepo)
 	svc.SetProxyRepository(proxyRepo)
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	if err := svc.InitializeDefaultSettings(ctx); err != nil {
+		return nil, fmt.Errorf("initialize default settings: %w", err)
+	}
+
 	antigravity.SetUserAgentVersionResolver(svc.GetAntigravityUserAgentVersion)
-	return svc
+	return svc, nil
 }
 
 // ProvideBillingCacheService wires BillingCacheService with its RPM dependencies.
