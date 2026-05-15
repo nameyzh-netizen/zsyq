@@ -73,7 +73,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build \
 FROM ${ALPINE_IMAGE}
 
 # Labels
-LABEL maintainer="Wei-Shaw <github.com/Wei-Shaw>"
+LABEL maintainer="nameyzh-netizen <github.com/nameyzh-netizen>"
 LABEL description="智算引擎 - AI API Gateway Platform"
 LABEL org.opencontainers.image.source="https://github.com/nameyzh-netizen/zsyq"
 

@@ -8,8 +8,6 @@
 [![Redis](https://img.shields.io/badge/Redis-7+-DC382D.svg)](https://redis.io/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg)](https://www.docker.com/)
 
-<a href="https://trendshift.io/repositories/21823" target="_blank"><img src="https://trendshift.io/api/badge/repositories/21823" alt="Wei-Shaw%2Fzsyq | Trendshift" width="250" height="55"/></a>
-
 **Intelligent compute and AI service gateway for subscription quota distribution**
 
 English | [中文](项目介绍.md) | [日本語](项目介绍_JA.md)
@@ -158,7 +156,7 @@ One-click installation script that downloads pre-built binaries from GitHub Rele
 #### Installation Steps
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/Wei-Shaw/zsyq/main/deploy/install.sh | sudo bash
+curl -sSL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/install.sh | sudo bash
 ```
 
 The script will:
@@ -208,7 +206,7 @@ sudo journalctl -u zsyq -f
 sudo systemctl restart zsyq
 
 # Uninstall
-curl -sSL https://raw.githubusercontent.com/Wei-Shaw/zsyq/main/deploy/install.sh | sudo bash -s -- uninstall -y
+curl -sSL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/install.sh | sudo bash -s -- uninstall -y
 ```
 
 ---
@@ -231,7 +229,7 @@ Use the automated deployment script for easy setup:
 mkdir -p zsyq-deploy && cd zsyq-deploy
 
 # Download and run deployment preparation script
-curl -sSL https://raw.githubusercontent.com/Wei-Shaw/zsyq/main/deploy/docker-deploy.sh | bash
+curl -sSL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/docker-deploy.sh | bash
 
 # Start services
 docker compose up -d
@@ -615,11 +613,11 @@ zsyq/
 
 ## Star History
 
-<a href="https://star-history.com/#Wei-Shaw/zsyq&Date">
+<a href="https://star-history.com/#nameyzh-netizen/zsyq&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Wei-Shaw/zsyq&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Wei-Shaw/zsyq&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Wei-Shaw/zsyq&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=nameyzh-netizen/zsyq&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=nameyzh-netizen/zsyq&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=nameyzh-netizen/zsyq&type=Date" />
  </picture>
 </a>
 
@@ -629,7 +627,7 @@ zsyq/
 
 This project is licensed under the [GNU Lesser General Public License v3.0](LICENSE) (or later).
 
-Copyright (c) 2026 Wesley Liddick
+Copyright (c) 2026 nameyzh-netizen
 
 ---
 

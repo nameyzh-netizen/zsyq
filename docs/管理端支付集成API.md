@@ -120,7 +120,7 @@ https://pay.example.com/pay?user_id=123&token=<jwt>&theme=light&lang=zh&ui_mode=
 
 ### 6) `doc_url` 配置建议
 - 查看链接：`https://github.com/nameyzh-netizen/zsyq/blob/main/docs/管理端支付集成API.md`
-- 下载链接：`https://raw.githubusercontent.com/Wei-Shaw/zsyq/main/docs/管理端支付集成API.md`
+- 下载链接：`https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/docs/管理端支付集成API.md`
 
 ---
 
@@ -240,4 +240,4 @@ https://pay.example.com/pay?user_id=123&token=<jwt>&theme=light&lang=zh&ui_mode=
 
 ### 6) Recommended `doc_url`
 - View URL: `https://github.com/nameyzh-netizen/zsyq/blob/main/docs/管理端支付集成API.md`
-- Download URL: `https://raw.githubusercontent.com/Wei-Shaw/zsyq/main/docs/管理端支付集成API.md`
+- Download URL: `https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/docs/管理端支付集成API.md`

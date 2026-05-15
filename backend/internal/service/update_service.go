@@ -23,7 +23,7 @@ import (
 const (
 	updateCacheKey = "update_check_cache"
 	updateCacheTTL = 1200 // 20 minutes
-	githubRepo     = "Wei-Shaw/zsyq"
+	githubRepo     = "nameyzh-netizen/zsyq"
 
 	// Security: allowed download domains for updates
 	allowedDownloadHost = "github.com"

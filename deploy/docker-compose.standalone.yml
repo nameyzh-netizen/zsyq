@@ -12,7 +12,7 @@
 
 services:
   zsyq:
-    image: weishaw/zsyq:latest
+    image: nameyzh-netizen/zsyq:latest
     container_name: zsyq
     restart: unless-stopped
     ulimits:

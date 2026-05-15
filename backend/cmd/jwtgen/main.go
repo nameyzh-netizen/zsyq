@@ -19,8 +19,8 @@ func main() {
 	confirm := flag.Bool("confirm-emergency-admin-token", false, "Confirm this emergency operation may mint an administrator JWT")
 	flag.Parse()
 
-	if !*confirm && os.Getenv("SUB2API_ENABLE_JWTGEN") != "1" {
-		log.Fatal("refusing to mint admin JWT without --confirm-emergency-admin-token or SUB2API_ENABLE_JWTGEN=1")
+	if !*confirm && os.Getenv("ZSYQ_ENABLE_JWTGEN") != "1" {
+		log.Fatal("refusing to mint admin JWT without --confirm-emergency-admin-token or ZSYQ_ENABLE_JWTGEN=1")
 	}
 
 	cfg, err := config.LoadForBootstrap()

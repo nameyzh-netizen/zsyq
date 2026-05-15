@@ -55,7 +55,7 @@ const (
 	defaultUserGroupRateCacheTTL = 30 * time.Second
 	defaultModelsListCacheTTL    = 15 * time.Second
 	postUsageBillingTimeout      = 15 * time.Second
-	debugGatewayBodyEnv          = "SUB2API_DEBUG_GATEWAY_BODY"
+	debugGatewayBodyEnv          = "ZSYQ_DEBUG_GATEWAY_BODY"
 )
 
 const (
@@ -567,7 +567,7 @@ type GatewayService struct {
 	debugClaudeMimic      atomic.Bool
 	channelService        *ChannelService
 	resolver              *ModelPricingResolver
-	debugGatewayBodyFile  atomic.Pointer[os.File] // non-nil when SUB2API_DEBUG_GATEWAY_BODY is set
+	debugGatewayBodyFile  atomic.Pointer[os.File] // non-nil when ZSYQ_DEBUG_GATEWAY_BODY is set
 	tlsFPProfileService   *TLSFingerprintProfileService
 	balanceNotifyService  *BalanceNotifyService
 }
@@ -643,8 +643,8 @@ func NewGatewayService(
 		&svc.userGroupRateSF,
 		"service.gateway",
 	)
-	svc.debugModelRouting.Store(parseDebugEnvBool(os.Getenv("SUB2API_DEBUG_MODEL_ROUTING")))
-	svc.debugClaudeMimic.Store(parseDebugEnvBool(os.Getenv("SUB2API_DEBUG_CLAUDE_MIMIC")))
+	svc.debugModelRouting.Store(parseDebugEnvBool(os.Getenv("ZSYQ_DEBUG_MODEL_ROUTING")))
+	svc.debugClaudeMimic.Store(parseDebugEnvBool(os.Getenv("ZSYQ_DEBUG_CLAUDE_MIMIC")))
 	if path := strings.TrimSpace(os.Getenv(debugGatewayBodyEnv)); path != "" {
 		svc.initDebugGatewayBodyFile(path)
 	}
@@ -9525,8 +9525,8 @@ func (s *GatewayService) initDebugGatewayBodyFile(path string) {
 //
 // 启用方式（环境变量）：
 //
-//	SUB2API_DEBUG_GATEWAY_BODY=1                          # 写入 gateway_debug.log
-//	SUB2API_DEBUG_GATEWAY_BODY=/tmp/gateway_debug.log     # 写入指定路径
+//	ZSYQ_DEBUG_GATEWAY_BODY=1                          # 写入 gateway_debug.log
+//	ZSYQ_DEBUG_GATEWAY_BODY=/tmp/gateway_debug.log     # 写入指定路径
 //
 // tag: "CLIENT_ORIGINAL" 或 "UPSTREAM_FORWARD"
 func (s *GatewayService) debugLogGatewaySnapshot(tag string, headers http.Header, body []byte, extra map[string]string) {

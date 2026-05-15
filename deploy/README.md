@@ -35,10 +35,10 @@ Use the automated preparation script for the easiest setup:
 
 ```bash
 # Download and run the preparation script
-curl -sSL https://raw.githubusercontent.com/Wei-Shaw/zsyq/main/deploy/docker-deploy.sh | bash
+curl -sSL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/docker-deploy.sh | bash
 
 # Or download first, then run
-curl -sSL https://raw.githubusercontent.com/Wei-Shaw/zsyq/main/deploy/docker-deploy.sh -o docker-deploy.sh
+curl -sSL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/docker-deploy.sh -o docker-deploy.sh
 chmod +x docker-deploy.sh
 ./docker-deploy.sh
 ```
@@ -349,7 +349,7 @@ For production servers using systemd.
 ### One-Line Installation
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/Wei-Shaw/zsyq/main/deploy/install.sh | sudo bash
+curl -sSL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/install.sh | sudo bash
 ```
 
 ### Manual Installation
@@ -557,7 +557,7 @@ sudo systemctl status redis
 
 智算引擎 supports TLS fingerprint simulation to make requests appear as if they come from the official Claude CLI (Node.js client).
 
-> **💡 Tip:** Visit **[tls.zsyq.org](https://tls.zsyq.org/)** to get TLS fingerprint information for different devices and browsers.
+> **💡 Tip:** Visit **[tls.example.com](https://tls.example.com/)** to get TLS fingerprint information for different devices and browsers.
 
 ### Default Behavior
 

@@ -2,7 +2,7 @@
 #
 # 智算引擎 Installation Script
 # 智算引擎 安装脚本
-# Usage: curl -sSL https://raw.githubusercontent.com/Wei-Shaw/zsyq/main/deploy/install.sh | bash
+# Usage: curl -sSL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/install.sh | bash
 #
 
 set -e
@@ -16,7 +16,7 @@ CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
 # Configuration
-GITHUB_REPO="Wei-Shaw/zsyq"
+GITHUB_REPO="nameyzh-netizen/zsyq"
 INSTALL_DIR="/opt/zsyq"
 SERVICE_NAME="zsyq"
 SERVICE_USER="zsyq"

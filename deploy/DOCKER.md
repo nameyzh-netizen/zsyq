@@ -10,7 +10,7 @@ docker run -d \
   -p 8080:8080 \
   -e DATABASE_URL="postgres://user:pass@host:5432/zsyq" \
   -e REDIS_URL="redis://host:6379" \
-  weishaw/zsyq:latest
+  nameyzh-netizen/zsyq:latest
 ```
 
 ## Docker Compose
@@ -20,7 +20,7 @@ version: '3.8'
 
 services:
   zsyq:
-    image: weishaw/zsyq:latest
+    image: nameyzh-netizen/zsyq:latest
     ports:
       - "8080:8080"
     environment:
@@ -72,5 +72,5 @@ volumes:
 
 ## Links
 
-- [GitHub Repository](https://github.com/weishaw/zsyq)
-- [Documentation](https://github.com/weishaw/zsyq#readme)
+- [GitHub Repository](https://github.com/nameyzh-netizen/zsyq)
+- [Documentation](https://github.com/nameyzh-netizen/zsyq#readme)
