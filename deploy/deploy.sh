@@ -15,6 +15,36 @@ echo "  智算引擎 一键部署脚本"
 echo "============================================"
 echo ""
 
+ACCESS_MODE="ip"
+DOMAIN=""
+
+if [ -t 0 ]; then
+  echo "请选择访问方式："
+  echo "  1) IP + 端口访问（http://服务器IP:8080）"
+  echo "  2) 域名 HTTPS 访问（https://你的域名，自动配置 Caddy）"
+  read -r -p "请输入 1 或 2，默认 1: " ACCESS_CHOICE
+  if [ "$ACCESS_CHOICE" = "2" ]; then
+    ACCESS_MODE="domain"
+    read -r -p "请输入已解析到本服务器的域名，例如 api.example.com: " DOMAIN
+    if [ -z "$DOMAIN" ]; then
+      echo "域名不能为空。"
+      exit 1
+    fi
+  fi
+else
+  if [ -n "${ZSYQ_DOMAIN:-}" ]; then
+    ACCESS_MODE="domain"
+    DOMAIN="$ZSYQ_DOMAIN"
+  fi
+fi
+
+if [ "$ACCESS_MODE" = "domain" ]; then
+  echo "访问方式: 域名 HTTPS (${DOMAIN})"
+else
+  echo "访问方式: IP + 端口"
+fi
+echo ""
+
 # ----------------------------------------------------------
 # 1. 系统更新 + 清理
 # ----------------------------------------------------------
@@ -38,6 +68,7 @@ if [ ! -f /swapfile ]; then
 fi
 
 # 内核参数
+sed -i '/^net\.netfilter\.nf_conntrack_/d' /etc/sysctl.conf /etc/sysctl.d/*.conf 2>/dev/null || true
 cat > /etc/sysctl.d/99-zsyq.conf << 'EOF'
 vm.swappiness=10
 fs.file-max=65535
@@ -51,7 +82,7 @@ net.ipv4.tcp_keepalive_intvl=15
 net.ipv4.tcp_keepalive_probes=5
 net.ipv4.ip_local_port_range=1024 65535
 EOF
-sysctl --system
+sysctl -p /etc/sysctl.d/99-zsyq.conf
 
 # 文件描述符
 grep -q "nofile 65535" /etc/security/limits.conf || cat >> /etc/security/limits.conf << 'EOF'
@@ -110,6 +141,8 @@ echo "[4/8] 克隆源码..."
 
 if [ ! -d /opt/zsyq ]; then
   git clone https://github.com/nameyzh-netizen/zsyq.git /opt/zsyq
+else
+  git -C /opt/zsyq pull
 fi
 
 cd /opt/zsyq/deploy
@@ -141,6 +174,12 @@ sed -i "s|^POSTGRES_EFFECTIVE_CACHE_SIZE=.*|POSTGRES_EFFECTIVE_CACHE_SIZE=2GB|" 
 sed -i "s|^DATABASE_MAX_OPEN_CONNS=.*|DATABASE_MAX_OPEN_CONNS=30|" .env
 sed -i "s|^DATABASE_MAX_IDLE_CONNS=.*|DATABASE_MAX_IDLE_CONNS=8|" .env
 
+if [ "$ACCESS_MODE" = "domain" ]; then
+  sed -i "s|^BIND_HOST=.*|BIND_HOST=127.0.0.1|" .env
+else
+  sed -i "s|^BIND_HOST=.*|BIND_HOST=0.0.0.0|" .env
+fi
+
 # ----------------------------------------------------------
 # 6. 创建数据目录
 # ----------------------------------------------------------
@@ -155,21 +194,43 @@ echo "[7/8] 源码构建启动（首次约10-20分钟）..."
 
 docker compose -f docker-compose.build.yml up -d --build
 
+if [ "$ACCESS_MODE" = "domain" ]; then
+  echo "[8/9] 配置域名 HTTPS..."
+  apt install -y caddy
+  cat > /etc/caddy/Caddyfile << EOF
+${DOMAIN} {
+    reverse_proxy 127.0.0.1:8080
+}
+EOF
+  caddy fmt --overwrite /etc/caddy/Caddyfile >/dev/null
+  systemctl enable caddy >/dev/null
+  systemctl restart caddy
+fi
+
 # ----------------------------------------------------------
 # 8. 完成
 # ----------------------------------------------------------
-echo "[8/8] 验证..."
+if [ "$ACCESS_MODE" = "domain" ]; then
+  echo "[9/9] 验证..."
+else
+  echo "[8/8] 验证..."
+fi
 
 sleep 5
 docker compose -f docker-compose.build.yml ps
 
 SERVER_IP=$(hostname -I | awk '{print $1}')
+if [ "$ACCESS_MODE" = "domain" ]; then
+  ACCESS_URL="https://${DOMAIN}"
+else
+  ACCESS_URL="http://${SERVER_IP}:8080"
+fi
 
 echo ""
 echo "============================================"
 echo "  部署完成！"
 echo ""
-echo "  访问地址: http://${SERVER_IP}:8080"
+echo "  访问地址: ${ACCESS_URL}"
 echo "  管理员邮箱: admin@zsyq.local"
 echo "  管理员密码: admin123（登录后请修改）"
 echo "  数据库密码: ${PG_PASS}"
@@ -187,4 +248,8 @@ echo ""
 echo "  ⚠️  请立即："
 echo "  1. 登录后修改管理员密码"
 echo "  2. 截图保存上面这些密钥（只显示这一次）"
+if [ "$ACCESS_MODE" = "domain" ]; then
+  echo "  3. 确认 Cloudflare DNS 指向本机，SSL/TLS 使用 Full 或 Full (strict)"
+  echo "  4. 确认服务器/服务商防火墙已放行 80 和 443"
+fi
 echo "============================================"
