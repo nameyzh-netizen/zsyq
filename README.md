@@ -74,7 +74,7 @@ Recommended for production operations: the script installs Docker, clones the so
 
 #### Prerequisites
 
-- Debian 12 / Ubuntu 22.04+ Linux server (amd64)
+- Debian 12 / Ubuntu 22.04+ Linux server (amd64 or arm64)
 - Root privileges
 - For domain HTTPS access: point the domain A record to the server IP in advance and allow ports 80/443
 
@@ -101,7 +101,7 @@ bash /opt/zsyq/deploy/deploy.sh
 - Updates the system and applies basic tuning (Swap, network sysctl, file descriptor limits)
 - Installs Docker and Docker Compose v2
 - Clones/updates source code to `/opt/zsyq`
-- Generates `POSTGRES_PASSWORD`, `JWT_SECRET`, and `TOTP_ENCRYPTION_KEY`
+- Generates `POSTGRES_PASSWORD`, `JWT_SECRET`, `TOTP_ENCRYPTION_KEY`, and `ADMIN_PASSWORD`
 - Allocates about 80% of machine resources across the app, PostgreSQL, Redis, and DB connection pool based on CPU/memory
 - Stores data in local directories: `deploy/data`, `deploy/postgres_data`, `deploy/redis_data`
 - Builds and starts from source with `docker-compose.build.yml`
@@ -178,6 +178,18 @@ docker compose -f docker-compose.build.yml up -d --build
 | **docker-compose.build.yml** | Local source build | Local directories | Recommended production deployment, frontend customization |
 | **docker-compose.local.yml** | Prebuilt image | Local directories | No code changes, quick run |
 | **docker-compose.yml** | Prebuilt image | Docker named volumes | Simple trial |
+
+#### Enable "Data Management" Feature (datamanagementd)
+
+To enable the "Data Management" feature in the admin dashboard, deploy the host-level `datamanagementd` process additionally.
+
+Key points:
+
+- The main process probes: `/tmp/zsyq-datamanagement.sock`
+- Data management is only enabled when this socket is reachable
+- In Docker, mount the host socket to the same path inside the container
+
+See `deploy/数据管理服务部署说明.md` for detailed deployment steps.
 
 ---
 
@@ -322,6 +334,8 @@ default:
   rate_multiplier: 1.0
 ```
 
+---
+
 ### Sora Status (Removed)
 
 > Sora-related features have been removed in v1.0.0 (database tables and columns dropped via migration). The `gateway.sora_*` and `sora:` configuration keys no longer take effect and will be cleaned up in a future release.
@@ -338,6 +352,14 @@ Additional security-related options are available in `config.yaml`:
 - `billing.circuit_breaker` to fail closed on billing errors
 - `server.trusted_proxies` to enable X-Forwarded-For parsing
 - `turnstile.required` to require Turnstile in release mode
+
+**Gateway Defense-in-Depth Recommendations (Key)**
+
+- `gateway.upstream_response_read_max_bytes`: limits non-streaming upstream response read size (default `8MB`), prevents memory amplification from abnormal responses.
+- `gateway.proxy_probe_response_read_max_bytes`: limits proxy probe response read size (default `1MB`).
+- `gateway.gemini_debug_response_headers`: defaults to `false`; enable only for short troubleshooting sessions to avoid high-frequency request log overhead.
+- `/auth/register`, `/auth/login`, `/auth/login/2fa`, `/auth/send-verify-code` have server-side fallback rate limiting (fail-close when Redis is down).
+- Recommended: use WAF/CDN as the first defense layer, server-side rate limiting and response read limits as the second fallback layer; keep both layers to prevent bypass traffic and misconfiguration risks.
 
 **⚠️ Security Warning: HTTP URL Configuration**
 
@@ -380,8 +402,31 @@ If you disable URL validation or response header filtering, harden your network 
 - Strip sensitive upstream response headers at the proxy
 
 ```bash
-# 6. Run the application
+# 7. Run the application
 ./zsyq
+```
+
+#### HTTP/2 (h2c) and HTTP/1.1 Fallback
+
+The backend plaintext port supports h2c by default, with HTTP/1.1 fallback for WebSocket and legacy clients. Browsers generally don't support h2c; performance gains are mainly for reverse proxy or internal network links.
+
+**Reverse proxy example (Caddy):**
+
+```caddyfile
+transport http {
+	versions h2c h1
+}
+```
+
+**Verification:**
+
+```bash
+# h2c prior knowledge
+curl --http2-prior-knowledge -I http://localhost:8080/health
+# HTTP/1.1 fallback
+curl --http1.1 -I http://localhost:8080/health
+# WebSocket fallback verification (requires admin token)
+websocat -H="Sec-WebSocket-Protocol: zsyq-admin, jwt.<ADMIN_TOKEN>" ws://localhost:8080/api/v1/admin/ops/ws/qps
 ```
 
 #### Development Mode

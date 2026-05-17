@@ -488,8 +488,8 @@ The main config file is at `/etc/zsyq/config.yaml` (created by Setup Wizard).
 ### Prerequisites
 
 - Linux server (Ubuntu 20.04+, Debian 11+, CentOS 8+, etc.)
-- PostgreSQL 14+
-- Redis 6+
+- PostgreSQL 15+
+- Redis 7+
 - systemd
 
 ### Directory Structure
