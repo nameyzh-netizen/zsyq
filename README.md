@@ -14,7 +14,7 @@ English | [中文](项目介绍.md) | [日本語](项目介绍_JA.md)
 
 </div>
 
-> **智算引擎 officially uses only the domain `zsyq.cloud`. Other websites using the 智算引擎 name may be third-party deployments or services and are not affiliated with this project. Please verify and exercise your own judgment.**
+> **智算引擎 官方域名仅为 `zsyq.cloud`。其他使用"智算引擎"名称的网站均为第三方部署，与本项目无关，请注意甄别。**
 
 ---
 
@@ -33,14 +33,6 @@ English | [中文](项目介绍.md) | [日本語](项目介绍_JA.md)
 - **Built-in Payment System** - Supports EasyPay, Alipay, WeChat Pay, and Stripe for user self-service top-up, no separate payment service needed ([Configuration Guide](docs/支付系统配置指南_EN.md))
 - **Admin Dashboard** - Web interface for monitoring and management
 - **External System Integration** - Embed external systems (e.g. ticketing) via iframe to extend the admin dashboard
-
-## Ecosystem
-
-Community projects that extend or integrate with 智算引擎:
-
-| Project | Description | Features |
-|---------|-------------|----------|
-| [zsyq-mobile](https://github.com/ckken/zsyq-mobile) | Mobile admin console | Cross-platform app (iOS/Android/Web) for user management, account management, monitoring dashboard, and multi-backend switching; built with Expo + React Native |
 
 ## Tech Stack
 
