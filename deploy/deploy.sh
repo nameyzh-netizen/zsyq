@@ -45,6 +45,68 @@ else
 fi
 echo ""
 
+CPU_CORES=$(nproc 2>/dev/null || echo 2)
+MEM_TOTAL_MB=$(awk '/MemTotal/ {print int($2/1024)}' /proc/meminfo)
+
+if [ -z "$MEM_TOTAL_MB" ] || [ "$MEM_TOTAL_MB" -lt 1024 ]; then
+  MEM_TOTAL_MB=2048
+fi
+
+if [ "$MEM_TOTAL_MB" -lt 4096 ]; then
+  SWAP_SIZE="1G"
+  ZSYQ_MEMORY_LIMIT="1024M"
+  GOMEMLIMIT="700MiB"
+  POSTGRES_MEMORY_LIMIT="1536M"
+  POSTGRES_SHARED_BUFFERS="512MB"
+  POSTGRES_EFFECTIVE_CACHE_SIZE="1GB"
+  REDIS_MEMORY_LIMIT="256M"
+  DATABASE_MAX_OPEN_CONNS="20"
+  DATABASE_MAX_IDLE_CONNS="5"
+elif [ "$MEM_TOTAL_MB" -lt 12000 ]; then
+  SWAP_SIZE="2G"
+  ZSYQ_MEMORY_LIMIT="1536M"
+  GOMEMLIMIT="700MiB"
+  POSTGRES_MEMORY_LIMIT="3G"
+  POSTGRES_SHARED_BUFFERS="1GB"
+  POSTGRES_EFFECTIVE_CACHE_SIZE="2GB"
+  REDIS_MEMORY_LIMIT="512M"
+  DATABASE_MAX_OPEN_CONNS="30"
+  DATABASE_MAX_IDLE_CONNS="8"
+elif [ "$MEM_TOTAL_MB" -lt 24000 ]; then
+  SWAP_SIZE="2G"
+  ZSYQ_MEMORY_LIMIT="3G"
+  GOMEMLIMIT="2GiB"
+  POSTGRES_MEMORY_LIMIT="6G"
+  POSTGRES_SHARED_BUFFERS="2GB"
+  POSTGRES_EFFECTIVE_CACHE_SIZE="5GB"
+  REDIS_MEMORY_LIMIT="1G"
+  DATABASE_MAX_OPEN_CONNS="60"
+  DATABASE_MAX_IDLE_CONNS="15"
+else
+  SWAP_SIZE="4G"
+  ZSYQ_MEMORY_LIMIT="4G"
+  GOMEMLIMIT="3GiB"
+  POSTGRES_MEMORY_LIMIT="12G"
+  POSTGRES_SHARED_BUFFERS="4GB"
+  POSTGRES_EFFECTIVE_CACHE_SIZE="10GB"
+  REDIS_MEMORY_LIMIT="2G"
+  DATABASE_MAX_OPEN_CONNS="100"
+  DATABASE_MAX_IDLE_CONNS="25"
+fi
+
+ZSYQ_CPU_LIMIT="$CPU_CORES"
+POSTGRES_CPU_LIMIT="$CPU_CORES"
+REDIS_CPU_LIMIT=1
+if [ "$CPU_CORES" -ge 8 ]; then
+  ZSYQ_CPU_LIMIT=$((CPU_CORES - 2))
+  POSTGRES_CPU_LIMIT=$((CPU_CORES - 2))
+  REDIS_CPU_LIMIT=2
+fi
+
+echo "检测到服务器配置: ${CPU_CORES}核 / ${MEM_TOTAL_MB}MB内存"
+echo "自动资源配置: 应用 ${ZSYQ_MEMORY_LIMIT}, PostgreSQL ${POSTGRES_MEMORY_LIMIT}, Redis ${REDIS_MEMORY_LIMIT}"
+echo ""
+
 # ----------------------------------------------------------
 # 1. 系统更新 + 清理
 # ----------------------------------------------------------
@@ -60,7 +122,7 @@ echo "[2/8] 系统调优..."
 
 # Swap
 if [ ! -f /swapfile ]; then
-  fallocate -l 2G /swapfile
+  fallocate -l "$SWAP_SIZE" /swapfile
   chmod 600 /swapfile
   mkswap /swapfile
   swapon /swapfile
@@ -82,7 +144,9 @@ net.ipv4.tcp_keepalive_intvl=15
 net.ipv4.tcp_keepalive_probes=5
 net.ipv4.ip_local_port_range=1024 65535
 EOF
-sysctl -p /etc/sysctl.d/99-zsyq.conf
+sysctl -p /etc/sysctl.d/99-zsyq.conf || true
+
+timedatectl set-timezone UTC 2>/dev/null || true
 
 # 文件描述符
 grep -q "nofile 65535" /etc/security/limits.conf || cat >> /etc/security/limits.conf << 'EOF'
@@ -165,14 +229,18 @@ sed -i "s|^ADMIN_PASSWORD=.*|ADMIN_PASSWORD=admin123|" .env
 sed -i "s|^JWT_SECRET=.*|JWT_SECRET=${JWT}|" .env
 sed -i "s|^TOTP_ENCRYPTION_KEY=.*|TOTP_ENCRYPTION_KEY=${TOTP}|" .env
 
-# 8G内存适配
-sed -i "s|^GOMEMLIMIT=.*|GOMEMLIMIT=700MiB|" .env
-sed -i "s|^ZSYQ_MEMORY_LIMIT=.*|ZSYQ_MEMORY_LIMIT=1536M|" .env
-sed -i "s|^POSTGRES_MEMORY_LIMIT=.*|POSTGRES_MEMORY_LIMIT=3G|" .env
-sed -i "s|^POSTGRES_SHARED_BUFFERS=.*|POSTGRES_SHARED_BUFFERS=1GB|" .env
-sed -i "s|^POSTGRES_EFFECTIVE_CACHE_SIZE=.*|POSTGRES_EFFECTIVE_CACHE_SIZE=2GB|" .env
-sed -i "s|^DATABASE_MAX_OPEN_CONNS=.*|DATABASE_MAX_OPEN_CONNS=30|" .env
-sed -i "s|^DATABASE_MAX_IDLE_CONNS=.*|DATABASE_MAX_IDLE_CONNS=8|" .env
+# 自动资源适配
+sed -i "s|^GOMEMLIMIT=.*|GOMEMLIMIT=${GOMEMLIMIT}|" .env
+sed -i "s|^ZSYQ_MEMORY_LIMIT=.*|ZSYQ_MEMORY_LIMIT=${ZSYQ_MEMORY_LIMIT}|" .env
+sed -i "s|^ZSYQ_CPU_LIMIT=.*|ZSYQ_CPU_LIMIT=${ZSYQ_CPU_LIMIT}|" .env
+sed -i "s|^POSTGRES_MEMORY_LIMIT=.*|POSTGRES_MEMORY_LIMIT=${POSTGRES_MEMORY_LIMIT}|" .env
+sed -i "s|^POSTGRES_CPU_LIMIT=.*|POSTGRES_CPU_LIMIT=${POSTGRES_CPU_LIMIT}|" .env
+sed -i "s|^POSTGRES_SHARED_BUFFERS=.*|POSTGRES_SHARED_BUFFERS=${POSTGRES_SHARED_BUFFERS}|" .env
+sed -i "s|^POSTGRES_EFFECTIVE_CACHE_SIZE=.*|POSTGRES_EFFECTIVE_CACHE_SIZE=${POSTGRES_EFFECTIVE_CACHE_SIZE}|" .env
+sed -i "s|^REDIS_MEMORY_LIMIT=.*|REDIS_MEMORY_LIMIT=${REDIS_MEMORY_LIMIT}|" .env
+sed -i "s|^REDIS_CPU_LIMIT=.*|REDIS_CPU_LIMIT=${REDIS_CPU_LIMIT}|" .env
+sed -i "s|^DATABASE_MAX_OPEN_CONNS=.*|DATABASE_MAX_OPEN_CONNS=${DATABASE_MAX_OPEN_CONNS}|" .env
+sed -i "s|^DATABASE_MAX_IDLE_CONNS=.*|DATABASE_MAX_IDLE_CONNS=${DATABASE_MAX_IDLE_CONNS}|" .env
 
 if [ "$ACCESS_MODE" = "domain" ]; then
   sed -i "s|^BIND_HOST=.*|BIND_HOST=127.0.0.1|" .env
@@ -236,6 +304,13 @@ echo "  管理员密码: admin123（登录后请修改）"
 echo "  数据库密码: ${PG_PASS}"
 echo "  JWT密钥:    ${JWT}"
 echo "  TOTP密钥:   ${TOTP}"
+echo ""
+echo "  自动资源配置:"
+echo "  CPU/内存: ${CPU_CORES}核 / ${MEM_TOTAL_MB}MB"
+echo "  应用: ${ZSYQ_MEMORY_LIMIT}, GOMEMLIMIT=${GOMEMLIMIT}, CPU=${ZSYQ_CPU_LIMIT}"
+echo "  PostgreSQL: ${POSTGRES_MEMORY_LIMIT}, shared_buffers=${POSTGRES_SHARED_BUFFERS}, CPU=${POSTGRES_CPU_LIMIT}"
+echo "  Redis: ${REDIS_MEMORY_LIMIT}, CPU=${REDIS_CPU_LIMIT}"
+echo "  数据库连接池: max_open=${DATABASE_MAX_OPEN_CONNS}, max_idle=${DATABASE_MAX_IDLE_CONNS}"
 echo ""
 echo "  修改前端后重新构建："
 echo "  cd /opt/zsyq/deploy"
