@@ -24,6 +24,8 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/cespare/xxhash/v2"
+	"github.com/google/uuid"
 	"github.com/nameyzh-netizen/zsyq/internal/config"
 	"github.com/nameyzh-netizen/zsyq/internal/pkg/claude"
 	"github.com/nameyzh-netizen/zsyq/internal/pkg/ctxkey"
@@ -31,8 +33,6 @@ import (
 	"github.com/nameyzh-netizen/zsyq/internal/pkg/usagestats"
 	"github.com/nameyzh-netizen/zsyq/internal/util/responseheaders"
 	"github.com/nameyzh-netizen/zsyq/internal/util/urlvalidator"
-	"github.com/cespare/xxhash/v2"
-	"github.com/google/uuid"
 	gocache "github.com/patrickmn/go-cache"
 	"github.com/tidwall/gjson"
 	"github.com/tidwall/sjson"
@@ -8250,10 +8250,9 @@ func writeUsageLogBestEffort(ctx context.Context, repo UsageLogRepository, usage
 	if writer, ok := repo.(usageLogBestEffortWriter); ok {
 		if err := writer.CreateBestEffort(usageCtx, usageLog); err != nil {
 			logger.LegacyPrintf(logKey, "Create usage log failed: %v", err)
-			if IsUsageLogCreateDropped(err) {
-				return
-			}
-			if _, syncErr := repo.Create(usageCtx, usageLog); syncErr != nil {
+			syncCtx, syncCancel := detachedBillingContext(ctx)
+			defer syncCancel()
+			if _, syncErr := repo.Create(syncCtx, usageLog); syncErr != nil {
 				logger.LegacyPrintf(logKey, "Create usage log sync fallback failed: %v", syncErr)
 			}
 		}

@@ -8,9 +8,9 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/alitto/pond/v2"
 	"github.com/nameyzh-netizen/zsyq/internal/config"
 	"github.com/nameyzh-netizen/zsyq/internal/pkg/logger"
-	"github.com/alitto/pond/v2"
 	"go.uber.org/zap"
 )
 
@@ -18,7 +18,7 @@ const (
 	defaultUsageRecordWorkerCount          = 128
 	defaultUsageRecordQueueSize            = 16384
 	defaultUsageRecordTaskTimeoutSeconds   = 5
-	defaultUsageRecordOverflowPolicy       = config.UsageRecordOverflowPolicySample
+	defaultUsageRecordOverflowPolicy       = config.UsageRecordOverflowPolicySync
 	defaultUsageRecordOverflowSampleRatio  = 10
 	defaultUsageRecordAutoScaleEnabled     = true
 	defaultUsageRecordAutoScaleMinWorkers  = 128
@@ -141,7 +141,7 @@ func NewUsageRecordWorkerPoolWithOptions(opts UsageRecordWorkerPoolOptions) *Usa
 }
 
 // Submit 提交一个使用量记录任务。
-// 提交失败（队列满）时按 overflowPolicy 执行降级策略：drop/sample/sync。
+// 提交失败（队列满）时同步执行，避免成功请求丢失账务记录。
 func (p *UsageRecordWorkerPool) Submit(task UsageRecordTask) UsageRecordSubmitMode {
 	if p == nil || task == nil {
 		return UsageRecordSubmitModeDropped
@@ -165,22 +165,9 @@ func (p *UsageRecordWorkerPool) Submit(task UsageRecordTask) UsageRecordSubmitMo
 		return UsageRecordSubmitModeDropped
 	}
 
-	switch p.overflowPolicy {
-	case config.UsageRecordOverflowPolicySync:
-		p.syncFallback.Add(1)
-		p.execute(task)
-		return UsageRecordSubmitModeSync
-	case config.UsageRecordOverflowPolicySample:
-		if p.shouldSyncFallback() {
-			p.syncFallback.Add(1)
-			p.execute(task)
-			return UsageRecordSubmitModeSync
-		}
-	}
-
-	p.droppedQueueFull.Add(1)
-	p.logDrop("full")
-	return UsageRecordSubmitModeDropped
+	p.syncFallback.Add(1)
+	p.execute(task)
+	return UsageRecordSubmitModeSync
 }
 
 // Stats 返回当前池状态与计数器。

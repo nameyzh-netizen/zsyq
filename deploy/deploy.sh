@@ -1,13 +1,20 @@
 #!/bin/bash
 set -e
 
-# ============================================================
-# 智算引擎 一键部署脚本（Debian 12 / 8G内存 / 美西服务器）
-# 系统调优 + Docker安装 + 源码构建 + 自动配置
-# ============================================================
-# 使用方法：
-#   bash deploy.sh
-# ============================================================
+# 智算引擎 一键源码部署脚本
+
+if [ "$(id -u)" -ne 0 ]; then
+  echo "请使用 root 用户执行，或使用 sudo bash。"
+  exit 1
+fi
+
+validate_domain() {
+  domain="$1"
+  if ! printf '%s' "$domain" | grep -Eq '^([A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,63}$'; then
+    echo "域名格式不正确: $domain"
+    exit 1
+  fi
+}
 
 echo ""
 echo "============================================"
@@ -30,11 +37,13 @@ if [ -t 0 ]; then
       echo "域名不能为空。"
       exit 1
     fi
+    validate_domain "$DOMAIN"
   fi
 else
   if [ -n "${ZSYQ_DOMAIN:-}" ]; then
     ACCESS_MODE="domain"
     DOMAIN="$ZSYQ_DOMAIN"
+    validate_domain "$DOMAIN"
   fi
 fi
 
@@ -86,6 +95,8 @@ fi
 
 DATABASE_MAX_IDLE_CONNS=$((DATABASE_MAX_OPEN_CONNS / 4))
 [ "$DATABASE_MAX_IDLE_CONNS" -lt 8 ] && DATABASE_MAX_IDLE_CONNS=8
+POSTGRES_MAX_CONNECTIONS=$((DATABASE_MAX_OPEN_CONNS + 50))
+[ "$POSTGRES_MAX_CONNECTIONS" -lt 100 ] && POSTGRES_MAX_CONNECTIONS=100
 
 GOMEMLIMIT_MB=$((ZSYQ_MEMORY_MB * 70 / 100))
 POSTGRES_SHARED_BUFFERS_MB=$((POSTGRES_MEMORY_MB * 30 / 100))
@@ -167,14 +178,32 @@ echo "[3/8] 安装Docker..."
 
 apt install -y ca-certificates curl gnupg git vim htop
 
+. /etc/os-release
+case "${ID:-}" in
+  debian)
+    DOCKER_REPO_OS="debian"
+    DOCKER_CODENAME="${VERSION_CODENAME:-bookworm}"
+    ;;
+  ubuntu)
+    DOCKER_REPO_OS="ubuntu"
+    DOCKER_CODENAME="${VERSION_CODENAME:-jammy}"
+    ;;
+  *)
+    echo "当前脚本支持 Debian/Ubuntu，检测到系统: ${ID:-unknown}"
+    exit 1
+    ;;
+esac
+
+ARCH=$(dpkg --print-architecture)
+
 install -m 0755 -d /etc/apt/keyrings
 
-curl -fsSL https://download.docker.com/linux/debian/gpg \
+curl -fsSL "https://download.docker.com/linux/${DOCKER_REPO_OS}/gpg" \
   | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 
 chmod a+r /etc/apt/keyrings/docker.gpg
 
-echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian bookworm stable" \
+echo "deb [arch=${ARCH} signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/${DOCKER_REPO_OS} ${DOCKER_CODENAME} stable" \
   > /etc/apt/sources.list.d/docker.list
 
 apt update
@@ -220,36 +249,64 @@ cd /opt/zsyq/deploy
 # ----------------------------------------------------------
 echo "[5/8] 配置环境..."
 
-cp .env.example .env
+if [ -f .env ]; then
+  echo "检测到已有 .env，保留现有密钥并仅补齐缺失配置。"
+else
+  cp .env.example .env
+fi
 
-# 生成密钥
+ensure_env_value() {
+  key="$1"
+  value="$2"
+  if grep -q "^${key}=" .env; then
+    if [ -z "$(grep "^${key}=" .env | tail -n 1 | cut -d= -f2-)" ]; then
+      sed -i "s|^${key}=.*|${key}=${value}|" .env
+    fi
+  else
+    printf '%s=%s\n' "$key" "$value" >> .env
+  fi
+}
+
+set_env_value() {
+  key="$1"
+  value="$2"
+  if grep -q "^${key}=" .env; then
+    sed -i "s|^${key}=.*|${key}=${value}|" .env
+  else
+    printf '%s=%s\n' "$key" "$value" >> .env
+  fi
+}
+
+# 生成缺失密钥
 PG_PASS=$(openssl rand -hex 16)
 JWT=$(openssl rand -hex 32)
 TOTP=$(openssl rand -hex 32)
+ADMIN_PASS=$(openssl rand -base64 18 | tr -d '/+=' | cut -c1-20)
 
-# 写入密钥
-sed -i "s|^POSTGRES_PASSWORD=.*|POSTGRES_PASSWORD=${PG_PASS}|" .env
-sed -i "s|^ADMIN_PASSWORD=.*|ADMIN_PASSWORD=admin123|" .env
-sed -i "s|^JWT_SECRET=.*|JWT_SECRET=${JWT}|" .env
-sed -i "s|^TOTP_ENCRYPTION_KEY=.*|TOTP_ENCRYPTION_KEY=${TOTP}|" .env
+# 写入缺失密钥
+ensure_env_value "POSTGRES_PASSWORD" "$PG_PASS"
+ensure_env_value "ADMIN_PASSWORD" "$ADMIN_PASS"
+ensure_env_value "JWT_SECRET" "$JWT"
+ensure_env_value "TOTP_ENCRYPTION_KEY" "$TOTP"
 
 # 自动资源适配
-sed -i "s|^GOMEMLIMIT=.*|GOMEMLIMIT=${GOMEMLIMIT}|" .env
-sed -i "s|^ZSYQ_MEMORY_LIMIT=.*|ZSYQ_MEMORY_LIMIT=${ZSYQ_MEMORY_LIMIT}|" .env
-sed -i "s|^ZSYQ_CPU_LIMIT=.*|ZSYQ_CPU_LIMIT=${ZSYQ_CPU_LIMIT}|" .env
-sed -i "s|^POSTGRES_MEMORY_LIMIT=.*|POSTGRES_MEMORY_LIMIT=${POSTGRES_MEMORY_LIMIT}|" .env
-sed -i "s|^POSTGRES_CPU_LIMIT=.*|POSTGRES_CPU_LIMIT=${POSTGRES_CPU_LIMIT}|" .env
-sed -i "s|^POSTGRES_SHARED_BUFFERS=.*|POSTGRES_SHARED_BUFFERS=${POSTGRES_SHARED_BUFFERS}|" .env
-sed -i "s|^POSTGRES_EFFECTIVE_CACHE_SIZE=.*|POSTGRES_EFFECTIVE_CACHE_SIZE=${POSTGRES_EFFECTIVE_CACHE_SIZE}|" .env
-sed -i "s|^REDIS_MEMORY_LIMIT=.*|REDIS_MEMORY_LIMIT=${REDIS_MEMORY_LIMIT}|" .env
-sed -i "s|^REDIS_CPU_LIMIT=.*|REDIS_CPU_LIMIT=${REDIS_CPU_LIMIT}|" .env
-sed -i "s|^DATABASE_MAX_OPEN_CONNS=.*|DATABASE_MAX_OPEN_CONNS=${DATABASE_MAX_OPEN_CONNS}|" .env
-sed -i "s|^DATABASE_MAX_IDLE_CONNS=.*|DATABASE_MAX_IDLE_CONNS=${DATABASE_MAX_IDLE_CONNS}|" .env
+set_env_value "GOMEMLIMIT" "$GOMEMLIMIT"
+set_env_value "ZSYQ_MEMORY_LIMIT" "$ZSYQ_MEMORY_LIMIT"
+set_env_value "ZSYQ_CPU_LIMIT" "$ZSYQ_CPU_LIMIT"
+set_env_value "POSTGRES_MEMORY_LIMIT" "$POSTGRES_MEMORY_LIMIT"
+set_env_value "POSTGRES_CPU_LIMIT" "$POSTGRES_CPU_LIMIT"
+set_env_value "POSTGRES_MAX_CONNECTIONS" "$POSTGRES_MAX_CONNECTIONS"
+set_env_value "POSTGRES_SHARED_BUFFERS" "$POSTGRES_SHARED_BUFFERS"
+set_env_value "POSTGRES_EFFECTIVE_CACHE_SIZE" "$POSTGRES_EFFECTIVE_CACHE_SIZE"
+set_env_value "REDIS_MEMORY_LIMIT" "$REDIS_MEMORY_LIMIT"
+set_env_value "REDIS_CPU_LIMIT" "$REDIS_CPU_LIMIT"
+set_env_value "DATABASE_MAX_OPEN_CONNS" "$DATABASE_MAX_OPEN_CONNS"
+set_env_value "DATABASE_MAX_IDLE_CONNS" "$DATABASE_MAX_IDLE_CONNS"
 
 if [ "$ACCESS_MODE" = "domain" ]; then
-  sed -i "s|^BIND_HOST=.*|BIND_HOST=127.0.0.1|" .env
+  set_env_value "BIND_HOST" "127.0.0.1"
 else
-  sed -i "s|^BIND_HOST=.*|BIND_HOST=0.0.0.0|" .env
+  set_env_value "BIND_HOST" "0.0.0.0"
 fi
 
 # ----------------------------------------------------------
@@ -269,12 +326,16 @@ docker compose -f docker-compose.build.yml up -d --build
 if [ "$ACCESS_MODE" = "domain" ]; then
   echo "[8/9] 配置域名 HTTPS..."
   apt install -y caddy
+  if [ -f /etc/caddy/Caddyfile ]; then
+    cp /etc/caddy/Caddyfile "/etc/caddy/Caddyfile.bak.$(date +%Y%m%d%H%M%S)"
+  fi
   cat > /etc/caddy/Caddyfile << EOF
 ${DOMAIN} {
     reverse_proxy 127.0.0.1:8080
 }
 EOF
   caddy fmt --overwrite /etc/caddy/Caddyfile >/dev/null
+  caddy validate --config /etc/caddy/Caddyfile >/dev/null
   systemctl enable caddy >/dev/null
   systemctl restart caddy
 fi
@@ -304,15 +365,20 @@ echo "  部署完成！"
 echo ""
 echo "  访问地址: ${ACCESS_URL}"
 echo "  管理员邮箱: admin@zsyq.local"
-echo "  管理员密码: admin123（登录后请修改）"
-echo "  数据库密码: ${PG_PASS}"
-echo "  JWT密钥:    ${JWT}"
-echo "  TOTP密钥:   ${TOTP}"
+ENV_ADMIN_PASSWORD=$(grep '^ADMIN_PASSWORD=' .env | tail -n 1 | cut -d= -f2-)
+ENV_POSTGRES_PASSWORD=$(grep '^POSTGRES_PASSWORD=' .env | tail -n 1 | cut -d= -f2-)
+ENV_JWT_SET=$(if [ -n "$(grep '^JWT_SECRET=' .env | tail -n 1 | cut -d= -f2-)" ]; then echo "已设置"; else echo "未设置"; fi)
+ENV_TOTP_SET=$(if [ -n "$(grep '^TOTP_ENCRYPTION_KEY=' .env | tail -n 1 | cut -d= -f2-)" ]; then echo "已设置"; else echo "未设置"; fi)
+
+echo "  管理员密码: ${ENV_ADMIN_PASSWORD}（登录后请修改）"
+echo "  数据库密码: ${ENV_POSTGRES_PASSWORD}"
+echo "  JWT密钥:    ${ENV_JWT_SET}"
+echo "  TOTP密钥:   ${ENV_TOTP_SET}"
 echo ""
 echo "  自动资源配置:"
 echo "  CPU/内存: ${CPU_CORES}核 / ${MEM_TOTAL_MB}MB"
 echo "  应用: ${ZSYQ_MEMORY_LIMIT}, GOMEMLIMIT=${GOMEMLIMIT}, CPU=${ZSYQ_CPU_LIMIT}"
-echo "  PostgreSQL: ${POSTGRES_MEMORY_LIMIT}, shared_buffers=${POSTGRES_SHARED_BUFFERS}, CPU=${POSTGRES_CPU_LIMIT}"
+echo "  PostgreSQL: ${POSTGRES_MEMORY_LIMIT}, shared_buffers=${POSTGRES_SHARED_BUFFERS}, max_connections=${POSTGRES_MAX_CONNECTIONS}, CPU=${POSTGRES_CPU_LIMIT}"
 echo "  Redis: ${REDIS_MEMORY_LIMIT}, CPU=${REDIS_CPU_LIMIT}"
 echo "  数据库连接池: max_open=${DATABASE_MAX_OPEN_CONNS}, max_idle=${DATABASE_MAX_IDLE_CONNS}"
 echo ""

@@ -1518,10 +1518,13 @@ func (h *OpenAIGatewayHandler) submitUsageRecordTask(fallbackCtx context.Context
 		return
 	}
 	if h.usageRecordWorkerPool != nil {
-		h.usageRecordWorkerPool.Submit(task)
-		return
+		if mode := h.usageRecordWorkerPool.Submit(task); mode != service.UsageRecordSubmitModeDropped {
+			return
+		}
+		logger.L().With(
+			zap.String("component", "handler.openai_gateway.responses"),
+		).Warn("openai.usage_record_task_sync_fallback")
 	}
-	// 回退路径：worker 池未注入时同步执行，避免退回到无界 goroutine 模式。
 	ctx, cancel := context.WithTimeout(fallbackCtx, 10*time.Second)
 	defer cancel()
 	defer func() {

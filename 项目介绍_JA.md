@@ -190,7 +190,7 @@ bash /opt/zsyq/deploy/deploy.sh
 
 ```text
 Email: admin@zsyq.local
-Password: admin123（ログイン後すぐに変更してください）
+Password: スクリプトがランダム生成し、完了時に表示します（ログイン後すぐに変更してください）
 ```
 
 #### よく使うコマンド

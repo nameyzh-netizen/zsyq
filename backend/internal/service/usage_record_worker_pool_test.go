@@ -38,7 +38,7 @@ func TestUsageRecordWorkerPool_SubmitEnqueued(t *testing.T) {
 	}, time.Second, 10*time.Millisecond)
 }
 
-func TestUsageRecordWorkerPool_OverflowDrop(t *testing.T) {
+func TestUsageRecordWorkerPool_OverflowSyncFallback(t *testing.T) {
 	pool := NewUsageRecordWorkerPoolWithOptions(UsageRecordWorkerPoolOptions{
 		WorkerCount:           1,
 		QueueSize:             1,
@@ -51,6 +51,7 @@ func TestUsageRecordWorkerPool_OverflowDrop(t *testing.T) {
 	block := make(chan struct{})
 	started := make(chan struct{})
 	secondDone := make(chan struct{})
+	var syncExecuted atomic.Bool
 
 	require.Equal(t, UsageRecordSubmitModeEnqueued, pool.Submit(func(ctx context.Context) {
 		close(started)
@@ -61,7 +62,10 @@ func TestUsageRecordWorkerPool_OverflowDrop(t *testing.T) {
 	require.Equal(t, UsageRecordSubmitModeEnqueued, pool.Submit(func(ctx context.Context) {
 		close(secondDone)
 	}))
-	require.Equal(t, UsageRecordSubmitModeDropped, pool.Submit(func(ctx context.Context) {}))
+	require.Equal(t, UsageRecordSubmitModeSync, pool.Submit(func(ctx context.Context) {
+		syncExecuted.Store(true)
+	}))
+	require.True(t, syncExecuted.Load())
 
 	close(block)
 	select {
@@ -71,7 +75,7 @@ func TestUsageRecordWorkerPool_OverflowDrop(t *testing.T) {
 	}
 
 	require.Eventually(t, func() bool {
-		return pool.Stats().DroppedQueueFull >= 1
+		return pool.Stats().SyncFallbackTasks >= 1
 	}, time.Second, 10*time.Millisecond)
 }
 
@@ -118,7 +122,7 @@ func TestUsageRecordWorkerPool_OverflowSync(t *testing.T) {
 	}, time.Second, 10*time.Millisecond)
 }
 
-func TestUsageRecordWorkerPool_OverflowSample(t *testing.T) {
+func TestUsageRecordWorkerPool_OverflowSampleFallsBackSync(t *testing.T) {
 	pool := NewUsageRecordWorkerPoolWithOptions(UsageRecordWorkerPoolOptions{
 		WorkerCount:           1,
 		QueueSize:             1,
@@ -131,7 +135,7 @@ func TestUsageRecordWorkerPool_OverflowSample(t *testing.T) {
 	block := make(chan struct{})
 	started := make(chan struct{})
 	secondDone := make(chan struct{})
-	var syncExecuted atomic.Bool
+	var syncCount atomic.Int64
 
 	require.Equal(t, UsageRecordSubmitModeEnqueued, pool.Submit(func(ctx context.Context) {
 		close(started)
@@ -144,13 +148,15 @@ func TestUsageRecordWorkerPool_OverflowSample(t *testing.T) {
 	}))
 
 	firstOverflow := pool.Submit(func(ctx context.Context) {
-		syncExecuted.Store(true)
+		syncCount.Add(1)
 	})
 	require.Equal(t, UsageRecordSubmitModeSync, firstOverflow)
-	require.True(t, syncExecuted.Load())
 
-	secondOverflow := pool.Submit(func(ctx context.Context) {})
-	require.Equal(t, UsageRecordSubmitModeDropped, secondOverflow)
+	secondOverflow := pool.Submit(func(ctx context.Context) {
+		syncCount.Add(1)
+	})
+	require.Equal(t, UsageRecordSubmitModeSync, secondOverflow)
+	require.Equal(t, int64(2), syncCount.Load())
 
 	close(block)
 	select {
@@ -161,7 +167,7 @@ func TestUsageRecordWorkerPool_OverflowSample(t *testing.T) {
 
 	require.Eventually(t, func() bool {
 		stats := pool.Stats()
-		return stats.SyncFallbackTasks >= 1 && stats.DroppedQueueFull >= 1
+		return stats.SyncFallbackTasks >= 2 && stats.DroppedQueueFull == 0
 	}, time.Second, 10*time.Millisecond)
 }
 
