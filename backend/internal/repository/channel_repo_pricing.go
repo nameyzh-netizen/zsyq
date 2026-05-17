@@ -65,7 +65,10 @@ func (r *channelRepository) UpdateModelPricing(ctx context.Context, pricing *ser
 	if err != nil {
 		return fmt.Errorf("update model pricing: %w", err)
 	}
-	rows, _ := result.RowsAffected()
+	rows, err := result.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("check rows affected: %w", err)
+	}
 	if rows == 0 {
 		return fmt.Errorf("pricing entry not found: %d", pricing.ID)
 	}

@@ -1,5 +1,4 @@
 export default {
-  // Home Page
   home: {
     viewOnGithub: 'View on GitHub',
     viewDocs: 'View Documentation',
@@ -10,7 +9,6 @@ export default {
     login: 'Login',
     getStarted: 'Get Started',
     goToDashboard: 'Go to Dashboard',
-    // User-focused value proposition
     heroSubtitle: 'One Key, All AI Models',
     heroDescription: 'No need to manage multiple subscriptions. Access Claude, GPT, Gemini and more with a single API key',
     tags: {
@@ -18,7 +16,6 @@ export default {
       stickySession: 'Session Persistence',
       realtimeBilling: 'Pay As You Go'
     },
-    // Pain points section
     painPoints: {
       title: 'Sound Familiar?',
       items: {
@@ -36,11 +33,10 @@ export default {
         },
         noControl: {
           title: 'No Usage Control',
-          desc: "Can't track where your money goes or limit team member usage"
+          desc: 'Can\'t track where your money goes or limit team member usage'
         }
       }
     },
-    // Solutions section
     solutions: {
       title: 'We Solve These Problems',
       subtitle: 'Three simple steps to stress-free AI access'
@@ -53,7 +49,6 @@ export default {
       balanceQuota: 'Pay What You Use',
       balanceQuotaDesc: 'Usage-based billing with quota limits. Full visibility into team consumption.'
     },
-    // Comparison section
     comparison: {
       title: 'Why Choose Us?',
       headers: {
@@ -99,7 +94,6 @@ export default {
       antigravity: 'Antigravity',
       more: 'More'
     },
-    // CTA section
     cta: {
       title: 'Ready to Get Started?',
       description: 'Sign up now and get free trial credits to experience seamless AI access',
@@ -109,8 +103,6 @@ export default {
       allRightsReserved: 'All rights reserved.'
     }
   },
-
-  // Key Usage Query Page
   keyUsage: {
     title: 'API Key Usage',
     subtitle: 'Enter your API Key to view real-time spending and usage status',
@@ -128,7 +120,6 @@ export default {
     detailInfo: 'Detail Information',
     tokenStats: 'Token Statistics',
     modelStats: 'Model Usage Statistics',
-    // Table headers
     model: 'Model',
     requests: 'Requests',
     inputTokens: 'Input Tokens',
@@ -137,17 +128,14 @@ export default {
     cacheReadTokens: 'Cache Read',
     totalTokens: 'Total Tokens',
     cost: 'Cost',
-    // Status
     quotaMode: 'Key Quota Mode',
     walletBalance: 'Wallet Balance',
-    // Ring card titles
     totalQuota: 'Total Quota',
     limit5h: '5-Hour Limit',
     limitDaily: 'Daily Limit',
     limit7d: '7-Day Limit',
     limitWeekly: 'Weekly Limit',
     limitMonthly: 'Monthly Limit',
-    // Detail rows
     remainingQuota: 'Remaining Quota',
     expiresAt: 'Expires At',
     todayExpires: '(expires today)',
@@ -156,7 +144,6 @@ export default {
     resetNow: 'Resetting soon',
     subscriptionType: 'Subscription Type',
     subscriptionExpires: 'Subscription Expires',
-    // Usage stat cells
     todayRequests: 'Today Requests',
     todayInputTokens: 'Today Input',
     todayOutputTokens: 'Today Output',
@@ -173,17 +160,14 @@ export default {
     totalCacheRead: 'Total Cache Read',
     totalCost: 'Total Cost',
     avgDuration: 'Avg Duration',
-    // Messages
     enterApiKey: 'Please enter an API Key',
     querySuccess: 'Query successful',
     queryFailed: 'Query failed',
-    queryFailedRetry: 'Query failed, please try again later',
+    queryFailedRetry: 'Query failed, please try again later'
   },
-
-  // Setup Wizard
   setup: {
-    title: '智算引擎 Setup',
-    description: 'Configure your 智算引擎 instance',
+    title: 'ZhiSuan Engine Setup',
+    description: 'Configure your ZhiSuan Engine instance',
     database: {
       title: 'Database Configuration',
       description: 'Connect to your PostgreSQL database',
@@ -241,8 +225,6 @@ export default {
       timeout: 'Service restart is taking longer than expected. Please refresh the page manually.'
     }
   },
-
-  // Common
   common: {
     loading: 'Loading...',
     submitting: 'Submitting...',
@@ -312,7 +294,7 @@ export default {
       title: 'Auto Refresh',
       enable: 'Enable auto refresh',
       countdown: 'Auto refresh: {seconds}s',
-      seconds: '{n} seconds',
+      seconds: '{n} seconds'
     },
     view: 'View',
     settings: 'Settings',
@@ -338,8 +320,6 @@ export default {
       }
     }
   },
-
-  // Navigation
   nav: {
     dashboard: 'Dashboard',
     announcements: 'Announcements',
@@ -382,10 +362,8 @@ export default {
     channelPricing: 'Channel Pricing',
     channelMonitor: 'Channel Monitor',
     channelStatus: 'Channel Status',
-    riskControl: 'Risk Control',
+    riskControl: 'Risk Control'
   },
-
-  // Auth
   auth: {
     welcomeBack: 'Welcome Back',
     signInToAccount: 'Sign in to your account to continue',
@@ -397,7 +375,7 @@ export default {
     processing: 'Processing...',
     continue: 'Continue',
     rememberMe: 'Remember me',
-    dontHaveAccount: "Don't have an account?",
+    dontHaveAccount: 'Don\'t have an account?',
     alreadyHaveAccount: 'Already have an account?',
     registrationDisabled: 'Registration is currently disabled. Please contact the administrator.',
     emailLabel: 'Email',
@@ -412,12 +390,11 @@ export default {
     passwordMinLength: 'Password must be at least 6 characters',
     loginFailed: 'Login failed. Please check your credentials and try again.',
     errors: {
-      USER_NOT_ACTIVE: 'Account has been disabled.',
+      USER_NOT_ACTIVE: 'Account has been disabled.'
     },
     registrationFailed: 'Registration failed. Please try again.',
     emailSuffixNotAllowed: 'This email domain is not allowed for registration.',
-    emailSuffixNotAllowedWithAllowed:
-      'This email domain is not allowed. Allowed domains: {suffixes}',
+    emailSuffixNotAllowedWithAllowed: 'This email domain is not allowed. Allowed domains: {suffixes}',
     loginSuccess: 'Login successful! Welcome back.',
     accountCreatedSuccess: 'Account created successfully! Welcome to {siteName}.',
     reloginRequired: 'Session expired. Please log in again.',
@@ -433,7 +410,7 @@ export default {
     sendCode: 'Send code',
     clickToResend: 'Click to resend code',
     resendCode: 'Resend verification code',
-    sendCodeDesc: "We'll send a verification code to",
+    sendCodeDesc: 'We\'ll send a verification code to',
     codeSentSuccess: 'Verification code sent! Please check your inbox.',
     verifying: 'Verifying...',
     verifyAndCreate: 'Verify & Create Account',
@@ -486,8 +463,7 @@ export default {
       callbackHint: 'If you are not redirected automatically, go back to the login page and try again.',
       callbackMissingToken: 'Missing login token, please try again.',
       backToLogin: 'Back to Login',
-      invitationRequired:
-        'This {providerName} account is not yet registered. The site requires an invitation code — please enter one to complete registration.',
+      invitationRequired: 'This {providerName} account is not yet registered. The site requires an invitation code — please enter one to complete registration.',
       invalidPendingToken: 'The registration token has expired. Please sign in again.',
       completeRegistration: 'Complete Registration',
       completing: 'Completing registration…',
@@ -544,7 +520,6 @@ export default {
       state: 'State',
       fullUrl: 'Full URL'
     },
-    // Forgot password
     forgotPassword: 'Forgot password?',
     forgotPasswordTitle: 'Reset Your Password',
     forgotPasswordHint: 'Enter your email address and we will send you a link to reset your password.',
@@ -555,7 +530,6 @@ export default {
     resetEmailSentHint: 'If an account exists with this email, you will receive a password reset link shortly. Please check your inbox and spam folder.',
     backToLogin: 'Back to Login',
     rememberedPassword: 'Remembered your password?',
-    // Reset password
     resetPasswordTitle: 'Set New Password',
     resetPasswordHint: 'Enter your new password below.',
     newPassword: 'New Password',
@@ -574,11 +548,9 @@ export default {
     requestNewResetLink: 'Request New Reset Link',
     invalidOrExpiredToken: 'The password reset link is invalid or has expired. Please request a new one.'
   },
-
-  // Dashboard
   dashboard: {
     title: 'Dashboard',
-    welcomeMessage: "Welcome back! Here's an overview of your account.",
+    welcomeMessage: 'Welcome back! Here\'s an overview of your account.',
     balance: 'Balance',
     apiKeys: 'API Keys',
     todayRequests: 'Today Requests',
@@ -620,13 +592,9 @@ export default {
     redeemCode: 'Redeem Code',
     addBalanceWithCode: 'Add balance with a code'
   },
-
-  // Groups (shared)
   groups: {
     subscription: 'Sub'
   },
-
-  // API Keys
   keys: {
     title: 'API Keys',
     description: 'Manage your API keys and access tokens',
@@ -637,14 +605,14 @@ export default {
       copied: 'Copied',
       copiedHint: 'Copied to clipboard',
       clickToCopy: 'Click to copy this endpoint',
-      speedTest: 'Speed Test',
+      speedTest: 'Speed Test'
     },
     allGroups: 'All Groups',
     allStatus: 'All Status',
     createKey: 'Create API Key',
     editKey: 'Edit API Key',
     deleteKey: 'Delete API Key',
-    deleteConfirmMessage: "Are you sure you want to delete '{name}'? This action cannot be undone.",
+    deleteConfirmMessage: 'Are you sure you want to delete \'{name}\'? This action cannot be undone.',
     apiKey: 'API Key',
     group: 'Group',
     noGroup: 'No group',
@@ -686,8 +654,7 @@ export default {
     useKey: 'Use Key',
     useKeyModal: {
       title: 'Use API Key',
-      description:
-        'Add the following environment variables to your terminal profile or run directly in terminal to configure API access.',
+      description: 'Add the following environment variables to your terminal profile or run directly in terminal to configure API access.',
       copy: 'Copy',
       copied: 'Copied',
       note: 'These environment variables will be active in the current terminal session. For permanent configuration, add them to ~/.bashrc, ~/.zshrc, or the appropriate configuration file.',
@@ -697,32 +664,32 @@ export default {
         description: 'Add the following configuration files to your Codex CLI config directory.',
         configTomlHint: 'Make sure the following content is at the beginning of the config.toml file',
         note: 'Make sure the config directory exists. macOS/Linux users can run mkdir -p ~/.codex to create it.',
-        noteWindows: 'Press Win+R and enter %userprofile%\\.codex to open the config directory. Create it manually if it does not exist.',
+        noteWindows: 'Press Win+R and enter %userprofile%\\.codex to open the config directory. Create it manually if it does not exist.'
       },
       cliTabs: {
         claudeCode: 'Claude Code',
         geminiCli: 'Gemini CLI',
         codexCli: 'Codex CLI',
         codexCliWs: 'Codex CLI (WebSocket)',
-        opencode: 'OpenCode',
+        opencode: 'OpenCode'
       },
       antigravity: {
         description: 'Configure API access for Antigravity group. Select the configuration method based on your client.',
         claudeCode: 'Claude Code',
         geminiCli: 'Gemini CLI',
         claudeNote: 'These environment variables will be active in the current terminal session. For permanent configuration, add them to ~/.bashrc, ~/.zshrc, or the appropriate configuration file.',
-        geminiNote: 'These environment variables will be active in the current terminal session. For permanent configuration, add them to ~/.bashrc, ~/.zshrc, or the appropriate configuration file.',
+        geminiNote: 'These environment variables will be active in the current terminal session. For permanent configuration, add them to ~/.bashrc, ~/.zshrc, or the appropriate configuration file.'
       },
       gemini: {
         description: 'Add the following environment variables to your terminal profile or run directly in terminal to configure Gemini CLI access.',
         modelComment: 'If you have Gemini 3 access, you can use: gemini-3-pro-preview',
-        note: 'These environment variables will be active in the current terminal session. For permanent configuration, add them to ~/.bashrc, ~/.zshrc, or the appropriate configuration file.',
+        note: 'These environment variables will be active in the current terminal session. For permanent configuration, add them to ~/.bashrc, ~/.zshrc, or the appropriate configuration file.'
       },
       opencode: {
         title: 'OpenCode Example',
         subtitle: 'opencode.json',
-        hint: 'Config path: ~/.config/opencode/opencode.json (or opencode.jsonc), create if not exists. Use default providers (openai/anthropic/google) or custom provider_id. API Key can be configured directly or via /connect command. This is an example, adjust models and options as needed.',
-      },
+        hint: 'Config path: ~/.config/opencode/opencode.json (or opencode.jsonc), create if not exists. Use default providers (openai/anthropic/google) or custom provider_id. API Key can be configured directly or via /connect command. This is an example, adjust models and options as needed.'
+      }
     },
     customKeyLabel: 'Custom Key',
     customKeyPlaceholder: 'Enter your custom key (min 16 chars)',
@@ -745,9 +712,8 @@ export default {
       claudeCode: 'Claude Code',
       claudeCodeDesc: 'Import as Claude Code configuration',
       geminiCli: 'Gemini CLI',
-      geminiCliDesc: 'Import as Gemini CLI configuration',
+      geminiCliDesc: 'Import as Gemini CLI configuration'
     },
-    // Quota and expiration
     quotaLimit: 'Quota Limit',
     quotaAmount: 'Quota Amount (USD)',
     quotaAmountPlaceholder: 'Enter quota limit in USD',
@@ -786,11 +752,9 @@ export default {
       active: 'Active',
       inactive: 'Inactive',
       quota_exhausted: 'Quota Exhausted',
-      expired: 'Expired',
-    },
+      expired: 'Expired'
+    }
   },
-
-  // Usage
   usage: {
     title: 'Usage Records',
     description: 'View and analyze your API usage history',
@@ -874,8 +838,6 @@ export default {
     imageUnit: ' images',
     userAgent: 'User-Agent'
   },
-
-  // Shared keys for channel monitor (admin + user views)
   monitorCommon: {
     status: {
       operational: 'Operational',
@@ -908,8 +870,6 @@ export default {
     relativeHoursAgo: '{n}h ago',
     relativeDaysAgo: '{n}d ago'
   },
-
-  // Channel Status (user-facing read-only view)
   channelStatus: {
     title: 'Channel Status',
     description: 'Inspect channel availability, latency and recent status',
@@ -951,8 +911,6 @@ export default {
       description: 'No monitored channels have been configured yet.'
     }
   },
-
-  // Available Channels (user-facing)
   availableChannels: {
     title: 'Available Channels',
     description: 'Channels you can access, along with their supported models and pricing',
@@ -987,7 +945,6 @@ export default {
       unitPerRequest: '/ request'
     }
   },
-
   affiliate: {
     title: 'Affiliate Rebates',
     description: 'Invite new users and convert your rebate quota into account balance',
@@ -1034,8 +991,6 @@ export default {
       line4: 'Newly earned rebates may have a waiting period before they can be transferred.'
     }
   },
-
-  // Redeem
   redeem: {
     title: 'Redeem Code',
     description: 'Enter your redeem code to add balance or increase concurrency',
@@ -1077,8 +1032,6 @@ export default {
     subscriptionRefreshFailed: 'Redeemed successfully, but failed to refresh subscription status.',
     pleaseEnterCode: 'Please enter a redeem code'
   },
-
-  // Profile
   profile: {
     title: 'Profile Settings',
     description: 'Manage your account information and settings',
@@ -1119,7 +1072,6 @@ export default {
     passwordTooShort: 'Password must be at least 8 characters long',
     passwordChangeSuccess: 'Password changed successfully',
     passwordChangeFailed: 'Failed to change password',
-    // TOTP 2FA
     totp: {
       title: 'Two-Factor Authentication (2FA)',
       description: 'Enhance account security with Google Authenticator or similar apps',
@@ -1134,7 +1086,7 @@ export default {
       setupTitle: 'Set Up Two-Factor Authentication',
       setupStep1: 'Scan the QR code below with your authenticator app',
       setupStep2: 'Enter the 6-digit code from your app',
-      manualEntry: "Can't scan? Enter the key manually:",
+      manualEntry: 'Can\'t scan? Enter the key manually:',
       enterCode: 'Enter 6-digit code',
       verify: 'Verify',
       setupFailed: 'Failed to get setup information',
@@ -1149,7 +1101,6 @@ export default {
       loginTitle: 'Two-Factor Authentication',
       loginHint: 'Enter the 6-digit code from your authenticator app',
       loginFailed: 'Verification failed, please try again',
-      // New translations for email verification
       verifyEmailFirst: 'Please verify your email first',
       verifyPasswordFirst: 'Please verify your identity first',
       emailCode: 'Email Verification Code',
@@ -1188,7 +1139,7 @@ export default {
       emailDuplicate: 'This email already exists',
       maxEmailsReached: 'Maximum number of notification emails reached',
       unverified: 'Unverified',
-      verified: 'Verified',
+      verified: 'Verified'
     },
     avatar: {
       title: 'Profile Avatar',
@@ -1203,7 +1154,7 @@ export default {
       compressTooLarge: 'Unable to compress this image below 20KB. Try a smaller image.',
       compressFailed: 'Failed to compress the selected image.',
       readFailed: 'Failed to read the selected image.',
-      emptyDeleteHint: 'Avatar is already empty',
+      emptyDeleteHint: 'Avatar is already empty'
     },
     authBindings: {
       title: 'Connected Sign-In Methods',
@@ -1226,38 +1177,32 @@ export default {
       boundCount: '{count} linked records',
       status: {
         bound: 'Bound',
-        notBound: 'Not bound',
+        notBound: 'Not bound'
       },
       providers: {
         email: 'Email',
         linuxdo: 'LinuxDo',
         oidc: '{providerName}',
-        wechat: 'WeChat',
+        wechat: 'WeChat'
       },
       notes: {
         emailManagedFromProfile: 'Primary email is managed in the profile form',
         canUnbind: 'You can unbind this sign-in method',
-        bindAnotherBeforeUnbind: 'Bind another sign-in method before unbinding',
+        bindAnotherBeforeUnbind: 'Bind another sign-in method before unbinding'
       },
       source: {
         avatar: 'Avatar is currently synced from {providerName}',
-        username: 'Nickname is currently synced from {providerName}',
-      },
+        username: 'Nickname is currently synced from {providerName}'
+      }
     }
   },
-
-  // Empty States
   empty: {
     noData: 'No data found'
   },
-
-  // Table
   table: {
     expandActions: 'Expand More Actions',
     collapseActions: 'Collapse Actions'
   },
-
-  // Pagination
   pagination: {
     showing: 'Showing',
     to: 'to',
@@ -1273,8 +1218,6 @@ export default {
     jumpPlaceholder: 'Page',
     jumpAction: 'Go'
   },
-
-  // Errors
   errors: {
     somethingWentWrong: 'Something went wrong',
     pageNotFound: 'Page not found',
@@ -1285,8 +1228,6 @@ export default {
     timeout: 'Request timeout',
     tryAgain: 'Please try again'
   },
-
-  // Dates
   dates: {
     today: 'Today',
     yesterday: 'Yesterday',
@@ -1304,10 +1245,7 @@ export default {
     apply: 'Apply',
     selectDateRange: 'Select date range'
   },
-
-  // Admin
   admin: {
-    // Dashboard
     dashboard: {
       title: 'Admin Dashboard',
       description: 'System overview and real-time statistics',
@@ -1358,9 +1296,31 @@ export default {
       spendShort: 'Spend',
       requestsShort: 'Req',
       tokensShort: 'Tok',
-      failedToLoad: 'Failed to load dashboard statistics'
+      failedToLoad: 'Failed to load dashboard statistics',
+      totalApiKeys: 'Total API Keys',
+      activeApiKeys: 'Active Keys',
+      totalUsers: 'Total Users',
+      totalAccounts: 'Total Accounts',
+      activeAccounts: 'Active Accounts',
+      totalRequests: 'Total Requests',
+      todayCost: 'Today Cost',
+      totalCost: 'Total Cost',
+      input: 'Input',
+      output: 'Output',
+      averageTime: 'Average time',
+      cache: 'Cache',
+      last7Days: 'Last 7 days',
+      noUsageRecords: 'No usage records',
+      startUsingApi: 'Start using the API to see your usage history here.',
+      viewAllUsage: 'View all usage',
+      quickActions: 'Quick Actions',
+      manageUsers: 'Manage Users',
+      viewUserAccounts: 'View and manage user accounts',
+      manageAccounts: 'Manage Accounts',
+      configureAiAccounts: 'Configure AI platform accounts',
+      systemSettings: 'System Settings',
+      configureSystem: 'Configure system settings'
     },
-
     backup: {
       title: 'Database Backup',
       description: 'Full database backup to S3-compatible storage with scheduled backup and restore',
@@ -1406,7 +1366,7 @@ export default {
         backupRunning: 'Backup in progress...',
         backupFailed: 'Backup failed',
         restoreRunning: 'Restore in progress...',
-        restoreFailed: 'Restore failed',
+        restoreFailed: 'Restore failed'
       },
       columns: {
         status: 'Status',
@@ -1426,7 +1386,7 @@ export default {
       progress: {
         pending: 'Preparing',
         dumping: 'Dumping database',
-        uploading: 'Uploading',
+        uploading: 'Uploading'
       },
       trigger: {
         manual: 'Manual',
@@ -1475,7 +1435,6 @@ export default {
         freeTier: 'R2 Free Tier: 10GB storage + 1M Class A requests + 10M Class B requests per month — more than enough for database backups.'
       }
     },
-
     dataManagement: {
       title: 'Data Management',
       description: 'Manage data management agent status, object storage settings, and backup jobs in one place',
@@ -1650,7 +1609,6 @@ export default {
         loadMore: 'Load More'
       }
     },
-
     affiliates: {
       invitesDescription: 'View site-wide inviter and invitee relationships',
       rebatesDescription: 'View recharge orders that generated affiliate rebates',
@@ -1693,8 +1651,6 @@ export default {
         historyQuota: 'Historical Rebate'
       }
     },
-
-    // Users
     users: {
       title: 'User Management',
       description: 'Manage users and their permissions',
@@ -1728,7 +1684,22 @@ export default {
       form: {
         rpmLimit: 'Requests Per Minute (RPM)',
         rpmLimitPlaceholder: '0 = unlimited',
-        rpmLimitHint: 'Max requests per minute for this user; 0 = unlimited. Acts as a fallback only when the group has no rpm_limit set.'
+        rpmLimitHint: 'Max requests per minute for this user; 0 = unlimited. Acts as a fallback only when the group has no rpm_limit set.',
+        emailLabel: 'Email',
+        emailPlaceholder: 'Enter email',
+        usernameLabel: 'Username',
+        usernamePlaceholder: 'Enter username (optional)',
+        notesLabel: 'Notes',
+        notesPlaceholder: 'Enter notes (admin only)',
+        notesHint: 'This note is only visible to administrators',
+        passwordLabel: 'Password',
+        passwordPlaceholder: 'Enter password (leave empty to keep current)',
+        roleLabel: 'Role',
+        selectRole: 'Select role',
+        balanceLabel: 'Balance',
+        concurrencyLabel: 'Concurrency',
+        statusLabel: 'Status',
+        selectStatus: 'Select status'
       },
       columns: {
         user: 'User',
@@ -1789,17 +1760,15 @@ export default {
       soraStorageQuotaHint: 'In GB, 0 means use group or system default quota',
       amountRequired: 'Please enter a valid amount',
       insufficientBalance: 'Insufficient balance',
-      deleteConfirm: "Are you sure you want to delete '{email}'? This action cannot be undone.",
+      deleteConfirm: 'Are you sure you want to delete \'{email}\'? This action cannot be undone.',
       setAllowedGroups: 'Set Allowed Groups',
-      allowedGroupsHint:
-        'Select which standard groups this user can use. Subscription groups are managed separately.',
+      allowedGroupsHint: 'Select which standard groups this user can use. Subscription groups are managed separately.',
       noStandardGroups: 'No standard groups available',
       allowAllGroups: 'Allow All Groups',
       allowAllGroupsHint: 'User can use any non-exclusive group',
       allowedGroupsUpdated: 'Allowed groups updated successfully',
       failedToLoadGroups: 'Failed to load groups',
       failedToUpdateAllowedGroups: 'Failed to update allowed groups',
-      // User Group Configuration
       groupConfig: 'User Group Configuration',
       groupConfigHint: 'Configure custom rate multipliers for user {email} (overrides group defaults)',
       exclusiveGroups: 'Exclusive Groups',
@@ -1823,10 +1792,8 @@ export default {
       withdrawAmount: 'Withdraw Amount',
       withdrawAll: 'All',
       currentBalance: 'Current Balance',
-      depositNotesPlaceholder:
-        'e.g., New user registration bonus, promotional credit, compensation, etc.',
-      withdrawNotesPlaceholder:
-        'e.g., Service issue refund, incorrect charge reversal, account closure refund, etc.',
+      depositNotesPlaceholder: 'e.g., New user registration bonus, promotional credit, compensation, etc.',
+      withdrawNotesPlaceholder: 'e.g., Service issue refund, incorrect charge reversal, account closure refund, etc.',
       notesOptional: 'Notes are optional but helpful for record keeping',
       amountHint: 'Please enter a positive amount',
       newBalance: 'New Balance',
@@ -1839,7 +1806,6 @@ export default {
       failedToDeposit: 'Failed to deposit',
       failedToWithdraw: 'Failed to withdraw',
       useDepositWithdrawButtons: 'Please use deposit/withdraw buttons to adjust balance',
-      // Balance History
       balanceHistory: 'Recharge History',
       balanceHistoryTip: 'Click to open recharge history',
       balanceHistoryTitle: 'User Recharge & Concurrency History',
@@ -1858,11 +1824,9 @@ export default {
         admin: 'Admin',
         user: 'User'
       },
-      // Settings Dropdowns
       filterSettings: 'Filter Settings',
       columnSettings: 'Column Settings',
       filterValue: 'Enter value',
-      // User Attributes
       attributes: {
         title: 'User Attributes',
         description: 'Configure custom user attribute fields',
@@ -1870,7 +1834,7 @@ export default {
         addAttribute: 'Add Attribute',
         editAttribute: 'Edit Attribute',
         deleteAttribute: 'Delete Attribute',
-        deleteConfirm: "Are you sure you want to delete attribute '{name}'? All user values for this attribute will be deleted.",
+        deleteConfirm: 'Are you sure you want to delete attribute \'{name}\'? All user values for this attribute will be deleted.',
         noAttributes: 'No custom attributes',
         noAttributesHint: 'Click the button above to add custom attributes',
         key: 'Attribute Key',
@@ -1920,10 +1884,28 @@ export default {
         failedToReorder: 'Failed to update order',
         keyExists: 'Attribute key already exists',
         dragToReorder: 'Drag to reorder'
-      }
+      },
+      deleteConfirmMessage: 'Are you sure you want to delete user \'{email}\'? This action cannot be undone.',
+      searchPlaceholder: 'Search by email, username, notes, or API key...',
+      roleFilter: 'Role Filter',
+      statusFilter: 'Status Filter',
+      allStatuses: 'All Statuses',
+      adjustBalance: 'Adjust Balance',
+      adjustConcurrency: 'Adjust Concurrency',
+      adjustmentAmount: 'Adjustment Amount',
+      adjustmentAmountHint: 'Positive to increase, negative to decrease',
+      currentConcurrency: 'Current Concurrency',
+      saving: 'Saving...',
+      noUsers: 'No users',
+      noUsersDescription: 'Create your first user to get started.',
+      userCreatedSuccess: 'User created successfully',
+      userUpdatedSuccess: 'User updated successfully',
+      userDeletedSuccess: 'User deleted successfully',
+      balanceAdjustedSuccess: 'Balance adjusted successfully',
+      concurrencyAdjustedSuccess: 'Concurrency adjusted successfully',
+      failedToSave: 'Failed to save user',
+      failedToAdjust: 'Failed to adjust'
     },
-
-    // Groups
     groups: {
       title: 'Group Management',
       description: 'Manage API key groups and rate multipliers',
@@ -1959,7 +1941,10 @@ export default {
         userName: 'Username',
         userEmail: 'Email',
         userNotes: 'Notes',
-        userStatus: 'Status'
+        userStatus: 'Status',
+        exclusive: 'Exclusive',
+        priority: 'Priority',
+        apiKeys: 'API Keys Count'
       },
       usageToday: 'Today',
       usageTotal: 'Total',
@@ -1978,7 +1963,22 @@ export default {
         exclusive: 'Exclusive Group',
         rpmLimit: 'Requests Per Minute (RPM)',
         rpmLimitPlaceholder: '0 = unlimited',
-        rpmLimitHint: 'Max requests per minute for each user in this group; 0 = unlimited. Once set, it takes over per-user rate limiting in this group (overrides the user-level rpm_limit fallback).'
+        rpmLimitHint: 'Max requests per minute for each user in this group; 0 = unlimited. Once set, it takes over per-user rate limiting in this group (overrides the user-level rpm_limit fallback).',
+        nameLabel: 'Group Name',
+        namePlaceholder: 'Enter group name',
+        descriptionLabel: 'Description',
+        descriptionPlaceholder: 'Enter description (optional)',
+        rateMultiplierLabel: 'Rate Multiplier',
+        rateMultiplierHint: '1.0 = standard rate, 0.5 = half price, 2.0 = double',
+        exclusiveLabel: 'Exclusive Group',
+        exclusiveHint: 'Exclusive group, manually assign to users',
+        platformLabel: 'Platform Restriction',
+        platformPlaceholder: 'Select platform (leave empty for no restriction)',
+        accountsLabel: 'Assigned Accounts',
+        accountsPlaceholder: 'Select accounts (leave empty for no restriction)',
+        priorityLabel: 'Priority',
+        priorityHint: 'Lower value means higher priority, used for account scheduling',
+        statusLabel: 'Status'
       },
       enterGroupName: 'Enter group name',
       optionalDescription: 'Optional description',
@@ -2038,17 +2038,14 @@ export default {
         anthropic: 'Anthropic',
         openai: 'OpenAI',
         gemini: 'Gemini',
-        antigravity: 'Antigravity',
+        antigravity: 'Antigravity'
       },
-      deleteConfirm:
-        "Are you sure you want to delete '{name}'? All associated API keys will no longer belong to any group.",
-      deleteConfirmSubscription:
-        "Are you sure you want to delete subscription group '{name}'? This will invalidate all API keys bound to this subscription and delete all related subscription records. This action cannot be undone.",
+      deleteConfirm: 'Are you sure you want to delete \'{name}\'? All associated API keys will no longer belong to any group.',
+      deleteConfirmSubscription: 'Are you sure you want to delete subscription group \'{name}\'? This will invalidate all API keys bound to this subscription and delete all related subscription records. This action cannot be undone.',
       subscription: {
         title: 'Subscription Settings',
         type: 'Billing Type',
-        typeHint:
-          'Standard billing deducts from user balance. Subscription mode uses quota limits instead.',
+        typeHint: 'Standard billing deducts from user balance. Subscription mode uses quota limits instead.',
         typeNotEditable: 'Billing type cannot be changed after group creation.',
         standard: 'Standard (Balance)',
         subscription: 'Subscription (Quota)',
@@ -2141,8 +2138,7 @@ export default {
       },
       claudeMaxSimulation: {
         title: 'Claude Max Usage Simulation',
-        tooltip:
-          'When enabled, for Claude models without upstream cache-write usage, the system deterministically maps tokens to a small input plus 1h cache creation while keeping total tokens unchanged.',
+        tooltip: 'When enabled, for Claude models without upstream cache-write usage, the system deterministically maps tokens to a small input plus 1h cache creation while keeping total tokens unchanged.',
         enabled: 'Enabled (simulate 1h cache)',
         disabled: 'Disabled',
         hint: 'Only token categories in usage billing logs are adjusted. No per-request mapping state is persisted.'
@@ -2154,10 +2150,20 @@ export default {
         geminiText: 'Gemini Text',
         geminiImage: 'Gemini Image',
         hint: 'Select at least one model family'
-      }
+      },
+      exclusiveObj: {
+        yes: 'Yes',
+        no: 'No'
+      },
+      saving: 'Saving...',
+      noGroups: 'No groups',
+      noGroupsDescription: 'Create groups to better manage API keys and rates.',
+      groupCreatedSuccess: 'Group created successfully',
+      groupUpdatedSuccess: 'Group updated successfully',
+      groupDeletedSuccess: 'Group deleted successfully',
+      failedToSave: 'Failed to save group',
+      exclusiveFilter: 'Exclusive'
     },
-
-    // Available Channels (aggregated read-only view)
     availableChannels: {
       title: 'Available Channels',
       description: 'Aggregated view: each channel with its linked groups and supported models (wildcards expanded)',
@@ -2196,8 +2202,6 @@ export default {
         unitPerRequest: '/ request'
       }
     },
-
-    // Channel Management
     channels: {
       title: 'Channel Management',
       description: 'Manage channels and custom model pricing',
@@ -2221,8 +2225,8 @@ export default {
       deleteError: 'Failed to delete channel',
       nameRequired: 'Please enter a channel name',
       duplicateModels: 'Model "{0}" appears in multiple pricing entries',
-      modelConflict: "Model patterns '{model1}' and '{model2}' conflict: overlapping match range",
-      mappingConflict: "Mapping source patterns '{model1}' and '{model2}' conflict: overlapping match range",
+      modelConflict: 'Model patterns \'{model1}\' and \'{model2}\' conflict: overlapping match range',
+      mappingConflict: 'Mapping source patterns \'{model1}\' and \'{model2}\' conflict: overlapping match range',
       deleteConfirm: 'Are you sure you want to delete channel "{name}"? This cannot be undone.',
       columns: {
         name: 'Name',
@@ -2315,7 +2319,6 @@ export default {
         unnamed: 'Unnamed'
       }
     },
-
     riskControl: {
       title: 'Risk Control',
       description: 'Configure content moderation and review audit records',
@@ -2483,7 +2486,7 @@ export default {
         scope: 'Scope',
         runtime: 'Runtime',
         response: 'Hit Notice',
-        retention: 'Retention',
+        retention: 'Retention'
       },
       overview: {
         status: 'Status',
@@ -2492,14 +2495,14 @@ export default {
         apiKey: 'API Key',
         groupScope: 'Scope',
         logs: 'Audit Records',
-        currentFilter: 'Current filter',
+        currentFilter: 'Current filter'
       },
       filters: {
         search: 'Search user/key/summary',
         from: 'From',
         to: 'To',
         allGroups: 'All Groups',
-        allEndpoints: 'All Endpoints',
+        allEndpoints: 'All Endpoints'
       },
       table: {
         time: 'Time',
@@ -2511,22 +2514,20 @@ export default {
         highest: 'Highest',
         actionMeta: 'Action',
         latency: 'Latency',
-        input: 'Input Summary',
+        input: 'Input Summary'
       },
       result: {
         all: 'All Results',
         hit: 'Hit',
         blocked: 'Blocked',
         pass: 'Pass',
-        error: 'Error',
+        error: 'Error'
       },
       action: {
         block: 'Blocked',
-        error: 'Error',
-      },
+        error: 'Error'
+      }
     },
-
-    // Channel Monitor
     channelMonitor: {
       title: 'Channel Monitor',
       description: 'Monitor channel availability, latency and status',
@@ -2649,8 +2650,6 @@ export default {
         }
       }
     },
-
-    // Subscriptions
     subscriptions: {
       title: 'Subscription Management',
       description: 'Manage user subscriptions and quota limits',
@@ -2707,7 +2706,7 @@ export default {
       revoke: 'Revoke',
       resetQuota: 'Reset Quota',
       resetQuotaTitle: 'Reset Usage Quota',
-      resetQuotaConfirm: "Reset the daily, weekly, and monthly usage quota for '{user}'? Usage will be zeroed and windows restarted from today.",
+      resetQuotaConfirm: 'Reset the daily, weekly, and monthly usage quota for \'{user}\'? Usage will be zeroed and windows restarted from today.',
       quotaResetSuccess: 'Quota reset successfully',
       failedToResetQuota: 'Failed to reset quota',
       noSubscriptionsYet: 'No subscriptions yet',
@@ -2724,8 +2723,7 @@ export default {
       pleaseSelectUser: 'Please select a user',
       pleaseSelectGroup: 'Please select a group',
       validityDaysRequired: 'Please enter a valid number of days (at least 1)',
-      revokeConfirm:
-        "Are you sure you want to revoke the subscription for '{user}'? This action cannot be undone.",
+      revokeConfirm: 'Are you sure you want to revoke the subscription for \'{user}\'? This action cannot be undone.',
       guide: {
         title: 'Subscription Management Guide',
         subtitle: 'Subscription mode lets you assign time-based usage quotas to users, with daily/weekly/monthly limits. Follow these steps to get started.',
@@ -2757,8 +2755,6 @@ export default {
         tip: 'Tip: Only groups with billing type "Subscription" and status "Active" appear in the group dropdown. If no options are available, create one in Group Management first.'
       }
     },
-
-    // Accounts
     accounts: {
       title: 'Account Management',
       description: 'Manage AI platform accounts and credentials',
@@ -2801,8 +2797,7 @@ export default {
       dataImportSuccess: 'Import completed: accounts {account_created}, failed {account_failed}',
       dataImportCompletedWithErrors: 'Import completed with errors: account failed {account_failed}, proxy failed {proxy_failed}',
       syncFromCrsTitle: 'Sync Accounts from CRS',
-      syncFromCrsDesc:
-        'Sync accounts from external relay service (CRS) into this system (CRS is called server-to-server).',
+      syncFromCrsDesc: 'Sync accounts from external relay service (CRS) into this system (CRS is called server-to-server).',
       crsVersionRequirement: '⚠️ Note: CRS version must be ≥ v1.1.240 to support this feature',
       crsBaseUrl: 'CRS Base URL',
       crsBaseUrlPlaceholder: 'e.g. http://127.0.0.1:3000',
@@ -2816,8 +2811,7 @@ export default {
       syncResultSummary: 'Created {created}, updated {updated}, skipped {skipped}, failed {failed}',
       syncErrors: 'Errors / Skipped Details',
       syncCompleted: 'Sync completed: created {created}, updated {updated}, skipped {skipped}',
-      syncCompletedWithErrors:
-        'Sync completed with errors: failed {failed} (created {created}, updated {updated}, skipped {skipped})',
+      syncCompletedWithErrors: 'Sync completed with errors: failed {failed} (created {created}, updated {updated}, skipped {skipped})',
       syncFailed: 'Sync failed',
       crsPreview: 'Preview',
       crsPreviewing: 'Previewing...',
@@ -2829,8 +2823,7 @@ export default {
       crsNoNewAccounts: 'All CRS accounts are already synced.',
       crsWillUpdate: 'Will update {count} existing accounts.',
       crsSelectedCount: '{count} new accounts selected',
-      crsUpdateBehaviorNote:
-        'Existing accounts only sync fields returned by CRS; missing fields keep their current values. Credentials are merged by key — keys not returned by CRS are preserved. Proxies are kept when "Sync proxies" is unchecked.',
+      crsUpdateBehaviorNote: 'Existing accounts only sync fields returned by CRS; missing fields keep their current values. Credentials are merged by key — keys not returned by CRS are preserved. Proxies are kept when "Sync proxies" is unchecked.',
       crsBack: 'Back',
       editAccount: 'Edit Account',
       deleteAccount: 'Delete Account',
@@ -2846,7 +2839,6 @@ export default {
       oauthType: 'OAuth',
       setupToken: 'Setup Token',
       apiKey: 'API Key',
-      // Schedulable toggle
       schedulable: 'Schedulable',
       schedulableHint: 'Enable to include this account in API request scheduling',
       schedulableEnabled: 'Scheduling enabled',
@@ -2858,7 +2850,7 @@ export default {
         claude: 'Claude',
         openai: 'OpenAI',
         gemini: 'Gemini',
-        antigravity: 'Antigravity',
+        antigravity: 'Antigravity'
       },
       types: {
         oauth: 'OAuth',
@@ -2869,7 +2861,9 @@ export default {
         antigravityOauth: 'Antigravity OAuth',
         antigravityApikey: 'Connect via Base URL + API Key',
         upstream: 'Upstream',
-        upstreamDesc: 'Connect via Base URL + API Key'
+        upstreamDesc: 'Connect via Base URL + API Key',
+        api_key: 'API Key',
+        cookie: 'Cookie'
       },
       status: {
         active: 'Active',
@@ -2922,7 +2916,6 @@ export default {
       setPrivacy: 'Set Privacy',
       subscriptionAbnormal: 'Abnormal',
       subscriptionExpires: 'Expires',
-      // Capacity status tooltips
       capacity: {
         windowCost: {
           blocked: '5h window cost exceeded, account scheduling paused',
@@ -2948,7 +2941,7 @@ export default {
         quota: {
           exceeded: 'Quota exceeded, account paused',
           normal: 'Quota normal'
-        },
+        }
       },
       tempUnschedulable: {
         title: 'Temp Unschedulable',
@@ -3021,7 +3014,7 @@ export default {
         thursday: 'Thursday',
         friday: 'Friday',
         saturday: 'Saturday',
-        sunday: 'Sunday',
+        sunday: 'Sunday'
       },
       quotaLimitAmount: 'Total Limit',
       quotaLimitAmountHint: 'Cumulative spending limit. Does not auto-reset.',
@@ -3029,7 +3022,7 @@ export default {
         alert: 'Alert',
         enabled: 'Enable Alert',
         threshold: 'Alert Amount',
-        thresholdPlaceholder: 'Enter percentage',
+        thresholdPlaceholder: 'Enter percentage'
       },
       testConnection: 'Test Connection',
       reAuthorize: 'Re-Authorize',
@@ -3059,8 +3052,7 @@ export default {
       },
       bulkEdit: {
         title: 'Bulk Edit Accounts',
-        selectionInfo:
-          '{count} account(s) selected. Only checked or filled fields will be updated; others stay unchanged.',
+        selectionInfo: '{count} account(s) selected. Only checked or filled fields will be updated; others stay unchanged.',
         baseUrlPlaceholder: 'https://api.anthropic.com or https://api.openai.com',
         baseUrlNotice: 'Applies to API Key accounts only; leave empty to keep existing value',
         submit: 'Update Accounts',
@@ -3088,8 +3080,7 @@ export default {
       failedToRefresh: 'Failed to refresh token',
       failedToDelete: 'Failed to delete account',
       failedToClearRateLimit: 'Failed to clear rate limit',
-      deleteConfirm: "Are you sure you want to delete '{name}'? This action cannot be undone.",
-      // Create/Edit Account Modal
+      deleteConfirm: 'Are you sure you want to delete \'{name}\'? This action cannot be undone.',
       platform: 'Platform',
       accountName: 'Account Name',
       enterAccountName: 'Enter account name',
@@ -3126,16 +3117,13 @@ export default {
       apiKeyRequired: 'API Key *',
       apiKeyPlaceholder: 'sk-ant-api03-...',
       apiKeyHint: 'Your Claude Console API Key',
-      // OpenAI specific hints
       openai: {
         baseUrlHint: 'Leave default for official OpenAI API',
         apiKeyHint: 'Your OpenAI API Key',
         oauthPassthrough: 'Auto passthrough (auth only)',
-        oauthPassthroughDesc:
-          'When enabled, this OpenAI account uses automatic passthrough: the gateway forwards request/response as-is and only swaps auth, while keeping billing/concurrency/audit and necessary safety filtering.',
+        oauthPassthroughDesc: 'When enabled, this OpenAI account uses automatic passthrough: the gateway forwards request/response as-is and only swaps auth, while keeping billing/concurrency/audit and necessary safety filtering.',
         responsesWebsocketsV2: 'Responses WebSocket v2',
-        responsesWebsocketsV2Desc:
-          'Disabled by default. Enable to allow responses_websockets_v2 capability (still gated by global and account-type switches).',
+        responsesWebsocketsV2Desc: 'Disabled by default. Enable to allow responses_websockets_v2 capability (still gated by global and account-type switches).',
         wsMode: 'WS mode',
         wsModeDesc: 'Only applies to the current OpenAI account type.',
         wsModeOff: 'Off (off)',
@@ -3143,23 +3131,17 @@ export default {
         wsModePassthrough: 'Passthrough (passthrough)',
         wsModeShared: 'Shared (shared)',
         wsModeDedicated: 'Dedicated (dedicated)',
-        wsModeConcurrencyHint:
-          'When WS mode is enabled, account concurrency becomes the WS connection pool limit for this account.',
+        wsModeConcurrencyHint: 'When WS mode is enabled, account concurrency becomes the WS connection pool limit for this account.',
         wsModePassthroughHint: 'Passthrough mode does not use the WS connection pool.',
         oauthResponsesWebsocketsV2: 'OAuth WebSocket Mode',
-        oauthResponsesWebsocketsV2Desc:
-          'Only applies to OpenAI OAuth. This account can use OpenAI WebSocket Mode only when enabled.',
+        oauthResponsesWebsocketsV2Desc: 'Only applies to OpenAI OAuth. This account can use OpenAI WebSocket Mode only when enabled.',
         apiKeyResponsesWebsocketsV2: 'API Key WebSocket Mode',
-        apiKeyResponsesWebsocketsV2Desc:
-          'Only applies to OpenAI API Key. This account can use OpenAI WebSocket Mode only when enabled.',
-        responsesWebsocketsV2PassthroughHint:
-          'Automatic passthrough is currently enabled: it only affects HTTP passthrough and does not disable WS mode.',
+        apiKeyResponsesWebsocketsV2Desc: 'Only applies to OpenAI API Key. This account can use OpenAI WebSocket Mode only when enabled.',
+        responsesWebsocketsV2PassthroughHint: 'Automatic passthrough is currently enabled: it only affects HTTP passthrough and does not disable WS mode.',
         codexCLIOnly: 'Codex official clients only',
-        codexCLIOnlyDesc:
-          'Only applies to OpenAI OAuth. When enabled, only Codex official client families are allowed; when disabled, the gateway bypasses this restriction and keeps existing behavior.',
+        codexCLIOnlyDesc: 'Only applies to OpenAI OAuth. When enabled, only Codex official client families are allowed; when disabled, the gateway bypasses this restriction and keeps existing behavior.',
         codexImageGenerationBridge: 'Codex image-generation bridge',
-        codexImageGenerationBridgeDesc:
-          'Account policy takes precedence over channel and global settings. Only controls whether Codex requests through the /responses text endpoint receive the image_generation tool; standalone image-generation endpoints are unaffected.',
+        codexImageGenerationBridgeDesc: 'Account policy takes precedence over channel and global settings. Only controls whether Codex requests through the /responses text endpoint receive the image_generation tool; standalone image-generation endpoints are unaffected.',
         codexImageGenerationBridgeInherit: 'Follow channel',
         codexImageGenerationBridgeInheritDesc: 'Do not write an account override; use the channel or global policy.',
         codexImageGenerationBridgeEnabled: 'Force on',
@@ -3170,14 +3152,12 @@ export default {
         codexImageGenerationBridgeBadgeEnabled: 'Account on',
         codexImageGenerationBridgeBadgeDisabled: 'Account off',
         compactMode: 'Compact mode',
-        compactModeDesc:
-          'Controls how this account participates in /responses/compact routing. Auto follows probe results, Force On always allows, Force Off always excludes.',
+        compactModeDesc: 'Controls how this account participates in /responses/compact routing. Auto follows probe results, Force On always allows, Force Off always excludes.',
         compactModeAuto: 'Auto',
         compactModeForceOn: 'Force On',
         compactModeForceOff: 'Force Off',
         compactModelMapping: 'Compact-only model mapping',
-        compactModelMappingDesc:
-          'Only applies to /responses/compact. Use this when the upstream compact endpoint requires a special compact model.',
+        compactModelMappingDesc: 'Only applies to /responses/compact. Use this when the upstream compact endpoint requires a special compact model.',
         compactSupported: 'Compact supported',
         compactUnsupported: 'Compact unsupported',
         compactAuto: 'Compact Auto',
@@ -3186,25 +3166,22 @@ export default {
         testMode: 'Test mode',
         testModeDefault: 'Default request',
         testModeCompact: 'Compact probe',
-        modelRestrictionDisabledByPassthrough: 'Automatic passthrough is enabled: model whitelist/mapping will not take effect.',
+        modelRestrictionDisabledByPassthrough: 'Automatic passthrough is enabled: model whitelist/mapping will not take effect.'
       },
       anthropic: {
         apiKeyPassthrough: 'Auto passthrough (auth only)',
-        apiKeyPassthroughDesc:
-          'Only applies to Anthropic API Key accounts. When enabled, messages/count_tokens are forwarded in passthrough mode with auth replacement only, while billing/concurrency/audit and safety filtering are preserved. Disable to roll back immediately.',
+        apiKeyPassthroughDesc: 'Only applies to Anthropic API Key accounts. When enabled, messages/count_tokens are forwarded in passthrough mode with auth replacement only, while billing/concurrency/audit and safety filtering are preserved. Disable to roll back immediately.',
         webSearchEmulation: 'Web Search Emulation',
-        webSearchEmulationDesc:
-          'Enable web search emulation for this API Key account. When a pure web_search request is detected, the gateway calls a third-party search API and constructs the response locally. Default follows channel config.',
+        webSearchEmulationDesc: 'Enable web search emulation for this API Key account. When a pure web_search request is detected, the gateway calls a third-party search API and constructs the response locally. Default follows channel config.',
         webSearchDefault: 'Default',
         webSearchEnabled: 'Enabled',
-        webSearchDisabled: 'Disabled',
+        webSearchDisabled: 'Disabled'
       },
       modelRestriction: 'Model Restriction (Optional)',
       modelWhitelist: 'Model Whitelist',
       modelMapping: 'Model Mapping',
       selectAllowedModels: 'Select allowed models. Leave empty to support all models.',
-      mapRequestModels:
-        'Map request models to actual models. Left is the requested model, right is the actual model sent to API.',
+      mapRequestModels: 'Map request models to actual models. Left is the requested model, right is the actual model sent to API.',
       selectedModels: 'Selected {count} model(s)',
       supportsAllModels: '(supports all models)',
       requestModel: 'Request model',
@@ -3224,30 +3201,23 @@ export default {
       modelCount: '{count} models',
       poolMode: 'Pool Mode',
       poolModeHint: 'Enable when upstream is an account pool; errors won\'t mark local account status',
-      poolModeInfo:
-        'When enabled, upstream 429/403/401 errors will auto-retry without marking the account as rate-limited or errored. Suitable for upstream pointing to another zsyq instance.',
+      poolModeInfo: 'When enabled, upstream 429/403/401 errors will auto-retry without marking the account as rate-limited or errored. Suitable for upstream pointing to another zsyq instance.',
       poolModeRetryCount: 'Same-Account Retries',
-      poolModeRetryCountHint:
-        'Only applies in pool mode. Use 0 to disable in-place retry. Default {default}, maximum {max}.',
+      poolModeRetryCountHint: 'Only applies in pool mode. Use 0 to disable in-place retry. Default {default}, maximum {max}.',
       customErrorCodes: 'Custom Error Codes',
       customErrorCodesHint: 'Only stop scheduling for selected error codes',
-      customErrorCodesWarning:
-        'Only selected error codes will stop scheduling. Other errors will return 500.',
-      customErrorCodes429Warning:
-        '429 already has built-in rate limit handling. Adding it to custom error codes will disable the account instead of temporary rate limiting. Are you sure?',
-      customErrorCodes529Warning:
-        '529 already has built-in overload handling. Adding it to custom error codes will disable the account instead of temporary overload marking. Are you sure?',
+      customErrorCodesWarning: 'Only selected error codes will stop scheduling. Other errors will return 500.',
+      customErrorCodes429Warning: '429 already has built-in rate limit handling. Adding it to custom error codes will disable the account instead of temporary rate limiting. Are you sure?',
+      customErrorCodes529Warning: '529 already has built-in overload handling. Adding it to custom error codes will disable the account instead of temporary overload marking. Are you sure?',
       selectedErrorCodes: 'Selected',
       noneSelectedUsesDefault: 'None selected (uses default policy)',
       enterErrorCode: 'Enter error code (100-599)',
       invalidErrorCode: 'Please enter a valid HTTP error code (100-599)',
       errorCodeExists: 'This error code is already selected',
       interceptWarmupRequests: 'Intercept Warmup Requests',
-      interceptWarmupRequestsDesc:
-        'When enabled, warmup requests like title generation will return mock responses without consuming upstream tokens',
+      interceptWarmupRequestsDesc: 'When enabled, warmup requests like title generation will return mock responses without consuming upstream tokens',
       autoPauseOnExpired: 'Auto Pause On Expired',
       autoPauseOnExpiredDesc: 'When enabled, the account will auto pause scheduling after it expires',
-      // Quota control (Anthropic OAuth/SetupToken only)
       quotaControl: {
         title: 'Quota Control',
         hint: 'Configure cost window, session limits, client affinity and other scheduling controls.',
@@ -3290,7 +3260,7 @@ export default {
           userMsgQueueHint: 'Rate-limit user messages to avoid triggering upstream RPM limits',
           umqModeOff: 'Off',
           umqModeThrottle: 'Throttle',
-          umqModeSerialize: 'Serialize',
+          umqModeSerialize: 'Serialize'
         },
         tlsFingerprint: {
           label: 'TLS Fingerprint Simulation',
@@ -3311,7 +3281,7 @@ export default {
         customBaseUrl: {
           label: 'Custom Relay URL',
           hint: 'Forward requests to a custom relay service. Proxy URL will be passed as a query parameter.',
-          urlHint: 'Relay service URL (e.g., https://relay.example.com)',
+          urlHint: 'Relay service URL (e.g., https://relay.example.com)'
         },
         clientAffinity: {
           label: 'Client Affinity Scheduling',
@@ -3347,12 +3317,10 @@ export default {
       higherPriorityFirst: 'Lower value means higher priority',
       mixedScheduling: 'Use in /v1/messages',
       mixedSchedulingHint: 'Enable to participate in Anthropic/Gemini group scheduling',
-      mixedSchedulingTooltip:
-        '!! WARNING !! Antigravity Claude and Anthropic Claude cannot be used in the same context. If you have both Anthropic and Antigravity accounts, enabling this option will cause frequent 400 errors. When enabled, please use the group feature to isolate Antigravity accounts from Anthropic accounts. Make sure you understand this before enabling!!',
+      mixedSchedulingTooltip: '!! WARNING !! Antigravity Claude and Anthropic Claude cannot be used in the same context. If you have both Anthropic and Antigravity accounts, enabling this option will cause frequent 400 errors. When enabled, please use the group feature to isolate Antigravity accounts from Anthropic accounts. Make sure you understand this before enabling!!',
       aiCreditsBalance: 'AI Credits',
       allowOverages: 'Allow Overages (AI Credits)',
-      allowOveragesTooltip:
-        'Only use AI Credits after free quota is explicitly exhausted. Ordinary concurrent 429 rate limits will not switch to overages.',
+      allowOveragesTooltip: 'Only use AI Credits after free quota is explicitly exhausted. Ordinary concurrent 429 rate limits will not switch to overages.',
       creating: 'Creating...',
       updating: 'Updating...',
       accountCreated: 'Account created successfully',
@@ -3386,7 +3354,6 @@ export default {
       bedrockApiKeyLeaveEmpty: 'Leave empty to keep current key',
       apiKeyIsRequired: 'API Key is required',
       leaveEmptyToKeep: 'Leave empty to keep current key',
-      // Upstream type
       upstream: {
         baseUrl: 'Upstream Base URL',
         baseUrlHint: 'The address of the upstream Antigravity service, e.g., https://cloudcode-pa.googleapis.com',
@@ -3395,19 +3362,16 @@ export default {
         pleaseEnterBaseUrl: 'Please enter upstream Base URL',
         pleaseEnterApiKey: 'Please enter upstream API Key'
       },
-      // OAuth flow
       oauth: {
         title: 'Claude Account Authorization',
         authMethod: 'Authorization Method',
         manualAuth: 'Manual Authorization',
         cookieAutoAuth: 'Cookie Auto-Auth',
-        cookieAutoAuthDesc:
-          'Use claude.ai sessionKey to automatically complete OAuth authorization without manually opening browser.',
+        cookieAutoAuthDesc: 'Use claude.ai sessionKey to automatically complete OAuth authorization without manually opening browser.',
         sessionKey: 'sessionKey',
         keysCount: '{count} keys',
         batchCreateAccounts: 'Will batch create {count} accounts',
-        sessionKeyPlaceholder:
-          'One sessionKey per line, e.g.:\nsk-ant-sid01-xxxxx...\nsk-ant-sid01-yyyyy...',
+        sessionKeyPlaceholder: 'One sessionKey per line, e.g.:\nsk-ant-sid01-xxxxx...\nsk-ant-sid01-yyyyy...',
         sessionKeyPlaceholderSingle: 'sk-ant-sid01-xxxxx...',
         howToGetSessionKey: 'How to get sessionKey',
         step1: 'Login to claude.ai in your browser',
@@ -3425,13 +3389,10 @@ export default {
         generating: 'Generating...',
         regenerate: 'Regenerate',
         step2OpenUrl: 'Open the URL in your browser and complete authorization',
-        openUrlDesc:
-          'Open the authorization URL in a new tab, log in to your Claude account and authorize.',
-        proxyWarning:
-          'Note: If you configured a proxy, make sure your browser uses the same proxy to access the authorization page.',
+        openUrlDesc: 'Open the authorization URL in a new tab, log in to your Claude account and authorize.',
+        proxyWarning: 'Note: If you configured a proxy, make sure your browser uses the same proxy to access the authorization page.',
         step3EnterCode: 'Enter the Authorization Code',
-        authCodeDesc:
-          'After authorization is complete, the page will display an Authorization Code. Copy and paste it below:',
+        authCodeDesc: 'After authorization is complete, the page will display an Authorization Code. Copy and paste it below:',
         authCode: 'Authorization Code',
         authCodePlaceholder: 'Paste the Authorization Code from Claude page...',
         authCodeHint: 'Paste the Authorization Code copied from the Claude page',
@@ -3445,33 +3406,25 @@ export default {
         batchSuccess: 'Successfully created {count} account(s)',
         batchPartialSuccess: 'Partial success: {success} succeeded, {failed} failed',
         batchFailed: 'Batch creation failed',
-        // OpenAI specific
         openai: {
           title: 'OpenAI Account Authorization',
           followSteps: 'Follow these steps to complete OpenAI account authorization:',
           step1GenerateUrl: 'Click the button below to generate the authorization URL',
           generateAuthUrl: 'Generate Auth URL',
           step2OpenUrl: 'Open the URL in your browser and complete authorization',
-          openUrlDesc:
-            'Open the authorization URL in a new tab, log in to your OpenAI account and authorize.',
-          importantNotice:
-            'Important: The page may take a while to load after authorization. Please wait patiently. When the browser address bar changes to http://localhost..., the authorization is complete.',
+          openUrlDesc: 'Open the authorization URL in a new tab, log in to your OpenAI account and authorize.',
+          importantNotice: 'Important: The page may take a while to load after authorization. Please wait patiently. When the browser address bar changes to http://localhost..., the authorization is complete.',
           step3EnterCode: 'Enter Authorization URL or Code',
-          authCodeDesc:
-            'After authorization is complete, when the page URL becomes http://localhost:xxx/auth/callback?code=...:',
+          authCodeDesc: 'After authorization is complete, when the page URL becomes http://localhost:xxx/auth/callback?code=...:',
           authCode: 'Authorization URL or Code',
-          authCodePlaceholder:
-            'Option 1: Copy the complete URL\n(http://localhost:xxx/auth/callback?code=...)\nOption 2: Copy only the code parameter value',
-          authCodeHint:
-            'You can copy the entire URL or just the code parameter value, the system will auto-detect',
+          authCodePlaceholder: 'Option 1: Copy the complete URL\n(http://localhost:xxx/auth/callback?code=...)\nOption 2: Copy only the code parameter value',
+          authCodeHint: 'You can copy the entire URL or just the code parameter value, the system will auto-detect',
           failedToGenerateUrl: 'Failed to generate OpenAI auth URL',
           failedToExchangeCode: 'Failed to exchange OpenAI auth code',
           failedToValidateRT: 'Failed to validate refresh token',
           errors: {
-            OPENAI_OAUTH_PROXY_REQUIRED:
-              'No proxy is configured and this server could not reach OpenAI directly, so the OpenAI OAuth request failed. Select a proxy that can access OpenAI and retry; if the authorization code has expired, regenerate the authorization URL.'
+            OPENAI_OAUTH_PROXY_REQUIRED: 'No proxy is configured and this server could not reach OpenAI directly, so the OpenAI OAuth request failed. Select a proxy that can access OpenAI and retry; if the authorization code has expired, regenerate the authorization URL.'
           },
-          // Refresh Token auth
           refreshTokenAuth: 'Manual RT Input',
           refreshTokenDesc: 'Enter your existing OpenAI Refresh Token(s). Supports batch input (one per line). The system will automatically validate and create accounts.',
           refreshTokenPlaceholder: 'Paste your OpenAI Refresh Token...\nSupports multiple, one per line',
@@ -3502,56 +3455,45 @@ export default {
           pleaseEnterRefreshToken: 'Please enter Refresh Token',
           pleaseEnterSessionToken: 'Please enter Session Token'
         },
-        // Gemini specific
-	        gemini: {
-	          title: 'Gemini Account Authorization',
-	          followSteps: 'Follow these steps to authorize your Gemini account:',
-	          step1GenerateUrl: 'Generate the authorization URL',
-	          generateAuthUrl: 'Generate Auth URL',
-	          projectIdLabel: 'Project ID (optional)',
-	          projectIdPlaceholder: 'e.g. my-gcp-project or cloud-ai-companion-xxxxx',
-	          projectIdHint:
-	            'Leave empty to auto-detect after code exchange. If auto-detection fails, fill it in and re-generate the auth URL to try again.',
-	          howToGetProjectId: 'How to get',
-	          step2OpenUrl: 'Open the URL in your browser and complete authorization',
-	          openUrlDesc:
-	            'Open the authorization URL in a new tab, log in to your Google account and authorize.',
-	          step3EnterCode: 'Enter Authorization URL or Code',
-	          authCodeDesc:
-	            'After authorization, copy the callback URL (recommended) or just the code and paste it below.',
-	          authCode: 'Callback URL or Code',
-	          authCodePlaceholder:
-	            'Option 1 (recommended): Paste the callback URL\nOption 2: Paste only the code value',
-	          authCodeHint: 'The system will auto-extract code/state from the URL.',
+        gemini: {
+          title: 'Gemini Account Authorization',
+          followSteps: 'Follow these steps to authorize your Gemini account:',
+          step1GenerateUrl: 'Generate the authorization URL',
+          generateAuthUrl: 'Generate Auth URL',
+          projectIdLabel: 'Project ID (optional)',
+          projectIdPlaceholder: 'e.g. my-gcp-project or cloud-ai-companion-xxxxx',
+          projectIdHint: 'Leave empty to auto-detect after code exchange. If auto-detection fails, fill it in and re-generate the auth URL to try again.',
+          howToGetProjectId: 'How to get',
+          step2OpenUrl: 'Open the URL in your browser and complete authorization',
+          openUrlDesc: 'Open the authorization URL in a new tab, log in to your Google account and authorize.',
+          step3EnterCode: 'Enter Authorization URL or Code',
+          authCodeDesc: 'After authorization, copy the callback URL (recommended) or just the code and paste it below.',
+          authCode: 'Callback URL or Code',
+          authCodePlaceholder: 'Option 1 (recommended): Paste the callback URL\nOption 2: Paste only the code value',
+          authCodeHint: 'The system will auto-extract code/state from the URL.',
           redirectUri: 'Redirect URI',
-          redirectUriHint:
-            'This must be configured in your Google OAuth client and must match exactly.',
-          confirmRedirectUri:
-            'I have configured this Redirect URI in the Google OAuth client (must match exactly)',
-	          invalidRedirectUri: 'Redirect URI must be a valid http(s) URL',
-	          redirectUriNotConfirmed: 'Please confirm the Redirect URI is configured correctly',
-	          missingRedirectUri: 'Missing redirect URI',
-	          failedToGenerateUrl: 'Failed to generate Gemini auth URL',
-	          missingExchangeParams: 'Missing auth code, session ID, or state',
-	          failedToExchangeCode: 'Failed to exchange Gemini auth code',
-	          missingProjectId: 'GCP Project ID retrieval failed: Your Google account is not linked to an active GCP project. Please activate GCP and bind a credit card in Google Cloud Console, or manually enter the Project ID during authorization.',
-	          modelPassthrough: 'Gemini Model Passthrough',
-	          modelPassthroughDesc:
-	            'All model requests are forwarded directly to the Gemini API without model restrictions or mappings.',
-	          stateWarningTitle: 'Note',
-	          stateWarningDesc: 'Recommended: paste the full callback URL (includes code & state).',
-	          oauthTypeLabel: 'OAuth Type',
+          redirectUriHint: 'This must be configured in your Google OAuth client and must match exactly.',
+          confirmRedirectUri: 'I have configured this Redirect URI in the Google OAuth client (must match exactly)',
+          invalidRedirectUri: 'Redirect URI must be a valid http(s) URL',
+          redirectUriNotConfirmed: 'Please confirm the Redirect URI is configured correctly',
+          missingRedirectUri: 'Missing redirect URI',
+          failedToGenerateUrl: 'Failed to generate Gemini auth URL',
+          missingExchangeParams: 'Missing auth code, session ID, or state',
+          failedToExchangeCode: 'Failed to exchange Gemini auth code',
+          missingProjectId: 'GCP Project ID retrieval failed: Your Google account is not linked to an active GCP project. Please activate GCP and bind a credit card in Google Cloud Console, or manually enter the Project ID during authorization.',
+          modelPassthrough: 'Gemini Model Passthrough',
+          modelPassthroughDesc: 'All model requests are forwarded directly to the Gemini API without model restrictions or mappings.',
+          stateWarningTitle: 'Note',
+          stateWarningDesc: 'Recommended: paste the full callback URL (includes code & state).',
+          oauthTypeLabel: 'OAuth Type',
           needsProjectId: 'Built-in OAuth (Code Assist)',
           needsProjectIdDesc: 'Requires GCP project and Project ID',
           noProjectIdNeeded: 'Custom OAuth (AI Studio)',
           noProjectIdNeededDesc: 'Requires admin-configured OAuth client',
-	          aiStudioNotConfiguredShort: 'Not configured',
-	          aiStudioNotConfiguredTip:
-	            'AI Studio OAuth is not configured: set GEMINI_OAUTH_CLIENT_ID / GEMINI_OAUTH_CLIENT_SECRET and add Redirect URI: http://localhost:1455/auth/callback (Consent screen scopes must include https://www.googleapis.com/auth/generative-language.retriever)',
-	          aiStudioNotConfigured:
-	            'AI Studio OAuth is not configured: set GEMINI_OAUTH_CLIENT_ID / GEMINI_OAUTH_CLIENT_SECRET and add Redirect URI: http://localhost:1455/auth/callback'
-	        },
-        // Antigravity specific
+          aiStudioNotConfiguredShort: 'Not configured',
+          aiStudioNotConfiguredTip: 'AI Studio OAuth is not configured: set GEMINI_OAUTH_CLIENT_ID / GEMINI_OAUTH_CLIENT_SECRET and add Redirect URI: http://localhost:1455/auth/callback (Consent screen scopes must include https://www.googleapis.com/auth/generative-language.retriever)',
+          aiStudioNotConfigured: 'AI Studio OAuth is not configured: set GEMINI_OAUTH_CLIENT_ID / GEMINI_OAUTH_CLIENT_SECRET and add Redirect URI: http://localhost:1455/auth/callback'
+        },
         antigravity: {
           title: 'Antigravity Account Authorization',
           followSteps: 'Follow these steps to authorize your Antigravity account:',
@@ -3559,28 +3501,24 @@ export default {
           generateAuthUrl: 'Generate Auth URL',
           step2OpenUrl: 'Open the URL in your browser and complete authorization',
           openUrlDesc: 'Open the authorization URL in a new tab, log in to your Google account and authorize.',
-          importantNotice:
-            'Important: The page may take a while to load after authorization. Please wait patiently. When the browser address bar shows http://localhost..., authorization is complete.',
+          importantNotice: 'Important: The page may take a while to load after authorization. Please wait patiently. When the browser address bar shows http://localhost..., authorization is complete.',
           step3EnterCode: 'Enter Authorization URL or Code',
-          authCodeDesc:
-            'After authorization, when the page URL becomes http://localhost:xxx/auth/callback?code=...:',
+          authCodeDesc: 'After authorization, when the page URL becomes http://localhost:xxx/auth/callback?code=...:',
           authCode: 'Authorization URL or Code',
-          authCodePlaceholder:
-            'Option 1: Copy the complete URL\n(http://localhost:xxx/auth/callback?code=...)\nOption 2: Copy only the code parameter value',
-                    authCodeHint: 'You can copy the entire URL or just the code parameter value, the system will auto-detect',
-                    failedToGenerateUrl: 'Failed to generate Antigravity auth URL',
-                    missingExchangeParams: 'Missing code, session ID, or state',
-                    failedToExchangeCode: 'Failed to exchange Antigravity auth code',
-                    // Refresh Token auth
-                    refreshTokenAuth: 'Manual RT',
-                    refreshTokenDesc: 'Enter your existing Antigravity Refresh Token. Supports batch input (one per line). The system will automatically validate and create accounts.',
-                    refreshTokenPlaceholder: 'Paste your Antigravity Refresh Token...\nSupports multiple tokens, one per line',
-                    validating: 'Validating...',
-                    validateAndCreate: 'Validate & Create',
-                    pleaseEnterRefreshToken: 'Please enter Refresh Token',
-                    failedToValidateRT: 'Failed to validate Refresh Token'
-                  }
-                },      // Gemini specific (platform-wide)
+          authCodePlaceholder: 'Option 1: Copy the complete URL\n(http://localhost:xxx/auth/callback?code=...)\nOption 2: Copy only the code parameter value',
+          authCodeHint: 'You can copy the entire URL or just the code parameter value, the system will auto-detect',
+          failedToGenerateUrl: 'Failed to generate Antigravity auth URL',
+          missingExchangeParams: 'Missing code, session ID, or state',
+          failedToExchangeCode: 'Failed to exchange Antigravity auth code',
+          refreshTokenAuth: 'Manual RT',
+          refreshTokenDesc: 'Enter your existing Antigravity Refresh Token. Supports batch input (one per line). The system will automatically validate and create accounts.',
+          refreshTokenPlaceholder: 'Paste your Antigravity Refresh Token...\nSupports multiple tokens, one per line',
+          validating: 'Validating...',
+          validateAndCreate: 'Validate & Create',
+          pleaseEnterRefreshToken: 'Please enter Refresh Token',
+          failedToValidateRT: 'Failed to validate Refresh Token'
+        }
+      },
       gemini: {
         helpButton: 'Help',
         helpDialog: {
@@ -3588,15 +3526,13 @@ export default {
           apiKeySection: 'API Key Links'
         },
         modelPassthrough: 'Gemini Model Passthrough',
-        modelPassthroughDesc:
-          'All model requests are forwarded directly to the Gemini API without model restrictions or mappings.',
+        modelPassthroughDesc: 'All model requests are forwarded directly to the Gemini API without model restrictions or mappings.',
         baseUrlHint: 'Leave default for official Gemini API',
         apiKeyHint: 'Your Gemini API Key (starts with AIza)',
         tier: {
           label: 'Account Tier',
           hint: 'Tip: The system will try to auto-detect the tier first; if auto-detection is unavailable or fails, your selected tier is used as a fallback (simulated quota).',
-          aiStudioHint:
-            'AI Studio quotas are per-model (Pro/Flash are limited independently). If billing is enabled, choose Pay-as-you-go.',
+          aiStudioHint: 'AI Studio quotas are per-model (Pro/Flash are limited independently). If billing is enabled, choose Pay-as-you-go.',
           googleOne: {
             free: 'Google One Free',
             pro: 'Google One Pro',
@@ -3616,8 +3552,7 @@ export default {
           oauthDesc: 'Authorize with your Google account and choose an OAuth type.',
           apiKeyTitle: 'API Key (AI Studio)',
           apiKeyDesc: 'Fastest setup. Use an AIza API key.',
-          apiKeyNote:
-            'Best for light testing. Free tier has strict rate limits and data may be used for training.',
+          apiKeyNote: 'Best for light testing. Free tier has strict rate limits and data may be used for training.',
           apiKeyLink: 'Get API Key',
           quotaLink: 'Quota guide'
         },
@@ -3717,7 +3652,6 @@ export default {
           now: 'now'
         }
       },
-      // Re-Auth Modal
       reAuthorizeAccount: 'Re-Authorize Account',
       claudeCodeAccount: 'Claude Code Account',
       openaiAccount: 'OpenAI Account',
@@ -3725,7 +3659,6 @@ export default {
       antigravityAccount: 'Antigravity Account',
       inputMethod: 'Input Method',
       reAuthorizedSuccess: 'Account re-authorized successfully',
-      // Test Modal
       testAccountConnection: 'Test Account Connection',
       account: 'Account',
       readyToTest: 'Ready to test. Click "Start Test" to begin...',
@@ -3754,7 +3687,6 @@ export default {
       imageTestMode: 'Mode: Image generation test',
       imagePreview: 'Generated images:',
       imageReceived: 'Received test image #{count}',
-      // Stats Modal
       viewStats: 'View Stats',
       usageStatistics: 'Usage Statistics',
       last30DaysUsage: 'Last 30 days usage statistics (based on actual usage days)',
@@ -3810,8 +3742,7 @@ export default {
         personal: 'Personal',
         unlimited: 'Unlimited'
       },
-      ineligibleWarning:
-        'This account is not eligible for Antigravity, but API forwarding still works. Use at your own risk.',
+      ineligibleWarning: 'This account is not eligible for Antigravity, but API forwarding still works. Use at your own risk.',
       forbidden: 'Forbidden',
       forbiddenValidation: 'Verification Required',
       forbiddenViolation: 'Violation Ban',
@@ -3820,10 +3751,44 @@ export default {
       linkCopied: 'Link Copied',
       needsReauth: 'Re-auth Required',
       rateLimited: 'Rate Limited',
-      usageError: 'Fetch Error'
+      usageError: 'Fetch Error',
+      deleteConfirmMessage: 'Are you sure you want to delete account \'{name}\'?',
+      refreshCookie: 'Refresh Cookie',
+      testAccount: 'Test Account',
+      form: {
+        nameLabel: 'Account Name',
+        namePlaceholder: 'Enter account name',
+        platformLabel: 'Platform',
+        selectPlatform: 'Select platform',
+        typeLabel: 'Type',
+        selectType: 'Select type',
+        credentialsLabel: 'Credentials',
+        credentialsPlaceholder: 'Enter Cookie or API Key',
+        priorityLabel: 'Priority',
+        priorityHint: 'Lower value means higher priority',
+        weightLabel: 'Weight',
+        weightHint: 'Weight value for load balancing',
+        statusLabel: 'Status'
+      },
+      filters: {
+        platform: 'Platform',
+        allPlatforms: 'All Platforms',
+        type: 'Type',
+        allTypes: 'All Types',
+        status: 'Status',
+        allStatuses: 'All Statuses'
+      },
+      saving: 'Saving...',
+      refreshing: 'Refreshing...',
+      noAccounts: 'No accounts',
+      noAccountsDescription: 'Add AI platform accounts to start using the API gateway.',
+      accountCreatedSuccess: 'Account created successfully',
+      accountUpdatedSuccess: 'Account updated successfully',
+      accountDeletedSuccess: 'Account deleted successfully',
+      cookieRefreshedSuccess: 'Cookie refreshed successfully',
+      testSuccess: 'Account test passed',
+      failedToSave: 'Failed to save account'
     },
-
-    // Scheduled Tests
     scheduledTests: {
       title: 'Scheduled Tests',
       addPlan: 'Add Plan',
@@ -3864,8 +3829,6 @@ export default {
       autoRecover: 'Auto Recover',
       autoRecoverHelp: 'Automatically recover account from error/rate-limited state on successful test'
     },
-
-    // Proxies
     proxies: {
       title: 'Proxy Management',
       description: 'Manage proxy servers for accounts',
@@ -3913,7 +3876,21 @@ export default {
         status: 'Status',
         accounts: 'Accounts',
         latency: 'Latency',
-        actions: 'Actions'
+        actions: 'Actions',
+        nameLabel: 'Name',
+        namePlaceholder: 'Enter proxy name',
+        protocolLabel: 'Protocol',
+        selectProtocol: 'Select protocol',
+        hostLabel: 'Host',
+        hostPlaceholder: 'Enter host address',
+        portLabel: 'Port',
+        portPlaceholder: 'Enter port',
+        usernameLabel: 'Username (optional)',
+        usernamePlaceholder: 'Enter username',
+        passwordLabel: 'Password (optional)',
+        passwordPlaceholder: 'Enter password',
+        priorityLabel: 'Priority',
+        statusLabel: 'Status'
       },
       testConnection: 'Test Connection',
       qualityCheck: 'Quality Check',
@@ -3953,14 +3930,11 @@ export default {
       },
       noProxiesYet: 'No proxies yet',
       createFirstProxy: 'Create your first proxy to route traffic through it.',
-      // Batch import
       standardAdd: 'Standard Add',
       batchAdd: 'Quick Add',
       batchInput: 'Proxy List',
-      batchInputPlaceholder:
-        "Enter one proxy per line in the following formats:\nsocks5://user:pass{'@'}192.168.1.1:1080\nhttp://192.168.1.1:8080\nhttps://user:pass{'@'}proxy.example.com:443",
-      batchInputHint:
-        "Supports http, https, socks5 protocols. Format: protocol://[user:pass{'@'}]host:port",
+      batchInputPlaceholder: 'Enter one proxy per line in the following formats:\nsocks5://user:pass{\'@\'}192.168.1.1:1080\nhttp://192.168.1.1:8080\nhttps://user:pass{\'@\'}proxy.example.com:443',
+      batchInputHint: 'Supports http, https, socks5 protocols. Format: protocol://[user:pass{\'@\'}]host:port',
       parsedCount: '{count} valid',
       invalidCount: '{count} invalid',
       duplicateCount: '{count} duplicate',
@@ -3969,7 +3943,6 @@ export default {
       batchImportSuccess: 'Successfully imported {created} proxies, skipped {skipped} duplicates',
       batchImportAllSkipped: 'All {skipped} proxies already exist, skipped import',
       failedToImport: 'Failed to batch import',
-      // Other messages
       creating: 'Creating...',
       updating: 'Updating...',
       proxyCreated: 'Proxy created successfully',
@@ -3980,8 +3953,7 @@ export default {
       proxyTestFailed: 'Proxy test failed',
       qualityCheckDone: 'Quality check completed: score {score} ({grade})',
       qualityCheckFailed: 'Failed to run proxy quality check',
-      batchQualityDone:
-        'Batch quality check completed for {count} proxies: healthy {healthy}, warn {warn}, challenge {challenge}, abnormal {failed}',
+      batchQualityDone: 'Batch quality check completed for {count} proxies: healthy {healthy}, warn {warn}, challenge {challenge}, abnormal {failed}',
       batchQualityFailed: 'Batch quality check failed',
       batchQualityEmpty: 'No proxies available for quality check',
       qualityReportTitle: 'Proxy Quality Report',
@@ -4009,11 +3981,25 @@ export default {
       nameRequired: 'Please enter proxy name',
       hostRequired: 'Please enter host address',
       portInvalid: 'Port must be between 1-65535',
-      deleteConfirm:
-        "Are you sure you want to delete '{name}'? Accounts using this proxy will have their proxy removed."
+      deleteConfirm: 'Are you sure you want to delete \'{name}\'? Accounts using this proxy will have their proxy removed.',
+      deleteConfirmMessage: 'Are you sure you want to delete proxy \'{name}\'?',
+      testProxy: 'Test Proxy',
+      filters: {
+        protocol: 'Protocol',
+        allProtocols: 'All Protocols',
+        status: 'Status',
+        allStatuses: 'All Statuses'
+      },
+      saving: 'Saving...',
+      testing: 'Testing...',
+      noProxies: 'No proxies',
+      noProxiesDescription: 'Add proxy servers to enhance API access stability.',
+      proxyCreatedSuccess: 'Proxy created successfully',
+      proxyUpdatedSuccess: 'Proxy updated successfully',
+      proxyDeletedSuccess: 'Proxy deleted successfully',
+      testSuccess: 'Proxy test passed',
+      failedToSave: 'Failed to save proxy'
     },
-
-    // Redeem Codes
     redeem: {
       title: 'Redeem Code Management',
       description: 'Generate and manage redeem codes',
@@ -4035,16 +4021,15 @@ export default {
         status: 'Status',
         usedBy: 'Used By',
         usedAt: 'Used At',
-        actions: 'Actions'
+        actions: 'Actions',
+        createdAt: 'Created At'
       },
       userPrefix: 'User #{id}',
       exportCsv: 'Export CSV',
       deleteAllUnused: 'Delete All Unused Codes',
       deleteCode: 'Delete Redeem Code',
-      deleteCodeConfirm:
-        'Are you sure you want to delete this redeem code? This action cannot be undone.',
-      deleteAllUnusedConfirm:
-        'Are you sure you want to delete all unused (active) redeem codes? This action cannot be undone.',
+      deleteCodeConfirm: 'Are you sure you want to delete this redeem code? This action cannot be undone.',
+      deleteAllUnusedConfirm: 'Are you sure you want to delete all unused (active) redeem codes? This action cannot be undone.',
       deleteAll: 'Delete All',
       generateCodesTitle: 'Generate Redeem Codes',
       generatedSuccessfully: 'Generated Successfully',
@@ -4073,7 +4058,6 @@ export default {
         concurrency: 'Concurrency',
         subscription: 'Subscription',
         invitation: 'Invitation',
-        // Admin adjustment types (created when admin modifies user balance/concurrency)
         admin_balance: 'Balance (Admin)',
         admin_concurrency: 'Concurrency (Admin)'
       },
@@ -4087,10 +4071,40 @@ export default {
         used: 'Used',
         expired: 'Expired',
         disabled: 'Disabled'
-      }
+      },
+      form: {
+        typeLabel: 'Type',
+        selectType: 'Select type',
+        valueLabel: 'Value',
+        valuePlaceholder: 'Enter value',
+        balanceHint: 'Balance amount (USD)',
+        concurrencyHint: 'Concurrency increment',
+        countLabel: 'Count',
+        countPlaceholder: 'Enter count',
+        countHint: 'Number of redeem codes to generate',
+        prefixLabel: 'Prefix (optional)',
+        prefixPlaceholder: 'e.g., GIFT',
+        expiresLabel: 'Expiration (optional)'
+      },
+      filters: {
+        type: 'Type',
+        allTypes: 'All Types',
+        status: 'Status',
+        allStatuses: 'All Statuses',
+        search: 'Search redeem codes'
+      },
+      copyCode: 'Copy',
+      disableCode: 'Disable',
+      enableCode: 'Enable',
+      deleteConfirmMessage: 'Are you sure you want to delete this redeem code?',
+      noCodes: 'No redeem codes',
+      noCodesDescription: 'Generate redeem codes to distribute balance or concurrency to users.',
+      codesGeneratedSuccess: 'Redeem codes generated successfully, {count} codes',
+      codeDisabledSuccess: 'Redeem code disabled',
+      codeEnabledSuccess: 'Redeem code enabled',
+      codeDeletedSuccess: 'Redeem code deleted successfully',
+      failedToUpdate: 'Failed to update redeem code'
     },
-
-    // Announcements
     announcements: {
       title: 'Announcements',
       description: 'Create announcements and target by conditions',
@@ -4163,8 +4177,6 @@ export default {
       failedToLoadReadStatus: 'Failed to load read status',
       deleteConfirm: 'Are you sure you want to delete this announcement? This action cannot be undone.'
     },
-
-    // Promo Codes
     promo: {
       title: 'Promo Code Management',
       description: 'Create and manage registration promo codes',
@@ -4184,7 +4196,6 @@ export default {
         createdAt: 'Created At',
         actions: 'Actions'
       },
-      // Form labels (flat structure for template usage)
       code: 'Promo Code',
       autoGenerate: 'auto-generate if empty',
       codePlaceholder: 'Enter promo code or leave empty',
@@ -4196,18 +4207,15 @@ export default {
       notesPlaceholder: 'Optional notes for this code',
       status: 'Status',
       neverExpires: 'Never expires',
-      // Status labels
       statusActive: 'Active',
       statusDisabled: 'Disabled',
       statusExpired: 'Expired',
       statusMaxUsed: 'Used Up',
-      // Usage records
       usageRecords: 'Usage Records',
       viewUsages: 'View Usages',
       noUsages: 'No usage records yet',
       userPrefix: 'User #{id}',
       copied: 'Copied!',
-      // Messages
       noCodesYet: 'No promo codes yet',
       createFirstCode: 'Create your first promo code to offer registration bonuses.',
       codeCreated: 'Promo code created successfully',
@@ -4222,8 +4230,6 @@ export default {
       failedToDelete: 'Failed to delete promo code',
       failedToLoadUsages: 'Failed to load usage records'
     },
-
-    // Usage Records
     usage: {
       title: 'Usage Records',
       description: 'View and manage all user usage records',
@@ -4297,12 +4303,9 @@ export default {
         }
       }
     },
-
-    // Ops Monitoring
     ops: {
       title: 'Ops Monitoring',
       description: 'Operational monitoring and troubleshooting',
-      // Dashboard
       systemHealth: 'System Health',
       overview: 'Overview',
       noSystemMetrics: 'No system metrics collected yet.',
@@ -4381,7 +4384,6 @@ export default {
       errorTrend: 'Error Trend',
       errorDistribution: 'Error Distribution',
       switchRate: 'Avg switches',
-      // Health Score & Diagnosis
       health: 'Health',
       healthCondition: 'Health Condition',
       healthHelp: 'Overall system health score based on SLA, error rate, and resource usage',
@@ -4397,7 +4399,8 @@ export default {
         '6h': 'Last 6 hours',
         '24h': 'Last 24 hours',
         '7d': 'Last 7 days',
-        '30d': 'Last 30 days'
+        '30d': 'Last 30 days',
+        custom: 'Custom'
       },
       openaiTokenStats: {
         title: 'OpenAI Token Request Stats',
@@ -4427,7 +4430,6 @@ export default {
         footer: 'Automated diagnostic suggestions based on current metrics',
         idle: 'System is currently idle',
         idleImpact: 'No active traffic',
-        // Resource diagnostics
         dbDown: 'Database connection failed',
         dbDownImpact: 'All database operations will fail',
         dbDownAction: 'Check database service status, network connectivity, and connection configuration',
@@ -4449,7 +4451,6 @@ export default {
         ttftHigh: 'Time to first token elevated ({ttft}ms)',
         ttftHighImpact: 'User perceived latency increased',
         ttftHighAction: 'Optimize request processing flow, reduce pre-processing time',
-        // Error rate diagnostics
         upstreamCritical: 'Upstream error rate critically high ({rate}%)',
         upstreamCriticalImpact: 'May affect many user requests',
         upstreamCriticalAction: 'Check upstream service health, enable fallback strategies',
@@ -4462,14 +4463,12 @@ export default {
         errorElevated: 'Error rate elevated ({rate}%)',
         errorElevatedImpact: 'Recommend checking error logs',
         errorElevatedAction: 'Analyze error types and distribution, create fix plan',
-        // SLA diagnostics
         slaCritical: 'SLA critically below target ({sla}%)',
         slaCriticalImpact: 'User experience severely degraded',
         slaCriticalAction: 'Urgently investigate errors and latency, consider rate limiting',
         slaLow: 'SLA below target ({sla}%)',
         slaLowImpact: 'Service quality needs attention',
         slaLowAction: 'Analyze SLA decline causes, optimize system performance',
-        // Health score diagnostics
         healthCritical: 'Overall health score critically low ({score})',
         healthCriticalImpact: 'Multiple metrics may be degraded; prioritize error rate and latency investigation',
         healthCriticalAction: 'Comprehensive system check, prioritize critical-level issues',
@@ -4479,7 +4478,6 @@ export default {
         healthy: 'All system metrics normal',
         healthyImpact: 'Service running stable'
       },
-      // Error Log
       errorLog: {
         timeId: 'Time / ID',
         commonErrors: {
@@ -4518,7 +4516,6 @@ export default {
         requestTypeStream: 'Stream',
         requestTypeWs: 'WS'
       },
-      // Error Details Modal
       errorDetails: {
         upstreamErrors: 'Upstream Errors',
         requestErrors: 'Request Errors',
@@ -4541,9 +4538,8 @@ export default {
           internal: 'Internal'
         },
         total: 'Total:',
-        searchPlaceholder: 'Search request_id / client_request_id / message',
+        searchPlaceholder: 'Search request_id / client_request_id / message'
       },
-      // Error Detail Modal
       errorDetail: {
         title: 'Error Detail',
         titleWithId: 'Error #{id}',
@@ -5054,8 +5050,7 @@ export default {
         latencyHistogram: 'Request duration distribution (ms) for successful requests.',
         errorTrend: 'Error counts over time (SLA scope excludes business limits; upstream excludes 429/529).',
         errorDistribution: 'Error distribution by status code.',
-        goroutines:
-          'Number of Go runtime goroutines (lightweight threads). There is no absolute "safe" number—use your historical baseline. Heuristic: <2k is common; 2k–8k watch; >8k plus rising queue/latency often suggests blocking/leaks.',
+        goroutines: 'Number of Go runtime goroutines (lightweight threads). There is no absolute "safe" number—use your historical baseline. Heuristic: <2k is common; 2k–8k watch; >8k plus rising queue/latency often suggests blocking/leaks.',
         cpu: 'CPU usage percentage, showing system processor load.',
         memory: 'Memory usage, including used and total available memory.',
         db: 'Database connection pool status, including active, idle, and waiting connections.',
@@ -5077,10 +5072,13 @@ export default {
         resetZoomHint: 'Reset zoom (if enabled)',
         downloadChart: 'Download',
         downloadChartHint: 'Download chart as image'
+      },
+      result: 'Result',
+      customTimeRange: {
+        startTime: 'Start Time',
+        endTime: 'End Time'
       }
     },
-
-    // Settings
     settings: {
       title: 'System Settings',
       description: 'Manage registration, email verification, default values, and SMTP settings',
@@ -5093,7 +5091,7 @@ export default {
         gateway: 'Gateway',
         email: 'Email',
         backup: 'Backup',
-        payment: 'Payment',
+        payment: 'Payment'
       },
       features: {
         channelMonitor: {
@@ -5103,21 +5101,21 @@ export default {
           enabled: 'Enable Channel Monitor',
           enabledHint: 'Disabling stops background checks; existing history is preserved.',
           defaultInterval: 'Default check interval (seconds)',
-          defaultIntervalHint: 'Pre-fills the interval when creating a new monitor; each monitor can override it. Range 15 – 3600.',
+          defaultIntervalHint: 'Pre-fills the interval when creating a new monitor; each monitor can override it. Range 15 – 3600.'
         },
         availableChannels: {
           title: 'Available Channels',
           description: 'Show logged-in users an aggregate view of the channels, models and pricing they can access. Disabled by default.',
           configureLink: 'Configure model pricing in Channel Management > Channel Pricing',
           enabled: 'Enable Available Channels',
-          enabledHint: 'When off, the sidebar entry is hidden and the endpoint returns an empty list.',
+          enabledHint: 'When off, the sidebar entry is hidden and the endpoint returns an empty list.'
         },
         riskControl: {
           title: 'Risk Control',
           description: 'Enable the content moderation menu and gateway audit entry point. Disabled by default.',
           configureLink: 'Configure content moderation in Risk Control',
           enabled: 'Enable Risk Control',
-          enabledHint: 'When off, the admin sidebar entry is hidden and gateway moderation is skipped.',
+          enabledHint: 'When off, the admin sidebar entry is hidden and gateway moderation is skipped.'
         },
         affiliate: {
           title: 'Affiliate (Invite Rebate)',
@@ -5149,8 +5147,8 @@ export default {
               username: 'Username',
               code: 'Invite Code',
               rate: 'Custom Rate',
-              actions: 'Actions',
-            },
+              actions: 'Actions'
+            }
           },
           modal: {
             addTitle: 'Add Custom User',
@@ -5165,15 +5163,15 @@ export default {
             ratePlaceholder: 'e.g. 30',
             rateHint: '0-100. Leave empty (in edit mode) to clear and fall back to the global rate.',
             errorBadRate: 'Please enter a number between 0 and 100',
-            errorEmpty: 'Fill at least one: custom invite code or exclusive rebate rate',
+            errorEmpty: 'Fill at least one: custom invite code or exclusive rebate rate'
           },
           batchModal: {
             title: 'Batch Set Rate ({count} users selected)',
             hint: 'Apply the same exclusive rebate rate to all selected users.',
             placeholder: 'e.g. 30',
-            clearHint: 'Submitting empty will clear the exclusive rate for selected users.',
-          },
-        },
+            clearHint: 'Submitting empty will clear the exclusive rate for selected users.'
+          }
+        }
       },
       emailTabDisabledTitle: 'Email Verification Not Enabled',
       emailTabDisabledHint: 'Enable email verification in the Security tab to configure SMTP settings.',
@@ -5185,8 +5183,7 @@ export default {
         emailVerification: 'Email Verification',
         emailVerificationHint: 'Require email verification for new registrations',
         emailSuffixWhitelist: 'Email Domain Whitelist',
-        emailSuffixWhitelistHint:
-          "Only email addresses from the specified domains can register (for example, {'@'}qq.com, {'@'}gmail.com)",
+        emailSuffixWhitelistHint: 'Only email addresses from the specified domains can register (for example, {\'@\'}qq.com, {\'@\'}gmail.com)',
         emailSuffixWhitelistPlaceholder: 'example.com',
         emailSuffixWhitelistInputHint: 'Leave empty for no restriction',
         promoCode: 'Promo Code',
@@ -5200,8 +5197,7 @@ export default {
         frontendUrlHint: 'Used to generate password reset links in emails. Example: https://example.com',
         totp: 'Two-Factor Authentication (2FA)',
         totpHint: 'Allow users to use authenticator apps like Google Authenticator',
-        totpKeyNotConfigured:
-          'Please configure TOTP_ENCRYPTION_KEY in environment variables first. Generate a key with: openssl rand -hex 32'
+        totpKeyNotConfigured: 'Please configure TOTP_ENCRYPTION_KEY in environment variables first. Generate a key with: openssl rand -hex 32'
       },
       turnstile: {
         title: 'Cloudflare Turnstile',
@@ -5213,10 +5209,11 @@ export default {
         siteKeyHint: 'Get this from your Cloudflare Dashboard',
         cloudflareDashboard: 'Cloudflare Dashboard',
         secretKeyHint: 'Server-side verification key (keep this secret)',
-        secretKeyConfiguredHint: 'Secret key configured. Leave empty to keep the current value.'      },
+        secretKeyConfiguredHint: 'Secret key configured. Leave empty to keep the current value.'
+      },
       linuxdo: {
         title: 'LinuxDo Connect Login',
-        description: 'Configure LinuxDo Connect OAuth for 智算引擎 end-user login',
+        description: 'Configure LinuxDo Connect OAuth for ZhiSuan Engine end-user login',
         enable: 'Enable LinuxDo Login',
         enableHint: 'Show LinuxDo login on the login/register pages',
         clientId: 'Client ID',
@@ -5229,8 +5226,7 @@ export default {
         clientSecretConfiguredHint: 'Secret configured. Leave empty to keep the current value.',
         redirectUrl: 'Redirect URL',
         redirectUrlPlaceholder: 'https://your-domain.com/api/v1/auth/oauth/linuxdo/callback',
-        redirectUrlHint:
-          'Must match the redirect URL configured in Connect.Linux.Do (must be an absolute http(s) URL)',
+        redirectUrlHint: 'Must match the redirect URL configured in Connect.Linux.Do (must be an absolute http(s) URL)',
         quickSetCopy: 'Generate & Copy (current site)',
         redirectUrlSetAndCopied: 'Redirect URL generated and copied to clipboard'
       },
@@ -5291,8 +5287,7 @@ export default {
         defaultBalance: 'Default Balance',
         defaultBalanceHint: 'Initial balance for new users',
         affiliateRebateRate: 'Affiliate Rebate Rate',
-        affiliateRebateRateHint:
-          'Rebate percentage credited to inviter after recharge (0-100%, e.g. 10 means 10%)',
+        affiliateRebateRateHint: 'Rebate percentage credited to inviter after recharge (0-100%, e.g. 10 means 10%)',
         defaultConcurrency: 'Default Concurrency',
         defaultConcurrencyHint: 'Maximum concurrent requests for new users',
         defaultUserRpmLimit: 'Default User RPM Limit',
@@ -5301,8 +5296,7 @@ export default {
         defaultSubscriptionsHint: 'Auto-assign these subscriptions when a new user is created or registered',
         addDefaultSubscription: 'Add Default Subscription',
         defaultSubscriptionsEmpty: 'No default subscriptions configured.',
-        defaultSubscriptionsDuplicate:
-          'Duplicate subscription group: {groupId}. Each group can only appear once.',
+        defaultSubscriptionsDuplicate: 'Duplicate subscription group: {groupId}. Each group can only appear once.',
         subscriptionGroup: 'Subscription Group',
         subscriptionValidityDays: 'Validity (days)'
       },
@@ -5311,12 +5305,10 @@ export default {
         description: 'Control Claude Code client access requirements',
         minVersion: 'Minimum Version',
         minVersionPlaceholder: 'e.g. 2.1.63',
-        minVersionHint:
-          'Reject Claude Code clients below this version (semver format). Leave empty to disable version check.',
+        minVersionHint: 'Reject Claude Code clients below this version (semver format). Leave empty to disable version check.',
         maxVersion: 'Maximum Version',
         maxVersionPlaceholder: 'e.g. 2.5.0',
-        maxVersionHint:
-          'Reject Claude Code clients above this version (semver format). Leave empty to allow any version.'
+        maxVersionHint: 'Reject Claude Code clients above this version (semver format). Leave empty to allow any version.'
       },
       scheduling: {
         title: 'Gateway Scheduling Settings',
@@ -5339,7 +5331,7 @@ export default {
         rewriteMessageCacheControlHint: 'Default off: preserve client cache_control on message content blocks. When enabled, client breakpoints are stripped and proxy breakpoints are injected for clients that do not manage caching themselves.',
         antigravityUserAgentVersion: 'Antigravity UA Version',
         antigravityUserAgentVersionPlaceholder: '1.23.2',
-        antigravityUserAgentVersionHint: 'Leave empty to use ANTIGRAVITY_USER_AGENT_VERSION or the built-in default 1.23.2; when set, the admin setting takes precedence.',
+        antigravityUserAgentVersionHint: 'Leave empty to use ANTIGRAVITY_USER_AGENT_VERSION or the built-in default 1.23.2; when set, the admin setting takes precedence.'
       },
       webSearchEmulation: {
         title: 'Web Search Emulation',
@@ -5373,24 +5365,22 @@ export default {
         testing: 'Searching...',
         testResultTitle: 'Search Results',
         testResultProvider: 'Provider',
-        testNoResults: 'No results found',
+        testNoResults: 'No results found'
       },
       site: {
         title: 'Site Settings',
         description: 'Customize site branding',
         backendMode: 'Backend Mode',
-        backendModeDescription:
-          'Disables user registration, public site, and self-service features. Only admin can log in and manage the platform.',
+        backendModeDescription: 'Disables user registration, public site, and self-service features. Only admin can log in and manage the platform.',
         siteName: 'Site Name',
-        siteNamePlaceholder: '智算引擎',
+        siteNamePlaceholder: 'ZhiSuan Engine',
         siteNameHint: 'Displayed in emails and page titles',
         siteSubtitle: 'Site Subtitle',
         siteSubtitlePlaceholder: 'Intelligent compute and AI service gateway',
         siteSubtitleHint: 'Displayed on login and register pages',
         apiBaseUrl: 'API Base URL',
         apiBaseUrlPlaceholder: 'https://api.example.com',
-        apiBaseUrlHint:
-          'Used for "Use Key" and "Import to CC Switch" features. Leave empty to use current site URL.',
+        apiBaseUrlHint: 'Used for "Use Key" and "Import to CC Switch" features. Leave empty to use current site URL.',
         tablePreferencesTitle: 'Global Table Preferences',
         tablePreferencesDescription: 'Configure default pagination behavior for shared table components',
         tableDefaultPageSize: 'Default Rows Per Page',
@@ -5410,7 +5400,7 @@ export default {
           endpointUrlPlaceholder: 'https://api2.example.com',
           descriptionLabel: 'Description',
           descriptionPlaceholder: 'e.g., Supports OpenAI format requests',
-          add: 'Add Endpoint',
+          add: 'Add Endpoint'
         },
         contactInfo: 'Contact Info',
         contactInfoPlaceholder: 'e.g., QQ: 123456789',
@@ -5440,8 +5430,7 @@ export default {
         url: 'Recharge / Subscription URL',
         urlPlaceholder: 'https://example.com/purchase',
         urlHint: 'Must be an absolute http(s) URL',
-        iframeWarning:
-          '⚠️ iframe note: Some websites block embedding via X-Frame-Options or CSP (frame-ancestors). If the page is blank, provide an "Open in new tab" alternative.',
+        iframeWarning: '⚠️ iframe note: Some websites block embedding via X-Frame-Options or CSP (frame-ancestors). If the page is blank, provide an "Open in new tab" alternative.',
         integrationDoc: 'Payment Integration Docs',
         integrationDocHint: 'Covers endpoint specs, idempotency semantics, and code samples'
       },
@@ -5470,7 +5459,7 @@ export default {
         add: 'Add Menu Item',
         remove: 'Remove',
         moveUp: 'Move Up',
-        moveDown: 'Move Down',
+        moveDown: 'Move Down'
       },
       payment: {
         title: 'Payment Settings',
@@ -5623,7 +5612,7 @@ export default {
         supportedTypesHint: 'Comma-separated, e.g. alipay,wxpay',
         refundEnabled: 'Allow Refund',
         allowUserRefund: 'Allow User Refund',
-        enableConflict: '{method} already has an enabled provider instance: {provider}. Disable the existing instance before switching.',
+        enableConflict: '{method} already has an enabled provider instance: {provider}. Disable the existing instance before switching.'
       },
       balanceNotify: {
         title: 'Balance Low Notification',
@@ -5634,7 +5623,7 @@ export default {
         thresholdPlaceholder: 'Enter amount',
         rechargeUrl: 'Recharge Page URL',
         rechargeUrlPlaceholder: 'https://example.com/payment',
-        rechargeUrlHint: 'A top-up button will appear in the email when set',
+        rechargeUrlHint: 'A top-up button will appear in the email when set'
       },
       quotaNotify: {
         title: 'Account Quota Notification',
@@ -5643,7 +5632,7 @@ export default {
         emails: 'Notification Emails',
         emailsHint: 'Leave empty to disable notifications',
         addEmail: 'Add Email',
-        emailPlaceholder: 'Enter email address',
+        emailPlaceholder: 'Enter email address'
       },
       smtp: {
         title: 'SMTP Settings',
@@ -5655,16 +5644,16 @@ export default {
         port: 'SMTP Port',
         portPlaceholder: '587',
         username: 'SMTP Username',
-        usernamePlaceholder: "your-email{'@'}gmail.com",
+        usernamePlaceholder: 'your-email{\'@\'}gmail.com',
         password: 'SMTP Password',
         passwordPlaceholder: '********',
         passwordHint: 'Leave empty to keep existing password',
         passwordConfiguredPlaceholder: '********',
         passwordConfiguredHint: 'Password configured. Leave empty to keep the current value.',
         fromEmail: 'From Email',
-        fromEmailPlaceholder: "noreply{'@'}example.com",
+        fromEmailPlaceholder: 'noreply{\'@\'}example.com',
         fromName: 'From Name',
-        fromNamePlaceholder: '智算引擎',
+        fromNamePlaceholder: 'ZhiSuan Engine',
         useTls: 'Use TLS',
         useTlsHint: 'Enable TLS encryption for SMTP connection'
       },
@@ -5672,7 +5661,7 @@ export default {
         title: 'Send Test Email',
         description: 'Send a test email to verify your SMTP configuration',
         recipientEmail: 'Recipient Email',
-        recipientEmailPlaceholder: "test{'@'}example.com",
+        recipientEmailPlaceholder: 'test{\'@\'}example.com',
         sendTestEmail: 'Send Test Email',
         sending: 'Sending...',
         enterRecipientHint: 'Please enter a recipient email address'
@@ -5706,8 +5695,7 @@ export default {
         create: 'Create Key',
         creating: 'Creating...',
         regenerateConfirm: 'Are you sure? The current key will be immediately invalidated.',
-        deleteConfirm:
-          'Are you sure you want to delete the admin API key? External integrations will stop working.',
+        deleteConfirm: 'Are you sure you want to delete the admin API key? External integrations will stop working.',
         keyGenerated: 'New admin API key generated',
         keyDeleted: 'Admin API key deleted',
         copyKey: 'Copy Key',
@@ -5859,11 +5847,9 @@ export default {
         thinkingBudget: 'Thinking Budget Rectifier',
         thinkingBudgetHint: 'Automatically set budget to 32000 and retry when upstream returns budget_tokens constraint error (≥1024)',
         apikeySignature: 'API Key Signature Rectifier',
-        apikeySignatureHint:
-          'Automatically strip signatures and retry when API Key accounts receive signature-related errors (built-in patterns always apply)',
+        apikeySignatureHint: 'Automatically strip signatures and retry when API Key accounts receive signature-related errors (built-in patterns always apply)',
         apikeyPatterns: 'Custom Match Patterns',
-        apikeyPatternsHint:
-          'Additional keywords matched against the response body (case-insensitive). Built-in patterns always apply; use these for supplementary matching.',
+        apikeyPatternsHint: 'Additional keywords matched against the response body (case-insensitive). Built-in patterns always apply; use these for supplementary matching.',
         apikeyPatternPlaceholder: 'e.g., thinking_error',
         addPattern: 'Add Pattern',
         saved: 'Rectifier settings saved',
@@ -5995,7 +5981,7 @@ export default {
       },
       openaiExperimentalScheduler: {
         title: 'OpenAI experimental scheduler policy',
-        description: "Disabled by default. When enabled, this only changes the gateway's experimental account-selection policy for OpenAI traffic; it does not indicate an upstream OpenAI capability."
+        description: 'Disabled by default. When enabled, this only changes the gateway\'s experimental account-selection policy for OpenAI traffic; it does not indicate an upstream OpenAI capability.'
       },
       saveSettings: 'Save Settings',
       saving: 'Saving...',
@@ -6007,8 +5993,6 @@ export default {
       failedToTestSmtp: 'SMTP connection test failed',
       failedToSendTestEmail: 'Failed to send test email'
     },
-
-    // Error Passthrough Rules
     errorPassthrough: {
       title: 'Error Passthrough Rules',
       description: 'Configure how upstream errors are returned to clients',
@@ -6023,8 +6007,6 @@ export default {
       code: 'Code',
       body: 'Body',
       skipMonitoring: 'Skip Monitoring',
-
-      // Columns
       columns: {
         priority: 'Priority',
         name: 'Name',
@@ -6034,16 +6016,12 @@ export default {
         status: 'Status',
         actions: 'Actions'
       },
-
-      // Match Mode
       matchMode: {
         any: 'Code OR Keyword',
         all: 'Code AND Keyword',
         anyHint: 'Status code matches any error code, OR message contains any keyword',
         allHint: 'Status code matches any error code, AND message contains any keyword'
       },
-
-      // Form
       form: {
         name: 'Rule Name',
         namePlaceholder: 'e.g., Context Limit Passthrough',
@@ -6071,8 +6049,6 @@ export default {
         skipMonitoringHint: 'When enabled, errors matching this rule will not be recorded in ops monitoring',
         enabled: 'Enable this rule'
       },
-
-      // Messages
       nameRequired: 'Please enter rule name',
       conditionsRequired: 'Please configure at least one error code or keyword',
       ruleCreated: 'Rule created successfully',
@@ -6084,8 +6060,6 @@ export default {
       failedToDelete: 'Failed to delete rule',
       failedToToggle: 'Failed to toggle status'
     },
-
-    // TLS Fingerprint Profiles
     tlsFingerprintProfiles: {
       title: 'TLS Fingerprint Profiles',
       description: 'Manage TLS fingerprint profiles for simulating specific client TLS handshake characteristics',
@@ -6094,7 +6068,6 @@ export default {
       deleteProfile: 'Delete Profile',
       noProfiles: 'No profiles configured',
       createFirstProfile: 'Create your first TLS fingerprint profile',
-
       columns: {
         name: 'Name',
         description: 'Description',
@@ -6102,7 +6075,6 @@ export default {
         alpn: 'ALPN',
         actions: 'Actions'
       },
-
       form: {
         pasteYaml: 'Paste YAML Configuration',
         pasteYamlPlaceholder: 'Paste YAML output from TLS Fingerprint Collector here...',
@@ -6130,7 +6102,6 @@ export default {
         pskModes: 'PSK Modes',
         extensions: 'Extensions'
       },
-
       deleteConfirm: 'Delete Profile',
       deleteConfirmMessage: 'Are you sure you want to delete profile "{name}"? Accounts using this profile will fall back to the built-in default.',
       createSuccess: 'Profile created successfully',
@@ -6141,8 +6112,6 @@ export default {
       deleteFailed: 'Failed to delete profile'
     }
   },
-
-  // Subscription Progress (Header component)
   subscriptionProgress: {
     title: 'My Subscriptions',
     viewDetails: 'View subscription details',
@@ -6158,12 +6127,10 @@ export default {
     noSubscriptions: 'No active subscriptions',
     unlimited: 'Unlimited'
   },
-
-  // Version Badge
   version: {
     currentVersion: 'Current Version',
     latestVersion: 'Latest Version',
-    upToDate: "You're running the latest version.",
+    upToDate: 'You\'re running the latest version.',
     updateAvailable: 'A new version is available!',
     releaseNotes: 'Release Notes',
     noReleaseNotes: 'No release notes',
@@ -6182,8 +6149,6 @@ export default {
     restarting: 'Restarting...',
     retry: 'Retry'
   },
-
-  // Recharge / Subscription Page
   purchase: {
     title: 'Recharge / Subscription',
     description: 'Recharge balance or purchase subscription via the embedded page',
@@ -6191,21 +6156,16 @@ export default {
     notEnabledTitle: 'Feature not enabled',
     notEnabledDesc: 'The administrator has not enabled the recharge/subscription entry. Please contact admin.',
     notConfiguredTitle: 'Recharge / Subscription URL not configured',
-    notConfiguredDesc:
-      'The administrator enabled the entry but has not configured a recharge/subscription URL. Please contact admin.'
+    notConfiguredDesc: 'The administrator enabled the entry but has not configured a recharge/subscription URL. Please contact admin.'
   },
-
-  // Custom Page (iframe embed)
   customPage: {
     title: 'Custom Page',
     openInNewTab: 'Open in new tab',
     notFoundTitle: 'Page not found',
     notFoundDesc: 'This custom page does not exist or has been removed.',
     notConfiguredTitle: 'Page URL not configured',
-    notConfiguredDesc: 'The URL for this custom page has not been properly configured.',
+    notConfiguredDesc: 'The URL for this custom page has not been properly configured.'
   },
-
-  // Announcements Page
   announcements: {
     title: 'Announcements',
     description: 'View system announcements',
@@ -6228,14 +6188,11 @@ export default {
     readStatus: 'You have read this announcement',
     markReadHint: 'Click "Mark as read" to mark this announcement'
   },
-
-  // User Subscriptions Page
   userSubscriptions: {
     title: 'My Subscriptions',
     description: 'View your subscription plans and usage',
     noActiveSubscriptions: 'No Active Subscriptions',
-    noActiveSubscriptionsDesc:
-      "You don't have any active subscriptions. Contact administrator to get one.",
+    noActiveSubscriptionsDesc: 'You don\'t have any active subscriptions. Contact administrator to get one.',
     failedToLoad: 'Failed to load subscriptions',
     status: {
       active: 'Active',
@@ -6256,30 +6213,27 @@ export default {
     windowNotActive: 'Awaiting first use',
     usageOf: '{used} of {limit}'
   },
-
-  // Onboarding Tour
   onboarding: {
     restartTour: 'Restart Onboarding Tour',
-    dontShowAgain: "Don't show again",
+    dontShowAgain: 'Don\'t show again',
     dontShowAgainTitle: 'Permanently close onboarding guide',
-    confirmDontShow: "Are you sure you don't want to see the onboarding guide again?\n\nYou can restart it anytime from the user menu in the top right corner.",
+    confirmDontShow: 'Are you sure you don\'t want to see the onboarding guide again?\n\nYou can restart it anytime from the user menu in the top right corner.',
     confirmExit: 'Are you sure you want to exit the onboarding guide? You can restart it anytime from the top right menu.',
     interactiveHint: 'Press Enter or Click to continue',
     navigation: {
       flipPage: 'Flip Page',
       exit: 'Exit'
     },
-    // Admin tour steps
     admin: {
       welcome: {
-        title: '👋 Welcome to 智算引擎',
-        description: '<div style="line-height: 1.8;"><p style="margin-bottom: 16px;">智算引擎 is a powerful AI service gateway platform that helps you easily manage and distribute AI services.</p><p style="margin-bottom: 12px;"><b>🎯 Core Features:</b></p><ul style="margin-left: 20px; margin-bottom: 16px;"><li>📦 <b>Group Management</b> - Create service tiers (VIP, Free Trial, etc.)</li><li>🔗 <b>Account Pool</b> - Connect multiple upstream AI service accounts</li><li>🔑 <b>Key Distribution</b> - Generate independent API Keys for users</li><li>💰 <b>Billing Control</b> - Flexible rate and quota management</li></ul><p style="color: #10b981; font-weight: 600;">Let\'s complete the initial setup in 3 minutes →</p></div>',
+        title: 'Welcome to ZhiSuan Engine',
+        description: '<div style="line-height: 1.8;"><p style="margin-bottom: 16px;">ZhiSuan Engine is a powerful AI service gateway platform that helps you easily manage and distribute AI services.</p><p style="margin-bottom: 12px;"><b>Core Features:</b></p><ul style="margin-left: 20px; margin-bottom: 16px;"><li><b>Group Management</b> - Create service tiers (VIP, Free Trial, etc.)</li><li><b>Account Pool</b> - Connect multiple upstream AI service accounts</li><li><b>Key Distribution</b> - Generate independent API Keys for users</li><li><b>Billing Control</b> - Flexible rate and quota management</li></ul><p style="color: #10b981; font-weight: 600;">Let\'s complete the initial setup in 3 minutes</p></div>',
         nextBtn: 'Start Setup 🚀',
         prevBtn: 'Skip'
       },
       groupManage: {
         title: '📦 Step 1: Group Management',
-        description: '<div style="line-height: 1.7;"><p style="margin-bottom: 12px;"><b>What is a Group?</b></p><p style="margin-bottom: 12px;">Groups are the core concept of 智算引擎, like a "service package":</p><ul style="margin-left: 20px; margin-bottom: 12px; font-size: 13px;"><li>🎯 Each group can contain multiple upstream accounts</li><li>💰 Each group has independent billing multiplier</li><li>👥 Can be set as public or exclusive</li></ul><p style="margin-top: 12px; padding: 8px 12px; background: #f0fdf4; border-left: 3px solid #10b981; border-radius: 4px; font-size: 13px;"><b>💡 Example:</b> You can create "VIP Premium" (high rate) and "Free Trial" (low rate) groups</p><p style="margin-top: 16px; color: #10b981; font-weight: 600;">👉 Click "Group Management" on the left sidebar</p></div>'
+        description: '<div style="line-height: 1.7;"><p style="margin-bottom: 12px;"><b>What is a Group?</b></p><p style="margin-bottom: 12px;">Groups are the core concept of ZhiSuan Engine, like a "service package":</p><ul style="margin-left: 20px; margin-bottom: 12px; font-size: 13px;"><li>Each group can contain multiple upstream accounts</li><li>Each group has independent billing multiplier</li><li>Can be set as public or exclusive</li></ul><p style="margin-top: 12px; padding: 8px 12px; background: #f0fdf4; border-left: 3px solid #10b981; border-radius: 4px; font-size: 13px;"><b>Example:</b> You can create "VIP Premium" (high rate) and "Free Trial" (low rate) groups</p><p style="margin-top: 16px; color: #10b981; font-weight: 600;">Click "Group Management" on the left sidebar</p></div>'
       },
       createGroup: {
         title: '➕ Create New Group',
@@ -6369,11 +6323,10 @@ export default {
         description: '<div style="line-height: 1.7;"><p style="margin-bottom: 12px;">System will generate a complete API Key after clicking create.</p><div style="padding: 8px 12px; background: #fee2e2; border-left: 3px solid #ef4444; border-radius: 4px; font-size: 13px; margin-bottom: 12px;"><b>⚠️ Important Reminder:</b><ul style="margin: 8px 0 0 16px;"><li>Key is only shown once, copy immediately</li><li>Need to regenerate if lost</li><li>Keep it safe, don\'t share with others</li></ul></div><div style="padding: 8px 12px; background: #f0fdf4; border-left: 3px solid #10b981; border-radius: 4px; font-size: 13px; margin-bottom: 12px;"><b>🚀 Next Steps:</b><ul style="margin: 8px 0 0 16px;"><li>Copy the generated sk-xxx key</li><li>Use in any OpenAI-compatible client</li><li>Start experiencing AI services!</li></ul></div><p style="margin-top: 12px; color: #10b981; font-weight: 600;">👉 Click "Create" button</p></div>'
       }
     },
-    // User tour steps
     user: {
       welcome: {
-        title: '👋 Welcome to 智算引擎',
-        description: '<div style="line-height: 1.8;"><p style="margin-bottom: 16px;">Hello! Welcome to the 智算引擎 AI service platform.</p><p style="margin-bottom: 12px;"><b>🎯 Quick Start:</b></p><ul style="margin-left: 20px; margin-bottom: 16px;"><li>🔑 Create API Key</li><li>📋 Copy key to your application</li><li>🚀 Start using AI services</li></ul><p style="color: #10b981; font-weight: 600;">Just 1 minute, let\'s get started →</p></div>',
+        title: 'Welcome to ZhiSuan Engine',
+        description: '<div style="line-height: 1.8;"><p style="margin-bottom: 16px;">Hello! Welcome to the ZhiSuan Engine AI service platform.</p><p style="margin-bottom: 12px;"><b>Quick Start:</b></p><ul style="margin-left: 20px; margin-bottom: 16px;"><li>Create API Key</li><li>Copy key to your application</li><li>Start using AI services</li></ul><p style="color: #10b981; font-weight: 600;">Just 1 minute, let\'s get started</p></div>',
         nextBtn: 'Start 🚀',
         prevBtn: 'Skip'
       },
@@ -6401,8 +6354,6 @@ export default {
       }
     }
   },
-
-  // Payment System
   payment: {
     title: 'Recharge / Subscription',
     amountLabel: 'Amount',
@@ -6424,7 +6375,7 @@ export default {
       card: 'Card',
       link: 'Link',
       alipay_direct: 'Alipay (Direct)',
-      wxpay_direct: 'WeChat Pay (Direct)',
+      wxpay_direct: 'WeChat Pay (Direct)'
     },
     status: {
       pending: 'Pending',
@@ -6438,7 +6389,7 @@ export default {
       refunding: 'Refunding',
       refunded: 'Refunded',
       partially_refunded: 'Partially Refunded',
-      refund_failed: 'Refund Failed',
+      refund_failed: 'Refund Failed'
     },
     qr: {
       scanToPay: 'Scan to Pay',
@@ -6455,7 +6406,7 @@ export default {
       cancelled: 'Order Cancelled',
       cancelledDesc: 'You have cancelled this payment.',
       waitingPayment: 'Waiting for payment...',
-      cancelOrder: 'Cancel Order',
+      cancelOrder: 'Cancel Order'
     },
     orders: {
       title: 'My Orders',
@@ -6475,7 +6426,7 @@ export default {
       userId: 'User ID',
       orderType: 'Order Type',
       actions: 'Actions',
-      requestRefund: 'Request Refund',
+      requestRefund: 'Request Refund'
     },
     result: {
       success: 'Payment Successful',
@@ -6484,7 +6435,7 @@ export default {
       processingHint: 'Payment confirmation is still pending. This page will refresh automatically.',
       failed: 'Payment Failed',
       backToRecharge: 'Back to Recharge',
-      viewOrders: 'View Orders',
+      viewOrders: 'View Orders'
     },
     currentBalance: 'Current Balance',
     groupFallback: 'Group #{id}',
@@ -6524,7 +6475,6 @@ export default {
       alipayDesktopQrHint: 'Desktop Alipay should render a QR code. Refresh and retry, or make sure the payment page was not blocked.',
       alipayMobileUnavailable: 'This page could not hand off to Alipay.',
       alipayMobileOpenHint: 'Allow the current page to open the Alipay app, or retry from the system browser.',
-      // Structured error codes (reason strings from backend ApplicationError)
       PAYMENT_DISABLED: 'Payment system is disabled.',
       USER_INACTIVE: 'Your account is disabled.',
       BALANCE_PAYMENT_DISABLED: 'Balance recharge has been disabled.',
@@ -6551,7 +6501,7 @@ export default {
       INVALID_STATUS: 'The current order status does not allow this operation.',
       BALANCE_NOT_ENOUGH: 'Refund amount exceeds balance.',
       REFUND_AMOUNT_EXCEEDED: 'Refund amount exceeds the recharge amount.',
-      REFUND_FAILED: 'Refund failed.',
+      REFUND_FAILED: 'Refund failed.'
     },
     airwallexPay: 'Airwallex Payment',
     stripePay: 'Pay Now',
@@ -6560,7 +6510,7 @@ export default {
       redirecting: 'Redirecting to payment page...',
       loadingQr: 'Loading WeChat Pay QR code...',
       timeout: 'Timed out waiting for payment credentials, please retry',
-      qrFailed: 'Failed to get WeChat Pay QR code',
+      qrFailed: 'Failed to get WeChat Pay QR code'
     },
     subscribeNow: 'Subscribe Now',
     renewNow: 'Renew',
@@ -6573,7 +6523,7 @@ export default {
       monthlyLimit: 'Monthly',
       quota: 'Quota',
       unlimited: 'Unlimited',
-      models: 'Models',
+      models: 'Models'
     },
     days: 'days',
     months: 'months',
@@ -6587,7 +6537,7 @@ export default {
         overview: 'Overview',
         orders: 'Orders',
         channels: 'Channels',
-        plans: 'Plans',
+        plans: 'Plans'
       },
       todayRevenue: 'Today Revenue',
       totalRevenue: 'Total Revenue',
@@ -6714,9 +6664,8 @@ export default {
       subsStatus: {
         active: 'Active',
         expired: 'Expired',
-        revoked: 'Revoked',
-      },
-    },
-  },
-
+        revoked: 'Revoked'
+      }
+    }
+  }
 }

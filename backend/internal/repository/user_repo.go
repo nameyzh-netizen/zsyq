@@ -750,7 +750,10 @@ func (r *userRepository) BatchSetConcurrency(ctx context.Context, userIDs []int6
 	if err != nil {
 		return 0, fmt.Errorf("batch set concurrency: %w", err)
 	}
-	affected, _ := res.RowsAffected()
+	affected, err := res.RowsAffected()
+	if err != nil {
+		return 0, fmt.Errorf("check rows affected: %w", err)
+	}
 	return int(affected), nil
 }
 
@@ -764,7 +767,10 @@ func (r *userRepository) BatchAddConcurrency(ctx context.Context, userIDs []int6
 	if err != nil {
 		return 0, fmt.Errorf("batch add concurrency: %w", err)
 	}
-	affected, _ := res.RowsAffected()
+	affected, err := res.RowsAffected()
+	if err != nil {
+		return 0, fmt.Errorf("check rows affected: %w", err)
+	}
 	return int(affected), nil
 }
 

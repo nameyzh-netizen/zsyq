@@ -140,7 +140,10 @@ func (r *channelRepository) Update(ctx context.Context, channel *service.Channel
 			}
 			return fmt.Errorf("update channel: %w", err)
 		}
-		rows, _ := result.RowsAffected()
+		rows, err := result.RowsAffected()
+		if err != nil {
+			return fmt.Errorf("check rows affected: %w", err)
+		}
 		if rows == 0 {
 			return service.ErrChannelNotFound
 		}
@@ -175,7 +178,10 @@ func (r *channelRepository) Delete(ctx context.Context, id int64) error {
 	if err != nil {
 		return fmt.Errorf("delete channel: %w", err)
 	}
-	rows, _ := result.RowsAffected()
+	rows, err := result.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("check rows affected: %w", err)
+	}
 	if rows == 0 {
 		return service.ErrChannelNotFound
 	}

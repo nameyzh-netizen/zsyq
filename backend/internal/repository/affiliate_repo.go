@@ -93,7 +93,10 @@ func (r *affiliateRepository) BindInviter(ctx context.Context, userID, inviterID
 		if err != nil {
 			return fmt.Errorf("bind inviter: %w", err)
 		}
-		affected, _ := res.RowsAffected()
+		affected, err := res.RowsAffected()
+		if err != nil {
+			return fmt.Errorf("check rows affected: %w", err)
+		}
 		if affected == 0 {
 			bound = false
 			return nil
@@ -132,7 +135,10 @@ func (r *affiliateRepository) AccrueQuota(ctx context.Context, inviterID, invite
 		if err != nil {
 			return err
 		}
-		affected, _ := res.RowsAffected()
+		affected, err := res.RowsAffected()
+		if err != nil {
+			return fmt.Errorf("check rows affected: %w", err)
+		}
 		if affected == 0 {
 			applied = false
 			return nil
@@ -177,6 +183,9 @@ func (r *affiliateRepository) GetAccruedRebateFromInvitee(ctx context.Context, i
 			return 0, err
 		}
 	}
+	if err := rows.Err(); err != nil {
+		return 0, fmt.Errorf("iterate accrued rebate rows: %w", err)
+	}
 	return total, rows.Close()
 }
 
@@ -212,6 +221,9 @@ SELECT COALESCE(SUM(amount), 0) FROM matured`, userID)
 		if err := rows.Scan(&thawed); err != nil {
 			return 0, err
 		}
+	}
+	if err := rows.Err(); err != nil {
+		return 0, fmt.Errorf("iterate thaw rows: %w", err)
 	}
 	if err := rows.Close(); err != nil {
 		return 0, err
@@ -1004,7 +1016,10 @@ WHERE user_id = $2`, code, userID)
 			}
 			return fmt.Errorf("update aff_code: %w", err)
 		}
-		affected, _ := res.RowsAffected()
+		affected, err := res.RowsAffected()
+		if err != nil {
+			return fmt.Errorf("check rows affected: %w", err)
+		}
 		if affected == 0 {
 			return service.ErrUserNotFound
 		}
@@ -1039,7 +1054,10 @@ WHERE user_id = $2`, candidate, userID)
 				}
 				return fmt.Errorf("reset aff_code: %w", err)
 			}
-			affected, _ := res.RowsAffected()
+			affected, err := res.RowsAffected()
+			if err != nil {
+				return fmt.Errorf("check rows affected: %w", err)
+			}
 			if affected == 0 {
 				return service.ErrUserNotFound
 			}
@@ -1073,7 +1091,10 @@ WHERE user_id = $2`, nullableArg(ratePercent), userID)
 		if err != nil {
 			return fmt.Errorf("set aff_rebate_rate_percent: %w", err)
 		}
-		affected, _ := res.RowsAffected()
+		affected, err := res.RowsAffected()
+		if err != nil {
+			return fmt.Errorf("check rows affected: %w", err)
+		}
 		if affected == 0 {
 			return service.ErrUserNotFound
 		}
