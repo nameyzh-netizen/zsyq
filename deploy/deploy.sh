@@ -38,8 +38,7 @@ if [ ! -f /swapfile ]; then
 fi
 
 # 内核参数
-grep -q "vm.swappiness=10" /etc/sysctl.conf || cat >> /etc/sysctl.conf << 'EOF'
-
+cat > /etc/sysctl.d/99-zsyq.conf << 'EOF'
 vm.swappiness=10
 fs.file-max=65535
 net.core.somaxconn=32768
@@ -51,10 +50,8 @@ net.ipv4.tcp_keepalive_time=300
 net.ipv4.tcp_keepalive_intvl=15
 net.ipv4.tcp_keepalive_probes=5
 net.ipv4.ip_local_port_range=1024 65535
-net.netfilter.nf_conntrack_max=262144
-net.netfilter.nf_conntrack_tcp_timeout_established=7200
 EOF
-sysctl -p
+sysctl --system
 
 # 文件描述符
 grep -q "nofile 65535" /etc/security/limits.conf || cat >> /etc/security/limits.conf << 'EOF'
