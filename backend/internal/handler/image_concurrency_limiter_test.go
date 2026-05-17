@@ -19,7 +19,7 @@ import (
 func TestImageConcurrencyLimiter_DefaultDisabledAllowsRequests(t *testing.T) {
 	limiter := &imageConcurrencyLimiter{}
 
-	release, acquired := limiter.TryAcquire(false, 1)
+	release, acquired := limiter.TryAcquire(context.Background(), false, 1)
 
 	require.True(t, acquired)
 	require.Nil(t, release)
@@ -28,16 +28,16 @@ func TestImageConcurrencyLimiter_DefaultDisabledAllowsRequests(t *testing.T) {
 func TestImageConcurrencyLimiter_RejectsWhenLimitReachedAndAllowsAfterRelease(t *testing.T) {
 	limiter := &imageConcurrencyLimiter{}
 
-	release, acquired := limiter.TryAcquire(true, 1)
+	release, acquired := limiter.TryAcquire(context.Background(), true, 1)
 	require.True(t, acquired)
 	require.NotNil(t, release)
 
-	secondRelease, secondAcquired := limiter.TryAcquire(true, 1)
+	secondRelease, secondAcquired := limiter.TryAcquire(context.Background(), true, 1)
 	require.False(t, secondAcquired)
 	require.Nil(t, secondRelease)
 
 	release()
-	thirdRelease, thirdAcquired := limiter.TryAcquire(true, 1)
+	thirdRelease, thirdAcquired := limiter.TryAcquire(context.Background(), true, 1)
 	require.True(t, thirdAcquired)
 	require.NotNil(t, thirdRelease)
 	thirdRelease()

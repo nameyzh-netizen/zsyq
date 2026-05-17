@@ -15,8 +15,8 @@ type imageConcurrencyLimiter struct {
 	enabled bool
 }
 
-func (l *imageConcurrencyLimiter) TryAcquire(enabled bool, limit int) (func(), bool) {
-	return l.acquire(context.Background(), enabled, limit, false, 0, 0)
+func (l *imageConcurrencyLimiter) TryAcquire(ctx context.Context, enabled bool, limit int) (func(), bool) {
+	return l.acquire(ctx, enabled, limit, false, 0, 0)
 }
 
 func (l *imageConcurrencyLimiter) Acquire(ctx context.Context, enabled bool, limit int, wait bool, timeout time.Duration, maxWaiting int) (func(), bool) {
