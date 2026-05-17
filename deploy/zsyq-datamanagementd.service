@@ -17,6 +17,9 @@ RestartSec=5s
 LimitNOFILE=100000
 NoNewPrivileges=true
 PrivateTmp=false
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/zsyq/datamanagement /tmp/zsyq-datamanagement.sock
 
 [Install]
 WantedBy=multi-user.target

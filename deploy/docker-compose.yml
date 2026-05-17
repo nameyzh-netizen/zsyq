@@ -24,7 +24,7 @@ services:
         soft: 100000
         hard: 100000
     ports:
-      - "${BIND_HOST:-0.0.0.0}:${SERVER_PORT:-8080}:8080"
+      - "${BIND_HOST:-0.0.0.0}:${SERVER_PORT:-8080}:${SERVER_PORT:-8080}"
     volumes:
       # Data persistence (config.yaml will be auto-generated here)
       - zsyq_data:/app/data
@@ -35,6 +35,8 @@ services:
       # gateway.forced_codex_instructions_template_file at /app/data/codex-instructions.md.tmpl
       # in config.yaml.
       # - ./codex-instructions.md.tmpl:/app/data/codex-instructions.md.tmpl:ro
+    env_file:
+      - .env
     environment:
       # =======================================================================
       # Auto Setup (REQUIRED for Docker deployment)
@@ -44,8 +46,8 @@ services:
       # =======================================================================
       # Server Configuration
       # =======================================================================
-      - SERVER_HOST=0.0.0.0
-      - SERVER_PORT=8080
+      - SERVER_HOST=${SERVER_HOST:-0.0.0.0}
+      - SERVER_PORT=${SERVER_PORT:-8080}
       - SERVER_MODE=${SERVER_MODE:-release}
       - RUN_MODE=${RUN_MODE:-standard}
 
@@ -112,6 +114,12 @@ services:
       - TZ=${TZ:-Asia/Shanghai}
 
       # =======================================================================
+      # Go Runtime Memory Limit
+      # Set to ~90% of ZSYQ_MEMORY_LIMIT to let GC reclaim before Docker kills
+      # =======================================================================
+      - GOMEMLIMIT=${GOMEMLIMIT:-450MiB}
+
+      # =======================================================================
       # Gemini OAuth Configuration (for Gemini accounts)
       # =======================================================================
       - GEMINI_OAUTH_CLIENT_ID=${GEMINI_OAUTH_CLIENT_ID:-}
@@ -154,6 +162,11 @@ services:
       - GATEWAY_IMAGE_CONCURRENCY_OVERFLOW_MODE=${GATEWAY_IMAGE_CONCURRENCY_OVERFLOW_MODE:-reject}
       - GATEWAY_IMAGE_CONCURRENCY_WAIT_TIMEOUT_SECONDS=${GATEWAY_IMAGE_CONCURRENCY_WAIT_TIMEOUT_SECONDS:-30}
       - GATEWAY_IMAGE_CONCURRENCY_MAX_WAITING_REQUESTS=${GATEWAY_IMAGE_CONCURRENCY_MAX_WAITING_REQUESTS:-100}
+    deploy:
+      resources:
+        limits:
+          memory: ${ZSYQ_MEMORY_LIMIT:-512M}
+          cpus: ${ZSYQ_CPU_LIMIT:-2}
     depends_on:
       postgres:
         condition: service_healthy
@@ -171,7 +184,7 @@ services:
           "5",
           "-O",
           "/dev/null",
-          "http://localhost:8080/health",
+          "http://localhost:${SERVER_PORT:-8080}/health",
         ]
       interval: 30s
       timeout: 10s
@@ -212,6 +225,11 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+    deploy:
+      resources:
+        limits:
+          memory: ${POSTGRES_MEMORY_LIMIT:-1G}
+          cpus: ${POSTGRES_CPU_LIMIT:-2}
     # SECURITY: Do not expose database port to host network.
     # Application connects via internal Docker network only.
     # For local debugging only, use: ports: ["127.0.0.1:5433:5432"]
@@ -245,11 +263,16 @@ services:
     networks:
       - zsyq-network
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD-SHELL", "redis-cli ${REDISCLI_AUTH:+-a \"$REDISCLI_AUTH\"} ping"]
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 5s
+    deploy:
+      resources:
+        limits:
+          memory: ${REDIS_MEMORY_LIMIT:-512M}
+          cpus: ${REDIS_CPU_LIMIT:-1}
     # SECURITY: Do not expose Redis port to host network.
     # Application connects via internal Docker network only.
     # For local debugging only, use: ports: ["127.0.0.1:6380:6379"]

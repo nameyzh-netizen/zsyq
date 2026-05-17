@@ -32,13 +32,15 @@ services:
         soft: 100000
         hard: 100000
     ports:
-      - "${BIND_HOST:-0.0.0.0}:${SERVER_PORT:-8080}:8080"
+      - "${BIND_HOST:-0.0.0.0}:${SERVER_PORT:-8080}:${SERVER_PORT:-8080}"
     volumes:
       # Local directory mapping for easy migration
       - ./data:/app/data
       # Optional: Mount custom config.yaml (uncomment and create the file first)
       # Copy config.example.yaml to config.yaml, modify it, then uncomment:
       # - ./config.yaml:/app/data/config.yaml
+    env_file:
+      - .env
     environment:
       # =======================================================================
       # Auto Setup (REQUIRED for Docker deployment)
@@ -48,8 +50,8 @@ services:
       # =======================================================================
       # Server Configuration
       # =======================================================================
-      - SERVER_HOST=0.0.0.0
-      - SERVER_PORT=8080
+      - SERVER_HOST=${SERVER_HOST:-0.0.0.0}
+      - SERVER_PORT=${SERVER_PORT:-8080}
       - SERVER_MODE=${SERVER_MODE:-release}
       - RUN_MODE=${RUN_MODE:-standard}
 
@@ -114,6 +116,7 @@ services:
       # Common values: Asia/Shanghai, America/New_York, Europe/London, UTC
       # =======================================================================
       - TZ=${TZ:-Asia/Shanghai}
+      - GOMEMLIMIT=${GOMEMLIMIT:-450MiB}
 
       # =======================================================================
       # Gemini OAuth Configuration (for Gemini accounts)
@@ -158,6 +161,11 @@ services:
       - GATEWAY_IMAGE_CONCURRENCY_OVERFLOW_MODE=${GATEWAY_IMAGE_CONCURRENCY_OVERFLOW_MODE:-reject}
       - GATEWAY_IMAGE_CONCURRENCY_WAIT_TIMEOUT_SECONDS=${GATEWAY_IMAGE_CONCURRENCY_WAIT_TIMEOUT_SECONDS:-30}
       - GATEWAY_IMAGE_CONCURRENCY_MAX_WAITING_REQUESTS=${GATEWAY_IMAGE_CONCURRENCY_MAX_WAITING_REQUESTS:-100}
+    deploy:
+      resources:
+        limits:
+          memory: ${ZSYQ_MEMORY_LIMIT:-512M}
+          cpus: ${ZSYQ_CPU_LIMIT:-2}
     depends_on:
       postgres:
         condition: service_healthy
@@ -166,7 +174,7 @@ services:
     networks:
       - zsyq-network
     healthcheck:
-      test: ["CMD", "wget", "-q", "-T", "5", "-O", "/dev/null", "http://localhost:8080/health"]
+      test: ["CMD", "wget", "-q", "-T", "5", "-O", "/dev/null", "http://localhost:${SERVER_PORT:-8080}/health"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -200,6 +208,11 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+    deploy:
+      resources:
+        limits:
+          memory: ${POSTGRES_MEMORY_LIMIT:-1G}
+          cpus: ${POSTGRES_CPU_LIMIT:-2}
     # 注意：不暴露端口到宿主机，应用通过内部网络连接
     # 如需调试，可临时添加：ports: ["127.0.0.1:5433:5432"]
 
@@ -231,11 +244,16 @@ services:
     networks:
       - zsyq-network
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD-SHELL", "redis-cli ${REDISCLI_AUTH:+-a \"$REDISCLI_AUTH\"} ping"]
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 5s
+    deploy:
+      resources:
+        limits:
+          memory: ${REDIS_MEMORY_LIMIT:-512M}
+          cpus: ${REDIS_CPU_LIMIT:-1}
 
 # =============================================================================
 # Networks

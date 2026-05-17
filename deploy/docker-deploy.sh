@@ -67,6 +67,10 @@ main() {
     # Check if deployment already exists
     if [ -f "docker-compose.yml" ] && [ -f ".env" ]; then
         print_warning "Deployment files already exist in current directory."
+        if [ ! -t 0 ]; then
+            print_error "Refusing to overwrite existing deployment files in non-interactive mode."
+            exit 1
+        fi
         read -p "Overwrite existing files? (y/N): " -r
         echo
         if [[ ! $REPLY =~ ^[Yy]$ ]]; then
@@ -139,7 +143,7 @@ main() {
     echo "=========================================="
     echo ""
     echo "Generated admin credential:"
-    echo "  ADMIN_PASSWORD:        ${ADMIN_PASSWORD}"
+    echo "  ADMIN_PASSWORD:        (saved to .env — ${#ADMIN_PASSWORD} characters)"
     echo ""
     print_warning "All generated credentials have been saved to .env file."
     print_warning "Keep .env secure and do not share it publicly."
