@@ -2802,7 +2802,7 @@ export default {
       dataImportCompletedWithErrors: 'Import completed with errors: account failed {account_failed}, proxy failed {proxy_failed}',
       syncFromCrsTitle: 'Sync Accounts from CRS',
       syncFromCrsDesc:
-        'Sync accounts from claude-relay-service (CRS) into this system (CRS is called server-to-server).',
+        'Sync accounts from external relay service (CRS) into this system (CRS is called server-to-server).',
       crsVersionRequirement: '⚠️ Note: CRS version must be ≥ v1.1.240 to support this feature',
       crsBaseUrl: 'CRS Base URL',
       crsBaseUrlPlaceholder: 'e.g. http://127.0.0.1:3000',

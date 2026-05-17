@@ -53,7 +53,8 @@ function tooltipHint(endpoint: string): string {
 }
 
 function speedTestUrl(endpoint: string): string {
-  return `https://www.tcptest.cn/http/${encodeURIComponent(endpoint)}`
+  const baseUrl = import.meta.env.VITE_SPEED_TEST_URL || 'https://www.tcptest.cn'
+  return `${baseUrl}/http/${encodeURIComponent(endpoint)}`
 }
 
 onBeforeUnmount(() => {

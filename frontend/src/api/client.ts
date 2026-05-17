@@ -267,6 +267,30 @@ apiClient.interceptors.response.use(
         }
       }
 
+      // 403 Forbidden - insufficient permissions
+      if (status === 403) {
+        return Promise.reject({
+          status,
+          code: apiData.code || 'FORBIDDEN',
+          reason: apiData.reason,
+          error: apiData.error,
+          message: apiData.message || apiData.detail || 'Permission denied. You do not have access to this resource.',
+          metadata: apiData.metadata,
+        })
+      }
+
+      // 5xx Server errors
+      if (status >= 500) {
+        return Promise.reject({
+          status,
+          code: apiData.code || 'SERVER_ERROR',
+          reason: apiData.reason,
+          error: apiData.error,
+          message: apiData.message || apiData.detail || `Server error (${status}). Please try again later.`,
+          metadata: apiData.metadata,
+        })
+      }
+
       // Return structured error
       return Promise.reject({
         status,

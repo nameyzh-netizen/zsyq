@@ -2878,7 +2878,7 @@ export default {
       dataImportCompletedWithErrors: '导入完成但有错误：账号失败 {account_failed}，代理失败 {proxy_failed}',
       syncFromCrsTitle: '从 CRS 同步账号',
       syncFromCrsDesc:
-        '将 claude-relay-service（CRS）中的账号同步到当前系统（不会在浏览器侧直接请求 CRS）。',
+        '将外部中继服务（CRS）中的账号同步到当前系统（不会在浏览器侧直接请求 CRS）。',
       crsVersionRequirement: '⚠️ 注意：CRS 版本必须 ≥ v1.1.240 才支持此功能',
       crsBaseUrl: 'CRS 服务地址',
       crsBaseUrlPlaceholder: '例如：http://127.0.0.1:3000',
