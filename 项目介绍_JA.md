@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Go](https://img.shields.io/badge/Go-1.25.7-00ADD8.svg)](https://golang.org/)
+[![Go](https://img.shields.io/badge/Go-1.26+-00ADD8.svg)](https://golang.org/)
 [![Vue](https://img.shields.io/badge/Vue-3.4+-4FC08D.svg)](https://vuejs.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15+-336791.svg)](https://www.postgresql.org/)
 [![Redis](https://img.shields.io/badge/Redis-7+-DC382D.svg)](https://redis.io/)
@@ -57,7 +57,7 @@
 
 | コンポーネント | 技術 |
 |-----------|------------|
-| バックエンド | Go 1.25.7, Gin, Ent |
+| バックエンド | Go 1.26+, Gin, Ent |
 | フロントエンド | Vue 3.4+, Vite 5+, TailwindCSS |
 | データベース | PostgreSQL 15+ |
 | キャッシュ/キュー | Redis 7+ |
@@ -317,7 +317,7 @@ rm -rf data/ postgres_data/ redis_data/
 
 #### 前提条件
 
-- Go 1.21+
+- Go 1.26+
 - Node.js 18+
 - PostgreSQL 15+
 - Redis 7+
@@ -329,8 +329,9 @@ rm -rf data/ postgres_data/ redis_data/
 git clone https://github.com/nameyzh-netizen/zsyq.git
 cd zsyq
 
-# 2. pnpm をインストール（未インストールの場合）
-npm install -g pnpm
+# 2. Corepack を有効化し pnpm をインストール（未インストールの場合）
+corepack enable
+corepack prepare pnpm@10.33.0 --activate
 
 # 3. フロントエンドをビルド
 cd frontend
@@ -382,11 +383,9 @@ default:
   rate_multiplier: 1.0
 ```
 
-### Sora ステータス（一時的に利用不可）
+### Sora ステータス（削除済み）
 
-> ⚠️ Sora 関連の機能は、上流統合およびメディア配信の技術的問題により一時的に利用できません。
-> 現時点では本番環境で Sora に依存しないでください。
-> 既存の `gateway.sora_*` 設定キーは予約されていますが、これらの問題が解決されるまで有効にならない場合があります。
+> Sora 関連の機能は v1.0.0 で削除されました（データベースのテーブルとカラムはマイグレーションで削除済み）。`gateway.sora_*` および `sora:` 設定キーは機能せず、今後のバージョンでクリーンアップ予定です。
 
 `config.yaml` では追加のセキュリティ関連オプションも利用できます:
 

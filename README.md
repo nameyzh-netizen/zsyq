@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Go](https://img.shields.io/badge/Go-1.25.7-00ADD8.svg)](https://golang.org/)
+[![Go](https://img.shields.io/badge/Go-1.26+-00ADD8.svg)](https://golang.org/)
 [![Vue](https://img.shields.io/badge/Vue-3.4+-4FC08D.svg)](https://vuejs.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15+-336791.svg)](https://www.postgresql.org/)
 [![Redis](https://img.shields.io/badge/Redis-7+-DC382D.svg)](https://redis.io/)
@@ -57,7 +57,7 @@ Community projects that extend or integrate with 智算引擎:
 
 | Component | Technology |
 |-----------|------------|
-| Backend | Go 1.25.7, Gin, Ent |
+| Backend | Go 1.26+, Gin, Ent |
 | Frontend | Vue 3.4+, Vite 5+, TailwindCSS |
 | Database | PostgreSQL 15+ |
 | Cache/Queue | Redis 7+ |
@@ -260,7 +260,10 @@ docker compose -f docker-compose.local.yml logs -f zsyq
 
 Open `http://YOUR_SERVER_IP:8080` in your browser.
 
-Set `ADMIN_PASSWORD` in `.env` before the first startup. Generated admin passwords are development-only and require `AUTO_SETUP_ALLOW_GENERATED_ADMIN_PASSWORD=true`.
+If the admin password was auto-generated, find it in the logs:
+```bash
+docker compose -f docker-compose.local.yml logs zsyq | grep "admin password"
+```
 
 #### Upgrade
 
@@ -314,7 +317,7 @@ Build and run from source code for development or customization.
 
 #### Prerequisites
 
-- Go 1.21+
+- Go 1.26+
 - Node.js 18+
 - PostgreSQL 15+
 - Redis 7+
@@ -326,8 +329,9 @@ Build and run from source code for development or customization.
 git clone https://github.com/nameyzh-netizen/zsyq.git
 cd zsyq
 
-# 2. Install pnpm (if not already installed)
-npm install -g pnpm
+# 2. Enable Corepack and install pnpm (if not already installed)
+corepack enable
+corepack prepare pnpm@10.33.0 --activate
 
 # 3. Build frontend
 cd frontend
@@ -379,11 +383,9 @@ default:
   rate_multiplier: 1.0
 ```
 
-### Sora Status (Temporarily Unavailable)
+### Sora Status (Removed)
 
-> ⚠️ Sora-related features are temporarily unavailable due to technical issues in upstream integration and media delivery.
-> Please do not rely on Sora in production at this time.
-> Existing `gateway.sora_*` configuration keys are reserved and may not take effect until these issues are resolved.
+> Sora-related features have been removed in v1.0.0 (database tables and columns dropped via migration). The `gateway.sora_*` and `sora:` configuration keys no longer take effect and will be cleaned up in a future release.
 
 Additional security-related options are available in `config.yaml`:
 
