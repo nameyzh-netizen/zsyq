@@ -68,76 +68,7 @@ Nginx drops headers containing underscores by default (e.g. `session_id`), which
 
 ## Deployment
 
-### Method 1: Script Installation (Recommended)
-
-One-click installation script that downloads pre-built binaries from GitHub Releases.
-
-#### Prerequisites
-
-- Linux server (amd64 or arm64)
-- PostgreSQL 15+ (installed and running)
-- Redis 7+ (installed and running)
-- Root privileges
-
-#### Installation Steps
-
-```bash
-curl -sSL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/install.sh | sudo bash
-```
-
-The script will:
-1. Detect your system architecture
-2. Download the latest release
-3. Install binary to `/opt/zsyq`
-4. Create systemd service
-5. Configure system user and permissions
-
-#### Post-Installation
-
-```bash
-# 1. Start the service
-sudo systemctl start zsyq
-
-# 2. Enable auto-start on boot
-sudo systemctl enable zsyq
-
-# 3. Open Setup Wizard in browser
-# http://YOUR_SERVER_IP:8080
-```
-
-The Setup Wizard will guide you through:
-- Database configuration
-- Redis configuration
-- Admin account creation
-
-#### Upgrade
-
-You can upgrade directly from the **Admin Dashboard** by clicking the **Check for Updates** button in the top-left corner.
-
-The web interface will:
-- Check for new versions automatically
-- Download and apply updates with one click
-- Support rollback if needed
-
-#### Useful Commands
-
-```bash
-# Check status
-sudo systemctl status zsyq
-
-# View logs
-sudo journalctl -u zsyq -f
-
-# Restart service
-sudo systemctl restart zsyq
-
-# Uninstall
-curl -sSL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/install.sh | sudo bash -s -- uninstall -y
-```
-
----
-
-### Method 2: Docker Compose Source Build (Recommended)
+### Method 1: Docker Compose Source Build (Recommended)
 
 Recommended for production operations: the script installs Docker, clones the source code, generates secrets, auto-tunes resources based on server CPU/memory, and builds both frontend and backend from source with `docker-compose.build.yml`. You can rebuild after frontend changes at any time.
 
@@ -247,6 +178,75 @@ docker compose -f docker-compose.build.yml up -d --build
 | **docker-compose.build.yml** | Local source build | Local directories | Recommended production deployment, frontend customization |
 | **docker-compose.local.yml** | Prebuilt image | Local directories | No code changes, quick run |
 | **docker-compose.yml** | Prebuilt image | Docker named volumes | Simple trial |
+
+---
+
+### Method 2: Script Installation
+
+One-click installation script that downloads pre-built binaries from GitHub Releases.
+
+#### Prerequisites
+
+- Linux server (amd64 or arm64)
+- PostgreSQL 15+ (installed and running)
+- Redis 7+ (installed and running)
+- Root privileges
+
+#### Installation Steps
+
+```bash
+curl -sSL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/install.sh | sudo bash
+```
+
+The script will:
+1. Detect your system architecture
+2. Download the latest release
+3. Install binary to `/opt/zsyq`
+4. Create systemd service
+5. Configure system user and permissions
+
+#### Post-Installation
+
+```bash
+# 1. Start the service
+sudo systemctl start zsyq
+
+# 2. Enable auto-start on boot
+sudo systemctl enable zsyq
+
+# 3. Open Setup Wizard in browser
+# http://YOUR_SERVER_IP:8080
+```
+
+The Setup Wizard will guide you through:
+- Database configuration
+- Redis configuration
+- Admin account creation
+
+#### Upgrade
+
+You can upgrade directly from the **Admin Dashboard** by clicking the **Check for Updates** button in the top-left corner.
+
+The web interface will:
+- Check for new versions automatically
+- Download and apply updates with one click
+- Support rollback if needed
+
+#### Useful Commands
+
+```bash
+# Check status
+sudo systemctl status zsyq
+
+# View logs
+sudo journalctl -u zsyq -f
+
+# Restart service
+sudo systemctl restart zsyq
+
+# Uninstall
+curl -sSL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/install.sh | sudo bash -s -- uninstall -y
+```
 
 ---
 

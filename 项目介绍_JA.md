@@ -68,76 +68,7 @@ Nginx はデフォルトでアンダースコアを含むヘッダー（例: `se
 
 ## デプロイ
 
-### 方法1: スクリプトによるインストール（推奨）
-
-GitHub Releases からビルド済みバイナリをダウンロードするワンクリックインストールスクリプトです。
-
-#### 前提条件
-
-- Linux サーバー（amd64 または arm64）
-- PostgreSQL 15+（インストール済みかつ稼働中）
-- Redis 7+（インストール済みかつ稼働中）
-- root 権限
-
-#### インストール手順
-
-```bash
-curl -sSL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/install.sh | sudo bash
-```
-
-スクリプトは以下を実行します:
-1. システムアーキテクチャの検出
-2. 最新リリースのダウンロード
-3. バイナリを `/opt/zsyq` にインストール
-4. systemd サービスの作成
-5. システムユーザーと権限の設定
-
-#### インストール後の作業
-
-```bash
-# 1. サービスを起動
-sudo systemctl start zsyq
-
-# 2. 起動時の自動起動を有効化
-sudo systemctl enable zsyq
-
-# 3. ブラウザでセットアップウィザードを開く
-# http://YOUR_SERVER_IP:8080
-```
-
-セットアップウィザードでは以下の設定を行います:
-- データベース設定
-- Redis 設定
-- 管理者アカウントの作成
-
-#### アップグレード
-
-**管理ダッシュボード**の左上にある**アップデートを確認**ボタンをクリックすることで、ダッシュボードから直接アップグレードできます。
-
-Web インターフェースでは以下が可能です:
-- 新しいバージョンの自動確認
-- ワンクリックでのアップデートのダウンロードと適用
-- 必要に応じたロールバック
-
-#### よく使うコマンド
-
-```bash
-# ステータスを確認
-sudo systemctl status zsyq
-
-# ログを表示
-sudo journalctl -u zsyq -f
-
-# サービスを再起動
-sudo systemctl restart zsyq
-
-# アンインストール
-curl -sSL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/install.sh | sudo bash -s -- uninstall -y
-```
-
----
-
-### 方法2: Docker Compose ソースビルド（推奨）
+### 方法1: Docker Compose ソースビルド（推奨）
 
 本番運用にはこの方式を推奨します。スクリプトが Docker のインストール、ソースコードのクローン、シークレット生成、サーバー CPU/メモリに応じた自動チューニングを行い、`docker-compose.build.yml` でフロントエンドとバックエンドをソースからビルドします。フロントエンド変更後もいつでも再ビルドできます。
 
@@ -247,6 +178,75 @@ docker compose -f docker-compose.build.yml up -d --build
 | **docker-compose.build.yml** | ローカルソースビルド | ローカルディレクトリ | 推奨本番デプロイ、フロントエンドカスタマイズ |
 | **docker-compose.local.yml** | ビルド済みイメージ | ローカルディレクトリ | コード変更なし、素早く起動 |
 | **docker-compose.yml** | ビルド済みイメージ | Docker 名前付きボリューム | 簡単な試用 |
+
+---
+
+### 方法2: スクリプトによるインストール
+
+GitHub Releases からビルド済みバイナリをダウンロードするワンクリックインストールスクリプトです。
+
+#### 前提条件
+
+- Linux サーバー（amd64 または arm64）
+- PostgreSQL 15+（インストール済みかつ稼働中）
+- Redis 7+（インストール済みかつ稼働中）
+- root 権限
+
+#### インストール手順
+
+```bash
+curl -sSL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/install.sh | sudo bash
+```
+
+スクリプトは以下を実行します:
+1. システムアーキテクチャの検出
+2. 最新リリースのダウンロード
+3. バイナリを `/opt/zsyq` にインストール
+4. systemd サービスの作成
+5. システムユーザーと権限の設定
+
+#### インストール後の作業
+
+```bash
+# 1. サービスを起動
+sudo systemctl start zsyq
+
+# 2. 起動時の自動起動を有効化
+sudo systemctl enable zsyq
+
+# 3. ブラウザでセットアップウィザードを開く
+# http://YOUR_SERVER_IP:8080
+```
+
+セットアップウィザードでは以下の設定を行います:
+- データベース設定
+- Redis 設定
+- 管理者アカウントの作成
+
+#### アップグレード
+
+**管理ダッシュボード**の左上にある**アップデートを確認**ボタンをクリックすることで、ダッシュボードから直接アップグレードできます。
+
+Web インターフェースでは以下が可能です:
+- 新しいバージョンの自動確認
+- ワンクリックでのアップデートのダウンロードと適用
+- 必要に応じたロールバック
+
+#### よく使うコマンド
+
+```bash
+# ステータスを確認
+sudo systemctl status zsyq
+
+# ログを表示
+sudo journalctl -u zsyq -f
+
+# サービスを再起動
+sudo systemctl restart zsyq
+
+# アンインストール
+curl -sSL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/install.sh | sudo bash -s -- uninstall -y
+```
 
 ---
 
