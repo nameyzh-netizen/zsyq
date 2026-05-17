@@ -222,7 +222,10 @@ func (s *PaymentService) createOrderInTx(ctx context.Context, req CreateOrderReq
 func (s *PaymentService) allocateOutTradeNo(ctx context.Context, tx *dbent.Tx) (string, error) {
 	const maxAttempts = 5
 	for attempt := 0; attempt < maxAttempts; attempt++ {
-		candidate := generateOutTradeNo()
+		candidate, err := generateOutTradeNo()
+		if err != nil {
+			return "", err
+		}
 		exists, err := tx.PaymentOrder.Query().Where(paymentorder.OutTradeNo(candidate)).Exist(ctx)
 		if err != nil {
 			return "", fmt.Errorf("check out_trade_no uniqueness: %w", err)

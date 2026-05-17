@@ -481,7 +481,7 @@ func (h *AuthHandler) CreatePendingOAuthAccount(c *gin.Context) {
 func (h *AuthHandler) SendPendingOAuthVerifyCode(c *gin.Context) {
 	var req sendPendingOAuthVerifyCodeRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		response.BadRequest(c, "Invalid request: "+err.Error())
+		response.BadRequest(c, "Invalid request")
 		return
 	}
 
@@ -1536,7 +1536,7 @@ func writeOAuthTokenPairResponse(c *gin.Context, tokenPair *service.TokenPair) {
 func (h *AuthHandler) bindPendingOAuthLogin(c *gin.Context, provider string) {
 	var req bindPendingOAuthLoginRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		response.BadRequest(c, "Invalid request: "+err.Error())
+		response.BadRequest(c, "Invalid request")
 		return
 	}
 
@@ -1620,7 +1620,7 @@ func respondPendingOAuthBindingApplyError(c *gin.Context, err error) {
 func (h *AuthHandler) createPendingOAuthAccount(c *gin.Context, provider string) {
 	var req createPendingOAuthAccountRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		response.BadRequest(c, "Invalid request: "+err.Error())
+		response.BadRequest(c, "Invalid request")
 		return
 	}
 
@@ -1806,7 +1806,7 @@ func (h *AuthHandler) ExchangePendingOAuthCompletion(c *gin.Context) {
 	}
 	adoptionDecision, err := bindOptionalOAuthAdoptionDecision(c)
 	if err != nil {
-		response.BadRequest(c, "Invalid request: "+err.Error())
+		response.BadRequest(c, "Invalid request")
 		return
 	}
 

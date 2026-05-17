@@ -136,6 +136,9 @@ func truncateOpsTable(ctx context.Context, db *sql.DB, table string) (int64, err
 	if db == nil {
 		return 0, nil
 	}
+	if !opsCleanupAllowedTable(table) {
+		return 0, fmt.Errorf("cleanup not allowed for table: %s", table)
+	}
 	var count int64
 	if err := db.QueryRowContext(ctx, fmt.Sprintf("SELECT COUNT(*) FROM %s", table)).Scan(&count); err != nil {
 		if isMissingRelationError(err) {
@@ -161,4 +164,14 @@ func isMissingRelationError(err error) bool {
 	}
 	s := strings.ToLower(err.Error())
 	return strings.Contains(s, "does not exist") && strings.Contains(s, "relation")
+}
+
+func opsCleanupAllowedTable(table string) bool {
+	switch table {
+	case "ops_error_logs", "ops_retry_attempts", "ops_alert_events",
+		"ops_system_logs", "ops_system_log_cleanup_audits",
+		"ops_system_metrics", "ops_metrics_hourly", "ops_metrics_daily":
+		return true
+	}
+	return false
 }

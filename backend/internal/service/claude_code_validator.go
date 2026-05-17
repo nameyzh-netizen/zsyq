@@ -11,7 +11,7 @@ import (
 )
 
 // ClaudeCodeValidator 验证请求是否来自 Claude Code 客户端
-// 完全学习自 claude-relay-service 项目的验证逻辑
+// 验证逻辑参考了上游中继服务项目的实现
 type ClaudeCodeValidator struct{}
 
 var (
@@ -21,12 +21,11 @@ var (
 	// 带捕获组的版本提取正则
 	claudeCodeUAVersionPattern = regexp.MustCompile(`(?i)^claude-cli/(\d+\.\d+\.\d+)`)
 
-	// System prompt 相似度阈值（默认 0.5，和 claude-relay-service 一致）
+	// System prompt 相似度阈值（默认 0.5，与上游中继服务一致）
 	systemPromptThreshold = 0.5
 )
 
-// Claude Code 官方 System Prompt 模板
-// 从 claude-relay-service/src/utils/contents.js 提取
+// Claude Code 官方 System Prompt 模板（参考上游中继服务实现）
 var claudeCodeSystemPrompts = []string{
 	// claudeOtherSystemPrompt1 - Primary
 	"You are Claude Code, Anthropic's official CLI for Claude.",
@@ -53,7 +52,7 @@ func NewClaudeCodeValidator() *ClaudeCodeValidator {
 }
 
 // Validate 验证请求是否来自 Claude Code CLI
-// 采用与 claude-relay-service 完全一致的验证策略：
+// 采用与上游中继服务完全一致的验证策略：
 //
 //	Step 1: User-Agent 检查 (必需) - 必须是 claude-cli/x.x.x
 //	Step 2: 对于非 messages 路径，只要 UA 匹配就通过

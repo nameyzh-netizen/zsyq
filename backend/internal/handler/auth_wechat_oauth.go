@@ -205,7 +205,7 @@ func (h *AuthHandler) WeChatOAuthCallback(c *gin.Context) {
 
 	tokenResp, userInfo, err := fetchWeChatOAuthIdentity(c.Request.Context(), cfg, code)
 	if err != nil {
-		redirectOAuthError(c, frontendCallback, "provider_error", "wechat_identity_fetch_failed", singleLine(err.Error()))
+		redirectOAuthError(c, frontendCallback, "provider_error", "wechat_identity_fetch_failed", "")
 		return
 	}
 
@@ -437,7 +437,7 @@ func (h *AuthHandler) WeChatPaymentOAuthCallback(c *gin.Context) {
 	cfg.redirectURI = h.resolveWeChatPaymentOAuthCallbackURL(c.Request.Context(), c)
 	tokenResp, err := exchangeWeChatOAuthCode(c.Request.Context(), cfg, code)
 	if err != nil {
-		redirectOAuthError(c, frontendCallback, "token_exchange_failed", "failed to exchange oauth code", err.Error())
+		redirectOAuthError(c, frontendCallback, "token_exchange_failed", "failed to exchange oauth code", "")
 		return
 	}
 
@@ -492,7 +492,7 @@ type completeWeChatOAuthRequest struct {
 func (h *AuthHandler) CompleteWeChatOAuthRegistration(c *gin.Context) {
 	var req completeWeChatOAuthRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "INVALID_REQUEST", "message": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "INVALID_REQUEST", "message": "invalid request"})
 		return
 	}
 

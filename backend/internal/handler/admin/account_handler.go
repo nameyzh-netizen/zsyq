@@ -773,7 +773,7 @@ func (h *AccountHandler) RecoverState(c *gin.Context) {
 	response.Success(c, h.buildAccountResponseWithRuntime(c.Request.Context(), account))
 }
 
-// SyncFromCRS handles syncing accounts from claude-relay-service (CRS)
+// SyncFromCRS handles syncing accounts from external relay service (CRS)
 // POST /api/v1/admin/accounts/sync/crs
 func (h *AccountHandler) SyncFromCRS(c *gin.Context) {
 	var req SyncFromCRSRequest

@@ -220,7 +220,6 @@ func (h *AuthHandler) LinuxDoOAuthCallback(c *gin.Context) {
 
 	tokenResp, err := linuxDoExchangeCode(c.Request.Context(), cfg, code, redirectURI, codeVerifier)
 	if err != nil {
-		description := ""
 		var exchangeErr *linuxDoTokenExchangeError
 		if errors.As(err, &exchangeErr) && exchangeErr != nil {
 			log.Printf(
@@ -230,12 +229,10 @@ func (h *AuthHandler) LinuxDoOAuthCallback(c *gin.Context) {
 				exchangeErr.ProviderDescription,
 				truncateLogValue(exchangeErr.Body, 2048),
 			)
-			description = exchangeErr.Error()
 		} else {
 			log.Printf("[LinuxDo OAuth] token exchange failed: %v", err)
-			description = err.Error()
 		}
-		redirectOAuthError(c, frontendCallback, "token_exchange_failed", "failed to exchange oauth code", singleLine(description))
+		redirectOAuthError(c, frontendCallback, "token_exchange_failed", "failed to exchange oauth code", "")
 		return
 	}
 
@@ -446,7 +443,7 @@ type completeLinuxDoOAuthRequest struct {
 func (h *AuthHandler) CompleteLinuxDoOAuthRegistration(c *gin.Context) {
 	var req completeLinuxDoOAuthRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "INVALID_REQUEST", "message": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "INVALID_REQUEST", "message": "invalid request"})
 		return
 	}
 

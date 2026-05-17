@@ -9,14 +9,14 @@ import (
 	"net/url"
 	"strings"
 
+	"github.com/gin-gonic/gin"
+	"github.com/imroc/req/v3"
 	dbent "github.com/nameyzh-netizen/zsyq/ent"
 	"github.com/nameyzh-netizen/zsyq/internal/config"
 	infraerrors "github.com/nameyzh-netizen/zsyq/internal/pkg/errors"
 	"github.com/nameyzh-netizen/zsyq/internal/pkg/oauth"
 	"github.com/nameyzh-netizen/zsyq/internal/pkg/response"
 	"github.com/nameyzh-netizen/zsyq/internal/service"
-	"github.com/gin-gonic/gin"
-	"github.com/imroc/req/v3"
 	"github.com/tidwall/gjson"
 )
 
@@ -138,12 +138,12 @@ func (h *AuthHandler) emailOAuthCallback(c *gin.Context, provider string) {
 
 	tokenResp, err := exchangeEmailOAuthCode(c.Request.Context(), cfg, code)
 	if err != nil {
-		redirectOAuthError(c, frontendCallback, "token_exchange_failed", "failed to exchange oauth code", singleLine(err.Error()))
+		redirectOAuthError(c, frontendCallback, "token_exchange_failed", "failed to exchange oauth code", "")
 		return
 	}
 	profile, err := fetchEmailOAuthProfile(c.Request.Context(), provider, cfg, tokenResp)
 	if err != nil {
-		redirectOAuthError(c, frontendCallback, "userinfo_failed", "failed to fetch verified email", singleLine(err.Error()))
+		redirectOAuthError(c, frontendCallback, "userinfo_failed", "failed to fetch verified email", "")
 		return
 	}
 	h.emailOAuthCallbackWithProfile(c, provider, cfg, frontendCallback, redirectTo, profile)
@@ -334,7 +334,7 @@ type completeEmailOAuthRequest struct {
 func (h *AuthHandler) completeEmailOAuthRegistration(c *gin.Context, provider string) {
 	var req completeEmailOAuthRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		response.BadRequest(c, "Invalid request: "+err.Error())
+		response.BadRequest(c, "Invalid request")
 		return
 	}
 

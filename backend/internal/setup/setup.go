@@ -342,11 +342,7 @@ func createInstallLock() error {
 }
 
 func initializeDatabase(cfg *SetupConfig) error {
-	dsn := fmt.Sprintf(
-		"host=%s port=%d user=%s password=%s dbname=%s sslmode=%s",
-		cfg.Database.Host, cfg.Database.Port, cfg.Database.User,
-		cfg.Database.Password, cfg.Database.DBName, cfg.Database.SSLMode,
-	)
+	dsn := setupPostgresDSN(&cfg.Database, cfg.Database.DBName)
 
 	db, err := sql.Open("postgres", dsn)
 	if err != nil {
@@ -365,11 +361,7 @@ func initializeDatabase(cfg *SetupConfig) error {
 }
 
 func createAdminUser(cfg *SetupConfig) (bool, string, error) {
-	dsn := fmt.Sprintf(
-		"host=%s port=%d user=%s password=%s dbname=%s sslmode=%s",
-		cfg.Database.Host, cfg.Database.Port, cfg.Database.User,
-		cfg.Database.Password, cfg.Database.DBName, cfg.Database.SSLMode,
-	)
+	dsn := setupPostgresDSN(&cfg.Database, cfg.Database.DBName)
 
 	db, err := sql.Open("postgres", dsn)
 	if err != nil {
@@ -408,7 +400,7 @@ func createAdminUser(cfg *SetupConfig) (bool, string, error) {
 			return false, "", fmt.Errorf("failed to generate admin password: %w", genErr)
 		}
 		cfg.Admin.Password = password
-		fmt.Printf("Generated admin password (one-time, development only): %s\n", cfg.Admin.Password)
+		fmt.Printf("Generated admin password (one-time, development only): %d characters\n", len(cfg.Admin.Password))
 		fmt.Println("IMPORTANT: Save this password! It will not be shown again.")
 	}
 
