@@ -14,19 +14,9 @@ English | [中文](项目介绍.md) | [日本語](项目介绍_JA.md)
 
 </div>
 
-> **智算引擎 officially uses only the domains `zsyq.org` and `pincc.ai`. Other websites using the 智算引擎 name may be third-party deployments or services and are not affiliated with this project. Please verify and exercise your own judgment.**
+> **智算引擎 officially uses only the domains `zsyq.cloud` and `pincc.ai`. Other websites using the 智算引擎 name may be third-party deployments or services and are not affiliated with this project. Please verify and exercise your own judgment.**
 
 ---
-
-## Demo
-
-Try 智算引擎 online: **[https://demo.zsyq.org/](https://demo.zsyq.org/)**
-
-Demo credentials (shared demo environment; **not** created automatically for self-hosted installs):
-
-| Email | Password |
-|-------|----------|
-| admin@zsyq.org | admin123 |
 
 ## Overview
 
