@@ -104,6 +104,12 @@ func TestMigrationChecksumCompatibilityRules_CoverEditedUpgradeCompatibilityMigr
 		"118_wechat_dual_mode_and_auth_source_defaults.sql",
 		"120_enforce_payment_orders_out_trade_no_unique_notx.sql",
 		"123_fix_legacy_auth_source_grant_on_signup_defaults.sql",
+		// v1.0.1: 移除 goose Down 块 + 修复 008
+		"008_seed_default_group.sql",
+		"019_migrate_wechat_to_attributes.sql",
+		"024_add_gemini_tier_id.sql",
+		"037_ops_alert_silences.sql",
+		"127_drop_channel_monitor_deleted_at.sql",
 	} {
 		rule, ok := migrationChecksumCompatibilityRules[name]
 		require.Truef(t, ok, "missing compatibility rule for %s", name)

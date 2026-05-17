@@ -19,12 +19,3 @@ WHERE platform = 'gemini'
   );
 -- +goose StatementEnd
 
--- +goose Down
--- +goose StatementBegin
--- 回滚：删除 tier_id 字段
-UPDATE accounts
-SET credentials = credentials - 'tier_id'
-WHERE platform = 'gemini'
-  AND type = 'oauth'
-  AND credentials ? 'tier_id';
--- +goose StatementEnd

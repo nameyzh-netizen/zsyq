@@ -22,7 +22,3 @@ CREATE INDEX IF NOT EXISTS idx_ops_alert_silences_lookup
 
 -- +goose StatementEnd
 
--- +goose Down
--- +goose StatementBegin
-DROP TABLE IF EXISTS ops_alert_silences;
--- +goose StatementEnd

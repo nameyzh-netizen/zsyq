@@ -6,6 +6,13 @@
 -- 110 尚未跑过聚合/清理（首次 maintenance 在次日 02:00），所以此处不担心业务数据。
 -- 直接 DROP 列 + 索引；对应的 Go 侧 ent schema 已移除 SoftDeleteMixin、repo 的
 -- raw SQL 已移除 deleted_at IS NULL 过滤。
+--
+-- !! 部署顺序要求 !!
+-- 本迁移 DROP deleted_at 列。如果旧代码仍在查询 deleted_at，执行此迁移后会导致
+-- "column does not exist" 错误。因此：
+--   1. 先部署新代码（已移除 deleted_at 引用）
+--   2. 再执行本迁移
+--   3. 或确保本迁移与新代码在同一版本中发布，且迁移先于应用启动
 
 DROP INDEX IF EXISTS idx_channel_monitor_histories_deleted_at;
 ALTER TABLE channel_monitor_histories
