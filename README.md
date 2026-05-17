@@ -14,7 +14,7 @@ English | [中文](项目介绍.md) | [日本語](项目介绍_JA.md)
 
 </div>
 
-> **智算引擎 officially uses only the domains `zsyq.cloud` and `pincc.ai`. Other websites using the 智算引擎 name may be third-party deployments or services and are not affiliated with this project. Please verify and exercise your own judgment.**
+> **智算引擎 officially uses only the domain `zsyq.cloud`. Other websites using the 智算引擎 name may be third-party deployments or services and are not affiliated with this project. Please verify and exercise your own judgment.**
 
 ---
 
@@ -40,7 +40,6 @@ Community projects that extend or integrate with 智算引擎:
 
 | Project | Description | Features |
 |---------|-------------|----------|
-| ~~[智算引擎Pay](https://github.com/touwaeriol/zsyqpay)~~ | ~~Self-service payment system~~ | **Now Built-in** — Payment is now integrated into 智算引擎, no separate deployment needed. See [Payment Configuration Guide](docs/支付系统配置指南_EN.md) |
 | [zsyq-mobile](https://github.com/ckken/zsyq-mobile) | Mobile admin console | Cross-platform app (iOS/Android/Web) for user management, account management, monitoring dashboard, and multi-backend switching; built with Expo + React Native |
 
 ## Tech Stack
