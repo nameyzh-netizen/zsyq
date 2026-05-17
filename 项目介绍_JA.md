@@ -147,167 +147,116 @@ curl -sSL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/ins
 
 ---
 
-### 方法2: Docker Compose（推奨）
+### 方法2: Docker Compose ソースビルド（推奨）
 
-PostgreSQL と Redis のコンテナを含む Docker Compose でデプロイします。
+本番運用にはこの方式を推奨します。スクリプトが Docker のインストール、ソースコードのクローン、シークレット生成、サーバー CPU/メモリに応じた自動チューニングを行い、`docker-compose.build.yml` でフロントエンドとバックエンドをソースからビルドします。フロントエンド変更後もいつでも再ビルドできます。
 
 #### 前提条件
 
-- Docker 20.10+
-- Docker Compose v2+
+- Debian 12 / Ubuntu 22.04+ Linux サーバー（amd64）
+- root 権限
+- ドメイン HTTPS を使用する場合: ドメインの A レコードを事前にサーバー IP に向け、80/443 ポートを開放してください
 
-#### クイックスタート（ワンクリックデプロイ）
-
-自動デプロイスクリプトを使用して簡単にセットアップできます:
+#### クイックスタート（ワンクリック自動デプロイ）
 
 ```bash
-# デプロイ用ディレクトリを作成
-mkdir -p zsyq-deploy && cd zsyq-deploy
-
-# デプロイ準備スクリプトをダウンロードして実行
-curl -sSL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/docker-deploy.sh | bash
-
-# サービスを起動
-docker compose up -d
-
-# ログを表示
-docker compose logs -f zsyq
+bash <(curl -sL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/deploy.sh)
 ```
 
-**スクリプトの動作内容:**
-- `docker-compose.local.yml`（`docker-compose.yml` として保存）と `.env.example` をダウンロード
-- セキュアな認証情報（JWT_SECRET、TOTP_ENCRYPTION_KEY、POSTGRES_PASSWORD）を自動生成
-- 自動生成されたシークレットで `.env` ファイルを作成
-- データディレクトリを作成（バックアップ・移行が容易なローカルディレクトリを使用）
-- 生成された認証情報を参照用に表示
+スクリプト実行中にアクセス方式を選択できます:
 
-#### 手動デプロイ
+- `1`: IP + ポートでアクセス（`http://YOUR_SERVER_IP:8080`）
+- `2`: ドメイン HTTPS でアクセス。ドメインを入力すると、Caddy のインストール、HTTPS 証明書の発行/更新、リバースプロキシ設定を自動で行います
 
-手動でセットアップする場合:
+GitHub Raw にアクセスできない場合は、以下の代替方式を使用してください:
 
 ```bash
-# 1. リポジトリをクローン
-git clone https://github.com/nameyzh-netizen/zsyq.git
-cd zsyq/deploy
-
-# 2. 環境設定ファイルをコピー
-cp .env.example .env
-
-# 3. 設定を編集（セキュアなパスワードを生成）
-nano .env
+git clone https://github.com/nameyzh-netizen/zsyq.git /opt/zsyq
+bash /opt/zsyq/deploy/deploy.sh
 ```
 
-**`.env` の必須設定:**
+**ワンクリックスクリプトが自動で行う内容:**
 
-```bash
-# PostgreSQL パスワード（必須）
-POSTGRES_PASSWORD=your_secure_password_here
+- システム更新、Swap、ネットワーク sysctl、ファイルディスクリプタ上限などの基本チューニング
+- Docker と Docker Compose v2 のインストール
+- ソースコードを `/opt/zsyq` にクローン/更新
+- `POSTGRES_PASSWORD`、`JWT_SECRET`、`TOTP_ENCRYPTION_KEY` の生成
+- CPU/メモリに応じて、マシンリソースの約 80% をアプリ、PostgreSQL、Redis、DB 接続プールへ自動配分
+- ローカルディレクトリにデータを保存: `deploy/data`、`deploy/postgres_data`、`deploy/redis_data`
+- `docker-compose.build.yml` でソースからビルドして起動
+- ドメインモードでは Caddy HTTPS リバースプロキシを自動設定
 
-# JWT シークレット（推奨 - 再起動後もユーザーのログイン状態を保持）
-JWT_SECRET=your_jwt_secret_here
+完了時にアクセス URL、管理者アカウント、シークレットが表示されます。安全に保存してください。デフォルト管理者:
 
-# TOTP 暗号化キー（推奨 - 再起動後も二要素認証を維持）
-TOTP_ENCRYPTION_KEY=your_totp_key_here
-
-# オプション: 管理者アカウント
-ADMIN_EMAIL=admin@example.com
-ADMIN_PASSWORD=your_admin_password
-
-# オプション: カスタムポート
-SERVER_PORT=8080
-```
-
-**セキュアなシークレットの生成方法:**
-```bash
-# JWT_SECRET を生成
-openssl rand -hex 32
-
-# TOTP_ENCRYPTION_KEY を生成
-openssl rand -hex 32
-
-# POSTGRES_PASSWORD を生成
-openssl rand -hex 32
-```
-
-```bash
-# 4. データディレクトリを作成（ローカルバージョンの場合）
-mkdir -p data postgres_data redis_data
-
-# 5. すべてのサービスを起動
-# オプション A: ローカルディレクトリバージョン（推奨 - 移行が容易）
-docker compose -f docker-compose.local.yml up -d
-
-# オプション B: 名前付きボリュームバージョン（シンプルなセットアップ）
-docker compose up -d
-
-# 6. ステータスを確認
-docker compose -f docker-compose.local.yml ps
-
-# 7. ログを表示
-docker compose -f docker-compose.local.yml logs -f zsyq
-```
-
-#### デプロイバージョン
-
-| バージョン | データストレージ | 移行 | 推奨用途 |
-|---------|-------------|-----------|----------|
-| **docker-compose.local.yml** | ローカルディレクトリ | ✅ 容易（ディレクトリ全体を tar） | 本番環境、頻繁なバックアップ |
-| **docker-compose.yml** | 名前付きボリューム | ⚠️ docker コマンドが必要 | シンプルなセットアップ |
-
-**推奨:** データ管理が容易な `docker-compose.local.yml`（スクリプトによるデプロイ）を使用してください。
-
-#### アクセス
-
-ブラウザで `http://YOUR_SERVER_IP:8080` を開いてください。
-
-管理者パスワードが自動生成された場合は、ログで確認できます:
-```bash
-docker compose -f docker-compose.local.yml logs zsyq | grep "admin password"
-```
-
-#### アップグレード
-
-```bash
-# 最新イメージをプルしてコンテナを再作成
-docker compose -f docker-compose.local.yml pull
-docker compose -f docker-compose.local.yml up -d
-```
-
-#### 簡単な移行（ローカルディレクトリバージョン）
-
-`docker-compose.local.yml` を使用している場合、新しいサーバーへの移行が簡単です:
-
-```bash
-# 移行元サーバーにて
-docker compose -f docker-compose.local.yml down
-cd ..
-tar czf zsyq-complete.tar.gz zsyq-deploy/
-
-# 新しいサーバーに転送
-scp zsyq-complete.tar.gz user@new-server:/path/
-
-# 移行先サーバーにて
-tar xzf zsyq-complete.tar.gz
-cd zsyq-deploy/
-docker compose -f docker-compose.local.yml up -d
+```text
+Email: admin@zsyq.local
+Password: admin123（ログイン後すぐに変更してください）
 ```
 
 #### よく使うコマンド
 
 ```bash
+cd /opt/zsyq/deploy
+
+# コンテナ状態を確認
+docker compose -f docker-compose.build.yml ps
+
+# アプリログを表示
+docker compose -f docker-compose.build.yml logs -f zsyq
+
+# サービスを再起動
+docker compose -f docker-compose.build.yml restart
+
+# フロントエンド/バックエンド変更後に再ビルド
+docker compose -f docker-compose.build.yml up -d --build
+
 # すべてのサービスを停止
-docker compose -f docker-compose.local.yml down
-
-# 再起動
-docker compose -f docker-compose.local.yml restart
-
-# すべてのログを表示
-docker compose -f docker-compose.local.yml logs -f
-
-# すべてのデータを削除（注意！）
-docker compose -f docker-compose.local.yml down
-rm -rf data/ postgres_data/ redis_data/
+docker compose -f docker-compose.build.yml down
 ```
+
+#### アップグレード
+
+```bash
+cd /opt/zsyq
+git pull
+cd deploy
+docker compose -f docker-compose.build.yml up -d --build
+```
+
+#### 後からドメイン HTTPS を有効化
+
+初回に IP アクセスを選んだ場合でも、後からドメイン HTTPS を有効化できます:
+
+```bash
+cd /opt/zsyq
+git pull
+bash /opt/zsyq/deploy/setup-domain.sh your-domain.com
+```
+
+Caddy が HTTPS 証明書を自動発行し、自動更新します。
+
+#### バックアップと移行
+
+```bash
+cd /opt/zsyq/deploy
+
+docker compose -f docker-compose.build.yml down
+tar czf ~/zsyq-backup-$(date +%Y%m%d).tar.gz data postgres_data redis_data .env
+```
+
+新しいサーバーでは、これらのディレクトリと `.env` を復元してから以下を実行してください:
+
+```bash
+docker compose -f docker-compose.build.yml up -d --build
+```
+
+#### デプロイバージョン
+
+| バージョン | イメージソース | データストレージ | 推奨用途 |
+|---------|-------------|-----------|----------|
+| **docker-compose.build.yml** | ローカルソースビルド | ローカルディレクトリ | 推奨本番デプロイ、フロントエンドカスタマイズ |
+| **docker-compose.local.yml** | ビルド済みイメージ | ローカルディレクトリ | コード変更なし、素早く起動 |
+| **docker-compose.yml** | ビルド済みイメージ | Docker 名前付きボリューム | 簡単な試用 |
 
 ---
 

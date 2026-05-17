@@ -147,167 +147,116 @@ curl -sSL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/ins
 
 ---
 
-### Method 2: Docker Compose (Recommended)
+### Method 2: Docker Compose Source Build (Recommended)
 
-Deploy with Docker Compose, including PostgreSQL and Redis containers.
+Recommended for production operations: the script installs Docker, clones the source code, generates secrets, auto-tunes resources based on server CPU/memory, and builds both frontend and backend from source with `docker-compose.build.yml`. You can rebuild after frontend changes at any time.
 
 #### Prerequisites
 
-- Docker 20.10+
-- Docker Compose v2+
+- Debian 12 / Ubuntu 22.04+ Linux server (amd64)
+- Root privileges
+- For domain HTTPS access: point the domain A record to the server IP in advance and allow ports 80/443
 
-#### Quick Start (One-Click Deployment)
-
-Use the automated deployment script for easy setup:
+#### Quick Start (One-Click Auto Deployment)
 
 ```bash
-# Create deployment directory
-mkdir -p zsyq-deploy && cd zsyq-deploy
-
-# Download and run deployment preparation script
-curl -sSL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/docker-deploy.sh | bash
-
-# Start services
-docker compose up -d
-
-# View logs
-docker compose logs -f zsyq
+bash <(curl -sL https://raw.githubusercontent.com/nameyzh-netizen/zsyq/main/deploy/deploy.sh)
 ```
 
-**What the script does:**
-- Downloads `docker-compose.local.yml` (saved as `docker-compose.yml`) and `.env.example`
-- Generates secure credentials (JWT_SECRET, TOTP_ENCRYPTION_KEY, POSTGRES_PASSWORD, ADMIN_PASSWORD)
-- Creates `.env` file with auto-generated secrets
-- Creates data directories (uses local directories for easy backup/migration)
-- Displays generated credentials for your reference
+The script will ask you to choose an access mode:
 
-#### Manual Deployment
+- `1`: IP + port, access via `http://YOUR_SERVER_IP:8080`
+- `2`: Domain HTTPS, enter your domain and the script will install Caddy, configure HTTPS certificate issuance/renewal, and reverse proxy to the app
 
-If you prefer manual setup:
+If GitHub Raw is unavailable, use the fallback method:
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/nameyzh-netizen/zsyq.git
-cd zsyq/deploy
-
-# 2. Copy environment configuration
-cp .env.example .env
-
-# 3. Edit configuration (generate secure passwords)
-nano .env
+git clone https://github.com/nameyzh-netizen/zsyq.git /opt/zsyq
+bash /opt/zsyq/deploy/deploy.sh
 ```
 
-**Required configuration in `.env`:**
+**The one-click script automatically:**
 
-```bash
-# PostgreSQL password (REQUIRED)
-POSTGRES_PASSWORD=your_secure_password_here
+- Updates the system and applies basic tuning (Swap, network sysctl, file descriptor limits)
+- Installs Docker and Docker Compose v2
+- Clones/updates source code to `/opt/zsyq`
+- Generates `POSTGRES_PASSWORD`, `JWT_SECRET`, and `TOTP_ENCRYPTION_KEY`
+- Allocates about 80% of machine resources across the app, PostgreSQL, Redis, and DB connection pool based on CPU/memory
+- Stores data in local directories: `deploy/data`, `deploy/postgres_data`, `deploy/redis_data`
+- Builds and starts from source with `docker-compose.build.yml`
+- Configures Caddy HTTPS reverse proxy in domain mode
 
-# JWT Secret (RECOMMENDED - keeps users logged in after restart)
-JWT_SECRET=your_jwt_secret_here
+The script prints the access URL, admin account, and secrets when finished. Save them securely. Default admin:
 
-# TOTP Encryption Key (RECOMMENDED - preserves 2FA after restart)
-TOTP_ENCRYPTION_KEY=your_totp_key_here
-
-# Optional: Admin account
-ADMIN_EMAIL=admin@example.com
-ADMIN_PASSWORD=your_admin_password
-
-# Optional: Custom port
-SERVER_PORT=8080
-```
-
-**Generate secure secrets:**
-```bash
-# Generate JWT_SECRET
-openssl rand -hex 32
-
-# Generate TOTP_ENCRYPTION_KEY
-openssl rand -hex 32
-
-# Generate POSTGRES_PASSWORD
-openssl rand -hex 32
-```
-
-```bash
-# 4. Create data directories (for local version)
-mkdir -p data postgres_data redis_data
-
-# 5. Start all services
-# Option A: Local directory version (recommended - easy migration)
-docker compose -f docker-compose.local.yml up -d
-
-# Option B: Named volumes version (simple setup)
-docker compose up -d
-
-# 6. Check status
-docker compose -f docker-compose.local.yml ps
-
-# 7. View logs
-docker compose -f docker-compose.local.yml logs -f zsyq
-```
-
-#### Deployment Versions
-
-| Version | Data Storage | Migration | Best For |
-|---------|-------------|-----------|----------|
-| **docker-compose.local.yml** | Local directories | ✅ Easy (tar entire directory) | Production, frequent backups |
-| **docker-compose.yml** | Named volumes | ⚠️ Requires docker commands | Simple setup |
-
-**Recommendation:** Use `docker-compose.local.yml` (deployed by script) for easier data management.
-
-#### Access
-
-Open `http://YOUR_SERVER_IP:8080` in your browser.
-
-If the admin password was auto-generated, find it in the logs:
-```bash
-docker compose -f docker-compose.local.yml logs zsyq | grep "admin password"
-```
-
-#### Upgrade
-
-```bash
-# Pull latest image and recreate container
-docker compose -f docker-compose.local.yml pull
-docker compose -f docker-compose.local.yml up -d
-```
-
-#### Easy Migration (Local Directory Version)
-
-When using `docker-compose.local.yml`, migrate to a new server easily:
-
-```bash
-# On source server
-docker compose -f docker-compose.local.yml down
-cd ..
-tar czf zsyq-complete.tar.gz zsyq-deploy/
-
-# Transfer to new server
-scp zsyq-complete.tar.gz user@new-server:/path/
-
-# On new server
-tar xzf zsyq-complete.tar.gz
-cd zsyq-deploy/
-docker compose -f docker-compose.local.yml up -d
+```text
+Email: admin@zsyq.local
+Password: admin123 (change it immediately after login)
 ```
 
 #### Useful Commands
 
 ```bash
+cd /opt/zsyq/deploy
+
+# Check containers
+docker compose -f docker-compose.build.yml ps
+
+# View app logs
+docker compose -f docker-compose.build.yml logs -f zsyq
+
+# Restart services
+docker compose -f docker-compose.build.yml restart
+
+# Rebuild after frontend/backend changes
+docker compose -f docker-compose.build.yml up -d --build
+
 # Stop all services
-docker compose -f docker-compose.local.yml down
-
-# Restart
-docker compose -f docker-compose.local.yml restart
-
-# View all logs
-docker compose -f docker-compose.local.yml logs -f
-
-# Remove all data (caution!)
-docker compose -f docker-compose.local.yml down
-rm -rf data/ postgres_data/ redis_data/
+docker compose -f docker-compose.build.yml down
 ```
+
+#### Upgrade
+
+```bash
+cd /opt/zsyq
+git pull
+cd deploy
+docker compose -f docker-compose.build.yml up -d --build
+```
+
+#### Enable Domain HTTPS Later
+
+If you chose IP access initially, you can enable domain HTTPS later:
+
+```bash
+cd /opt/zsyq
+git pull
+bash /opt/zsyq/deploy/setup-domain.sh your-domain.com
+```
+
+Caddy will automatically issue and renew HTTPS certificates.
+
+#### Backup and Migration
+
+```bash
+cd /opt/zsyq/deploy
+
+docker compose -f docker-compose.build.yml down
+tar czf ~/zsyq-backup-$(date +%Y%m%d).tar.gz data postgres_data redis_data .env
+```
+
+On a new server, restore those directories and `.env`, then run:
+
+```bash
+docker compose -f docker-compose.build.yml up -d --build
+```
+
+#### Deployment Versions
+
+| Version | Image Source | Data Storage | Best For |
+|---------|--------------|--------------|----------|
+| **docker-compose.build.yml** | Local source build | Local directories | Recommended production deployment, frontend customization |
+| **docker-compose.local.yml** | Prebuilt image | Local directories | No code changes, quick run |
+| **docker-compose.yml** | Prebuilt image | Docker named volumes | Simple trial |
 
 ---
 
