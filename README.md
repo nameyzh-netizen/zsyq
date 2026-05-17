@@ -24,15 +24,14 @@ English | [中文](项目介绍.md) | [日本語](项目介绍_JA.md)
 
 ## Features
 
-- **Multi-Account Management** - Support multiple upstream account types (OAuth, API Key)
-- **API Key Distribution** - Generate and manage API Keys for users
-- **Precise Billing** - Token-level usage tracking and cost calculation
-- **Smart Scheduling** - Intelligent account selection with sticky sessions
-- **Concurrency Control** - Per-user and per-account concurrency limits
-- **Rate Limiting** - Configurable request and token rate limits
-- **Built-in Payment System** - Supports EasyPay, Alipay, WeChat Pay, and Stripe for user self-service top-up, no separate payment service needed ([Configuration Guide](docs/支付系统配置指南_EN.md))
-- **Admin Dashboard** - Web interface for monitoring and management
-- **External System Integration** - Embed external systems (e.g. ticketing) via iframe to extend the admin dashboard
+- **Multi-Account Aggregation** - Unified management of OAuth, API Key and other upstream accounts, with batch import and automatic rotation
+- **API Key Distribution & Control** - One-click API Key generation for users, with quota allocation, permission isolation, and usage tracking
+- **Precise Billing & Cost Accounting** - Real-time Token-level usage tracking, multi-model differentiated pricing, with multiplier and discount strategies
+- **Smart Scheduling & Load Balancing** - Sticky sessions + account rotation + automatic fault eviction, ensuring high availability
+- **Concurrency & Rate Dual Control** - Per-user and per-account concurrency limits + request/Token dual-dimension rate limiting, preventing abuse and overload
+- **Built-in Payment & Self-Service Top-Up** - Zero external dependencies; integrates EasyPay, Alipay, WeChat Pay, Stripe for instant self-service recharge ([Configuration Guide](docs/支付系统配置指南_EN.md))
+- **Admin Dashboard & Real-Time Monitoring** - One-stop web operations: usage dashboards, account status, log auditing and alerts
+- **External System Integration** - Embed ticketing, notifications and other external systems via iframe to seamlessly extend admin capabilities
 
 ## Tech Stack
 
